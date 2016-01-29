@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.assets.AssetManager;
 import net.thirteen.sotl.screens.TitleScreen;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.Input;
 
 public class Main extends Game {
 
@@ -27,6 +28,8 @@ public class Main extends Game {
 		manager.load("wall.png", Texture.class);
 		manager.load("hero.png", Texture.class);
 		manager.load("door.png", Texture.class);
+		manager.load("enemy.png", Texture.class);
+		manager.load("titleScreenBG.png", Texture.class);
 		manager.finishLoading();
 		setScreen(new TitleScreen(this));
 	}
@@ -34,6 +37,12 @@ public class Main extends Game {
 	@Override
 	public void render () {
 		super.render();
+
+		//ESC quits
+		if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+			dispose();
+			System.exit(0);
+		}
 	}
 
 	@Override public void dispose() {

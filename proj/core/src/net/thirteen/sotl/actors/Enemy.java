@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import net.thirteen.sotl.levels.Level;
+import net.thirteen.sotl.Main;
 import com.badlogic.gdx.math.Rectangle;
 
 public class Enemy extends Actor {
@@ -15,7 +16,7 @@ public class Enemy extends Actor {
     	         IEnemyCollisionBehaviour collisionBehaviour,
     	         IEnemyMovementBehaviour movementBehaviour) {
     	
-    	super(new Texture(Gdx.files.internal("enemy.png")),
+    	super(Main.manager.get("enemy.png", Texture.class),
         	lev, 
         	xpos, 
         	ypos

@@ -3,6 +3,7 @@ package net.thirteen.sotl.screens;
 import net.thirteen.sotl.Main;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.Gdx;
 
@@ -27,6 +28,10 @@ public class TitleScreen implements Screen {
 
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+		game.batch.begin();
+		game.batch.draw(Main.manager.get("titleScreenBG.png", Texture.class), 0, 0);
+		game.batch.end();
 	}
 
 	public void update(float delta) {
