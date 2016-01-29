@@ -29,6 +29,9 @@ public class Actor extends Sprite {
     	rect.x = xpos;
     	rect.y = ypos;
 
+        setX(xpos);
+        setY(ypos);
+
     	//Ensure within a valid position
     	if(!rect.overlaps(lev.getRekt())){
     		throw new IllegalArgumentException("Actor cannot exist outside of level");

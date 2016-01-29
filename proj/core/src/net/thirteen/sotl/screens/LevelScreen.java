@@ -8,6 +8,7 @@ import com.badlogic.gdx.Gdx;
 import net.thirteen.sotl.scenes.GameHud;
 import net.thirteen.sotl.levels.Level;
 import com.badlogic.gdx.math.Rectangle;
+import net.thirteen.sotl.actors.Hero;
 
 public class LevelScreen implements Screen {
 
@@ -16,10 +17,16 @@ public class LevelScreen implements Screen {
 	private GameHud hud;
 	private Level level;
 
+	private Hero hero;
+
 	public LevelScreen(Main game) {
 		this.game = game;
 		hud = new GameHud(game.batch);
 		level = new Level(Main.MAP_WIDTH, Main.MAP_HEIGHT, 1, new Rectangle(0, 0, Main.WIDTH, Main.HEIGHT));
+
+		//hero = game.world.getHero();
+
+		hero = new Hero(level, 10 * Main.TILE_SIZE, 7 * Main.TILE_SIZE);
 
 		levelCam = new OrthographicCamera();
 		levelCam.setToOrtho(false, Main.WIDTH, Main.HEIGHT);
@@ -42,6 +49,8 @@ public class LevelScreen implements Screen {
 				game.batch.draw(level.getTile(ii, jj).getTexture(), ii * Main.TILE_SIZE, jj * Main.TILE_SIZE);
 			}
 		}
+		hero.draw(game.batch);
+
 		game.batch.end();
 
 		game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
