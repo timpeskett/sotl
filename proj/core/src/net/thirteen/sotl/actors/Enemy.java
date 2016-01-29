@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import net.thirteen.sotl.levels.Level;
+import com.badlogic.gdx.math.Rectangle;
 
 public class Enemy extends Actor {
 
@@ -20,10 +21,10 @@ public class Enemy extends Actor {
     	checkCollisions();
     }
 
-    public boolean checkHeroCollision(){
+   /* public boolean checkHeroCollision(){
     	Hero hero = lev.getHero();
-    	return rect.overlaps(hero.getRekt()));
-    }
+    	return rect.overlaps(hero.getRekt());
+    }*/
 
     private void checkCollisions(){
 

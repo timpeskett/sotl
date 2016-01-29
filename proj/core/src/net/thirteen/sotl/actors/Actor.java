@@ -4,12 +4,13 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import net.thirteen.sotl.levels.Level;
+import com.badlogic.gdx.math.Rectangle;
 
 public class Actor extends Sprite {
 
 	//back reference to level actor exists within
-	private Level lev;
-	private Rectangle rect;
+	protected Level lev;
+	protected Rectangle rect;
 
     public Actor(Texture tex, Level lev, float xpos, float ypos) {
 
