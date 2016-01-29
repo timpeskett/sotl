@@ -8,31 +8,44 @@ import com.badlogic.gdx.math.Rectangle;
 
 public class Enemy extends Actor {
 
-    public Enemy(Level lev, float xpos, float ypos) {
+	protected IEnemyCollisionBehaviour collisionBehaviour;
+	protected IEnemyMovementBehaviour movementBehaviour;
+	protected Direction direction;
+
+    public Enemy(Level lev, float xpos, float ypos,
+    	         IEnemyCollisionBehaviour collisionBehaviour,
+    	         IEnemyMovementBehaviour movementBehaviour) {
+    	
     	super(new Texture(Gdx.files.internal("enemy.png")),
         	lev, 
         	xpos, 
         	ypos
         );
+
+        this.collisionBehaviour = collisionBehaviour;
+        this.movementBehaviour = movementBehaviour;
         
     }
 
-    public void update(){
-    	checkCollisions();
+    public void update() {
+    	//checkCollisions();
     }
 
-   /* public boolean checkHeroCollision(){
-    	Hero hero = lev.getHero();
-    	return rect.overlaps(hero.getRekt());
-    }*/
-
-    private void checkCollisions(){
-
-    	//Loop through other enemies for collisions
-    	for(Enemy enemy: lev.getEnemies()){
-    		//do something?
-    	}
+    public void move() {
+    	movementBehaviour.move(lev, rect);
     }
+
+    public boolean checkHeroCollision() {
+    	return collisionBehaviour.collide(lev, rect, direction);
+    }
+
+    // private void checkCollisions() {
+
+    // 	//Loop through other enemies for collisions
+    // 	for(Enemy enemy: lev.getEnemies()){
+    // 		//do something?
+    // 	}
+    // }
 
 
 

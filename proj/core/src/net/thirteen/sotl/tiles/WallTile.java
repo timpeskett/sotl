@@ -19,4 +19,9 @@ public class WallTile extends Tile {
     @Override public boolean isTileTraversable() {
         return true;
     }
+
+    @Override
+    public boolean isTileTransparent(){
+        return false;
+    }
 }

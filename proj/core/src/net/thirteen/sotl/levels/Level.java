@@ -2,6 +2,7 @@ package net.thirteen.sotl.levels;
 
 import net.thirteen.sotl.tiles.Tile;
 import net.thirteen.sotl.actors.Enemy;
+import net.thirteen.sotl.actors.Hero;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
@@ -36,6 +37,10 @@ public class Level {
     /* sic */
     public Rectangle getRekt() {
         return bounds;
+    }
+
+    public Hero getHero(){
+        return null;
     }
 
     public int getTilesX() {

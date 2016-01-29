@@ -20,6 +20,11 @@ public class GrassTile extends Tile {
     public boolean isTileTraversable() {
         return true;
     }
+
+    @Override
+    public boolean isTileTransparent(){
+        return true;
+    }
 }
 
 
