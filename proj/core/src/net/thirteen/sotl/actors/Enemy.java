@@ -9,6 +9,8 @@ import com.badlogic.gdx.math.Rectangle;
 
 public class Enemy extends Actor {
 
+    private Level lev;
+
 	protected IEnemyCollisionBehaviour collisionBehaviour;
 	protected IEnemyMovementBehaviour movementBehaviour;
 
@@ -17,10 +19,13 @@ public class Enemy extends Actor {
     	         IEnemyMovementBehaviour movementBehaviour) {
     	
     	super(Main.manager.get("enemy.png", Texture.class),
-        	lev, 
         	xpos, 
-        	ypos
+        	ypos,
+            lev.getTileWidth(),
+            lev.getTileHeight()
         );
+
+        this.lev = lev;
 
         this.collisionBehaviour = collisionBehaviour;
         this.movementBehaviour = movementBehaviour;

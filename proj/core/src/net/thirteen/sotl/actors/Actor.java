@@ -8,25 +8,17 @@ import com.badlogic.gdx.math.Rectangle;
 
 public class Actor extends Sprite {
 
-	//back reference to level actor exists within
-	protected Level lev;
 	protected Rectangle rect;
     protected Direction direction;
 
-    public Actor(Texture tex, Level lev, float xpos, float ypos) {
+    public Actor(Texture tex, float xpos, float ypos, float width, float height) {
 
     	super(tex);
     	rect = new Rectangle();
 
-    	//Ensure level is not null
-    	if (lev == null) {
-    		throw new IllegalArgumentException("Actor must have a level");
-    	}
-    	this.lev =lev;
-
     	//level knows how wide/high a tile should be
-    	rect.width = lev.getTileWidth();
-    	rect.height = lev.getTileHeight();
+    	rect.width = width;
+    	rect.height = height;
     	rect.x = xpos;
     	rect.y = ypos;
 
@@ -36,11 +28,6 @@ public class Actor extends Sprite {
 
         direction = Direction.UP;
 
-    	//Ensure within a valid position
-    	if(!rect.overlaps(lev.getRekt())){
-    		throw new IllegalArgumentException("Actor cannot exist outside of level");
-    	}
-        
     }
 
     public Rectangle getRekt(){

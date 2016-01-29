@@ -4,13 +4,16 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.assets.AssetManager;
-import net.thirteen.sotl.screens.TitleScreen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.Input;
+
+import net.thirteen.sotl.screens.TitleScreen;
+import net.thirteen.sotl.World;
 
 public class Main extends Game {
 
 	public SpriteBatch batch;
+    public World world;
 	public static AssetManager manager;
 
 	public static final int TILE_SIZE = 32;
@@ -32,6 +35,8 @@ public class Main extends Game {
 		manager.load("titleScreenBG.png", Texture.class);
 		manager.finishLoading();
 		setScreen(new TitleScreen(this));
+
+        world = new World();
 	}
 
 	@Override

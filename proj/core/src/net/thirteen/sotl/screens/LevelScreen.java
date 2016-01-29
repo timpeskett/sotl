@@ -28,10 +28,9 @@ public class LevelScreen implements Screen {
 		hud = new GameHud(game.batch);
 
         /* Temporary code for working with world while it's stubbed */
-		hero = new Hero(level, 10 * Main.TILE_SIZE, 7 * Main.TILE_SIZE);
-		level = new Level(Main.MAP_WIDTH, Main.MAP_HEIGHT, 1, new Rectangle(0, 0, Main.WIDTH, Main.HEIGHT), new World(hero));
+		level = new Level(Main.MAP_WIDTH, Main.MAP_HEIGHT, 1, new Rectangle(0, 0, Main.WIDTH, Main.HEIGHT), game.world);
 
-		//hero = game.world.getHero();
+		hero = game.world.getHero();
 
 
 		levelCam = new OrthographicCamera();
