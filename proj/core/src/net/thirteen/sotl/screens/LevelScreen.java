@@ -1,16 +1,18 @@
 package net.thirteen.sotl.screens;
 
-import net.thirteen.sotl.Main;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.Input;
+
+import net.thirteen.sotl.Main;
+import net.thirteen.sotl.World;
+import net.thirteen.sotl.actors.Hero;
+import net.thirteen.sotl.actors.Direction;
 import net.thirteen.sotl.scenes.GameHud;
 import net.thirteen.sotl.levels.Level;
-import com.badlogic.gdx.math.Rectangle;
-import net.thirteen.sotl.actors.Hero;
-import com.badlogic.gdx.Input;
-import net.thirteen.sotl.actors.Direction;
 
 public class LevelScreen implements Screen {
 
@@ -24,11 +26,13 @@ public class LevelScreen implements Screen {
 	public LevelScreen(Main game) {
 		this.game = game;
 		hud = new GameHud(game.batch);
-		level = new Level(Main.MAP_WIDTH, Main.MAP_HEIGHT, 1, new Rectangle(0, 0, Main.WIDTH, Main.HEIGHT));
+
+        /* Temporary code for working with world while it's stubbed */
+		hero = new Hero(level, 10 * Main.TILE_SIZE, 7 * Main.TILE_SIZE);
+		level = new Level(Main.MAP_WIDTH, Main.MAP_HEIGHT, 1, new Rectangle(0, 0, Main.WIDTH, Main.HEIGHT), new World(hero));
 
 		//hero = game.world.getHero();
 
-		hero = new Hero(level, 10 * Main.TILE_SIZE, 7 * Main.TILE_SIZE);
 
 		levelCam = new OrthographicCamera();
 		levelCam.setToOrtho(false, Main.WIDTH, Main.HEIGHT);
