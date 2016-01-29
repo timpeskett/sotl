@@ -1,6 +1,7 @@
 package net.thirteen.sotl.levels;
 
 import net.thirteen.sotl.tiles.Tile;
+import net.thirteen.sotl.actors.Enemy;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 
 public class Level {
     private Tile [][] tileMap;
-    private ArrayList enemies;
+    private ArrayList<Enemy> enemies;
     private Rectangle bounds;
 
     int dimX, dimY;
@@ -24,6 +25,8 @@ public class Level {
         this.dimX = dimX;
         this.dimY = dimY;
         this.difficulty = difficulty;
+
+        enemies = new ArrayList<Enemy>();
 
     }
 
@@ -55,7 +58,7 @@ public class Level {
         return tileMap[x][y];
     }
 
-    public ArrayList getEnemies() {
+    public ArrayList<Enemy> getEnemies() {
         return enemies;
     }
 }
