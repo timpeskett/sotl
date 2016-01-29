@@ -1,12 +1,18 @@
-package net.thirteen.sotl.sprite;
+package net.thirteen.sotl.tiles;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.Texture;
 
-public abstract class Tile extends Sprite {
+public abstract class Tile {
+    private Texture tex;
 
-    public Tile(Texture t) {
-        super(t);
+    
+    public Texture getTexture() {
+        return tex;
+    }
+
+    protected void setTexture(Texture t) {
+        tex = t;
     }
 
     /* Returns the speed multiplier for this tile. Will usually be 1. Will

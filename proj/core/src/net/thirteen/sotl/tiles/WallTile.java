@@ -1,4 +1,4 @@
-package net.thirteen.sotl.sprite;
+package net.thirteen.sotl.tiles;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.Gdx;
@@ -8,7 +8,7 @@ public class WallTile extends Tile {
     private static final double SPEED_MULT = 0.0;
 
     public WallTile() {
-        super(new Texture(Gdx.files.internal("wall.png")));
+        setTexture(new Texture(Gdx.files.internal("wall.png")));
     }
 
     @Override

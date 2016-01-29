@@ -1,4 +1,4 @@
-package net.thirteen.sotl.sprite;
+package net.thirteen.sotl.actors;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.Gdx;
