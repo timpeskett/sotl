@@ -42,6 +42,7 @@ public class LevelScreen implements Screen {
 				game.batch.draw(level.getTile(ii, jj).getTexture(), ii * Main.TILE_SIZE, jj * Main.TILE_SIZE);
 			}
 		}
+		game.batch.end();
 
 		game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
 		hud.stage.draw();
