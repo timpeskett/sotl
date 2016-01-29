@@ -54,4 +54,8 @@ public class Level {
     public Tile getTile(int x, int y) {
         return tileMap[x][y];
     }
+
+    public ArrayList getEnemies() {
+        return enemies;
+    }
 }
