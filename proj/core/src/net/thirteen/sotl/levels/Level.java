@@ -61,4 +61,9 @@ public class Level {
     public ArrayList<Enemy> getEnemies() {
         return enemies;
     }
+
+    /* For testing */
+    protected Tile [][] getTileMap() {
+        return tileMap;
+    }
 }
