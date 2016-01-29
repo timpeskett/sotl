@@ -6,9 +6,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.math.Rectangle;
 
 import net.thirteen.sotl.screens.TitleScreen;
 import net.thirteen.sotl.World;
+import net.thirteen.sotl.levels.LevelMaker;
 
 public class Main extends Game {
 
@@ -34,9 +36,13 @@ public class Main extends Game {
 		manager.load("enemy.png", Texture.class);
 		manager.load("titleScreenBG.png", Texture.class);
 		manager.finishLoading();
+
+        world = new World(new LevelMaker(MAP_WIDTH, 
+                                         MAP_HEIGHT,
+                                         new Rectangle(0, 0, Main.WIDTH, Main.HEIGHT)));
+
 		setScreen(new TitleScreen(this));
 
-        world = new World();
 	}
 
 	@Override

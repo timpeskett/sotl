@@ -28,8 +28,7 @@ public class LevelScreen implements Screen {
 		hud = new GameHud(game.batch);
 
         /* Temporary code for working with world while it's stubbed */
-		level = new Level(Main.MAP_WIDTH, Main.MAP_HEIGHT, 1, new Rectangle(0, 0, Main.WIDTH, Main.HEIGHT), game.world);
-
+		level = game.world.getCurrentLevel();
 		hero = game.world.getHero();
 
 

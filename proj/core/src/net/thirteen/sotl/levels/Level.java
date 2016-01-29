@@ -21,20 +21,16 @@ public class Level {
     private int dimX, dimY;
     private int difficulty;
 
-    
-    /* The format of difficulty is (as of yet) undecided. */
-    public Level(int dimX, int dimY, int difficulty, Rectangle bounds, World world) {
-        tileMap = LevelGen.generate(dimX, dimY, difficulty);
 
-        this.bounds = bounds;
+    Level(int dimX, int dimY, Rectangle bounds, Tile [][] tileMap, World world) {
         this.dimX = dimX;
         this.dimY = dimY;
-        this.difficulty = difficulty;
+        this.bounds = bounds;
 
         this.world = world;
-
+        this.tileMap = tileMap;
+        
         enemies = new ArrayList<Enemy>();
-
     }
 
 
@@ -65,6 +61,10 @@ public class Level {
         return tileMap[x][y];
     }
 
+    public Tile getTile(Tuple t) {
+        return tileMap[t.first()][t.last()];
+    }
+
     public ArrayList<Enemy> getEnemies() {
         return enemies;
     }
@@ -84,6 +84,9 @@ public class Level {
         return new Tuple((int)x / getTileWidth(), (int)y / getTileHeight());
     }
 
+    public void setEnemies(ArrayList<Enemy> enemies) {
+        this.enemies = enemies;
+    }
     /* For testing */
     protected Tile [][] getTileMap() {
         return tileMap;
