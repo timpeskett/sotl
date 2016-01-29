@@ -11,8 +11,11 @@ public class Main extends Game {
 	public SpriteBatch batch;
 	public AssetManager manager;
 
-	public static final int WIDTH = 640;
-	public static final int HEIGHT = 448;
+	public static final int TILE_SIZE = 32;
+	public static final int MAP_WIDTH = 20;
+	public static final int MAP_HEIGHT = 14;
+	public static final int WIDTH = MAP_WIDTH * TILE_SIZE;
+	public static final int HEIGHT = MAP_HEIGHT * TILE_SIZE;
 	
 	
 	@Override
