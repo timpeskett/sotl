@@ -5,6 +5,7 @@ import net.thirteen.sotl.actors.Hero;
 import net.thirteen.sotl.tiles.Tile;
 import com.badlogic.gdx.math.Rectangle;
 import net.thirteen.sotl.actors.Direction;
+import net.thirteen.sotl.utils.Tuple;
 
 public class MediumRangeCollision implements IEnemyCollisionBehaviour {
 	
