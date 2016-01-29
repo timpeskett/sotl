@@ -5,13 +5,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import net.thirteen.sotl.levels.Level;
 import com.badlogic.gdx.math.Rectangle;
+import net.thirteen.sotl.Main;
 
 public class Hero extends Actor {
 
 	private int speed;
 
     public Hero(Level lev, float xpos, float ypos) {
-        super(new Texture(Gdx.files.internal("hero.png")),
+        super(Main.manager.get("hero.png", Texture.class),
         	lev, 
         	xpos, 
         	ypos

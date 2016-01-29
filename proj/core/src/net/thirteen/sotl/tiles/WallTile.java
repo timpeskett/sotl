@@ -3,12 +3,13 @@ package net.thirteen.sotl.tiles;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import net.thirteen.sotl.Main;
 
 public class WallTile extends Tile {
     private static final double SPEED_MULT = 0.0;
 
     public WallTile() {
-        setTexture(new Texture(Gdx.files.internal("wall.png")));
+        setTexture(Main.manager.get("wall.png", Texture.class));
     }
 
     @Override

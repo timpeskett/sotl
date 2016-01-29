@@ -5,11 +5,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.assets.AssetManager;
 import net.thirteen.sotl.screens.TitleScreen;
+import com.badlogic.gdx.graphics.Texture;
 
 public class Main extends Game {
 
 	public SpriteBatch batch;
-	public AssetManager manager;
+	public static AssetManager manager;
 
 	public static final int TILE_SIZE = 32;
 	public static final int MAP_WIDTH = 20;
@@ -22,7 +23,10 @@ public class Main extends Game {
 	public void create () {
 		batch = new SpriteBatch();
 		manager = new AssetManager();
-
+		manager.load("grass.png", Texture.class);
+		manager.load("wall.png", Texture.class);
+		manager.load("hero.png", Texture.class);
+		manager.finishLoading();
 		setScreen(new TitleScreen(this));
 	}
 
