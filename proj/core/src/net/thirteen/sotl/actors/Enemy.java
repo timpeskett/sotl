@@ -11,11 +11,11 @@ public class Enemy extends Actor {
 
     private Level lev;
 
-	protected IEnemyCollisionBehaviour collisionBehaviour;
+	protected EnemyCollisionBehaviour collisionBehaviour;
 	protected IEnemyMovementBehaviour movementBehaviour;
 
     public Enemy(Level lev, float xpos, float ypos,
-    	         IEnemyCollisionBehaviour collisionBehaviour,
+    	         EnemyCollisionBehaviour collisionBehaviour,
     	         IEnemyMovementBehaviour movementBehaviour) {
     	
     	super(Main.manager.get("enemy.png", Texture.class),

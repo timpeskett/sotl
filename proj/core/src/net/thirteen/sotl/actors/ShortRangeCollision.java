@@ -5,12 +5,14 @@ import net.thirteen.sotl.actors.Hero;
 import com.badlogic.gdx.math.Rectangle;
 import net.thirteen.sotl.actors.Direction;
 
-public class ShortRangeCollision implements IEnemyCollisionBehaviour {
+public class ShortRangeCollision extends EnemyCollisionBehaviour {
 
 	private static ShortRangeCollision instance;
 
 	private ShortRangeCollision(){
 		//singleton
+
+		distance = 0;
 	}
 
 	public static ShortRangeCollision getInstance(){
@@ -19,11 +21,6 @@ public class ShortRangeCollision implements IEnemyCollisionBehaviour {
 		}
 
 		return instance;
-	}
-	
-	public boolean collide(Level lev, Rectangle rect, Direction direction){
-		Hero hero = lev.getHero();
-        return rect.overlaps(hero.getRekt());
 	}
 
 }
