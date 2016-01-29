@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 
 public class TitleScreen implements Screen {
 
@@ -41,7 +42,8 @@ public class TitleScreen implements Screen {
 	}
 
 	public void handleInput(float delta) {
-		if(Gdx.input.isTouched()) {
+		if(Gdx.input.isTouched() || 
+		   Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
 			game.setScreen(new LevelScreen(game));
 			dispose();
 		}
