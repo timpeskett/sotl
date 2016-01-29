@@ -25,5 +25,6 @@ public abstract class Tile {
     public boolean isTileTraversable() {
         return getSpeedMult() > 0.0;
     }
+    public abstract boolean isTileTransparent();
 }
 
