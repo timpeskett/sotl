@@ -26,6 +26,7 @@ public class Main extends Game {
 		manager.load("grass.png", Texture.class);
 		manager.load("wall.png", Texture.class);
 		manager.load("hero.png", Texture.class);
+		manager.load("door.png", Texture.class);
 		manager.finishLoading();
 		setScreen(new TitleScreen(this));
 	}
