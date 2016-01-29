@@ -4,10 +4,14 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
-public class Hero extends Sprite {
+public class Hero extends Actor {
 
-    public Hero() {
-        super(new Texture(Gdx.files.internal("hero.png")));
+    public Hero(Level lev, float xpos, float ypos) {
+        super(new Texture(Gdx.files.internal("hero.png")),
+        	lev, 
+        	xpos, 
+        	ypos
+        );
     }
 
 }
