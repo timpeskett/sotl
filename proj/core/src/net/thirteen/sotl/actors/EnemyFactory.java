@@ -2,18 +2,17 @@ package net.thirteen.sotl.actors;
 
 import net.thirteen.sotl.actors.Enemy;
 import net.thirteen.sotl.levels.Level;
-import net.thirteen.sotl.actors.EnemyCollisionBehaviour;
-import net.thirteen.sotl.actors.IEnemyMovementBehaviour;
 
 public class EnemyFactory {
 
 	public enum Difficulty {
 		STATIONARY(0x00000001),
-		PATH(0x00000010),
-		SEEKING(0x00000100),
-		SHORT_RANGE(0x00001000),
-		MEDIUM_RANGE(0x00010000),
-		LONG_RANGE(0x00010000);
+		HOR_PATH(0x00000010),
+		VERT_PATH(0x00000100),
+		SEEKING(0x00001000),
+		SHORT_RANGE(0x00010000),
+		MEDIUM_RANGE(0x00100000),
+		LONG_RANGE(0x01000000);
 
 		private final int value;
 
@@ -46,11 +45,14 @@ public class EnemyFactory {
 		if((difficulty & Difficulty.SEEKING.val()) != 0){
 			movementBehaviour = null;
 		}
-		else if((difficulty & Difficulty.PATH.val()) != 0){
-			movementBehaviour = null;
+		else if((difficulty & Difficulty.HOR_PATH.val()) != 0){
+			movementBehaviour = HorizontalPathMovement.getInstance();
+		}
+		else if((difficulty & Difficulty.VERT_PATH.val()) != 0){
+			movementBehaviour = VerticalPathMovement.getInstance();
 		}
 		else{
-			movementBehaviour = null;
+			movementBehaviour = StationaryMovement.getInstance();
 		}
 
 		return new Enemy(lev, xpos, ypos,

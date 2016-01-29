@@ -37,7 +37,7 @@ public class Enemy extends Actor {
     }
 
     public void move() {
-    	movementBehaviour.move(lev, rect);
+    	movementBehaviour.move(lev, rect, direction);
     }
 
     public boolean checkHeroCollision() {
