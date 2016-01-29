@@ -11,6 +11,7 @@ public class Actor extends Sprite {
 	//back reference to level actor exists within
 	protected Level lev;
 	protected Rectangle rect;
+    protected Direction direction;
 
     public Actor(Texture tex, Level lev, float xpos, float ypos) {
 
@@ -29,8 +30,11 @@ public class Actor extends Sprite {
     	rect.x = xpos;
     	rect.y = ypos;
 
+        setOriginCenter();
         setX(xpos);
         setY(ypos);
+
+        direction = Direction.UP;
 
     	//Ensure within a valid position
     	if(!rect.overlaps(lev.getRekt())){
@@ -43,5 +47,21 @@ public class Actor extends Sprite {
         return rect;
     }
 
+    public void setDirection( Direction d) {
+        //probs should be case statement. not even mad.
+        if( d == Direction.DOWN) {
+            setRotation(180);
+        }
+        if( d == Direction.UP) {
+            setRotation(0);
+        }
+        if( d == Direction.LEFT) {
+            setRotation(90);
+        }
+        if( d == Direction.RIGHT) {
+            setRotation(270);
+        }
+        direction = d;
+    }
 }
 

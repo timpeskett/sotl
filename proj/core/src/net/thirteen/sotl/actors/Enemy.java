@@ -10,7 +10,6 @@ public class Enemy extends Actor {
 
 	protected IEnemyCollisionBehaviour collisionBehaviour;
 	protected IEnemyMovementBehaviour movementBehaviour;
-	protected Direction direction;
 
     public Enemy(Level lev, float xpos, float ypos,
     	         IEnemyCollisionBehaviour collisionBehaviour,

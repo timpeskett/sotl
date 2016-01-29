@@ -8,12 +8,20 @@ import com.badlogic.gdx.math.Rectangle;
 
 public class Hero extends Actor {
 
+	private int speed;
+
     public Hero(Level lev, float xpos, float ypos) {
         super(new Texture(Gdx.files.internal("hero.png")),
         	lev, 
         	xpos, 
         	ypos
         );
+
+        speed = 200;
+    }
+
+    public int getSpeed() {
+    	return speed;
     }
 
 }
