@@ -1,6 +1,7 @@
 package net.thirteen.sotl.levels;
 
 import net.thirteen.sotl.tiles.Tile;
+import net.thirteen.sotl.tiles.DoorTile;
 import net.thirteen.sotl.tiles.WallTile;
 import net.thirteen.sotl.tiles.GrassTile;
 
@@ -19,8 +20,15 @@ public class LevelGen {
         }
 
         for(int x = 0; x < dimX; x++) {
+            //we'll add a door
+            if(x == 8){
+                tileMap[x][dimY-1] = new DoorTile();
+            }
+            else{
+                tileMap[x][dimY-1] = new WallTile();
+            }
+
             tileMap[x][0] = new WallTile();
-            tileMap[x][dimY-1] = new WallTile();
         }
             
         for(int y = 0; y < dimY; y++) {

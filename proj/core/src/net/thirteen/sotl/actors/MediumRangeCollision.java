@@ -24,12 +24,15 @@ public class MediumRangeCollision implements IEnemyCollisionBehaviour {
 
 	public boolean collide(Level lev, Rectangle rect, Direction direction){
 		
+		//convert from x/y co-ords to tile co-ords
 		float tileX = rect.x / lev.getTileWidth();
 		float tileY = rect.y / lev.getTileHeight();
-		Tile checkTile;
 
 		//mediumRange can see 2 ahead
 		for(int i = 0; i < 2; i++){
+
+			Tile checkTile;
+
 			switch (direction){
 				case UP:
 					tileY++;
@@ -45,8 +48,10 @@ public class MediumRangeCollision implements IEnemyCollisionBehaviour {
 					break;
 			}
 
+
 			checkTile = lev.getTile((int)tileX, (int)tileY);
 
+			//Don't check further tiles if looking at wall/etc
 			if(!checkTile.isTileTransparent()){
 				return false;
 			}
@@ -56,9 +61,6 @@ public class MediumRangeCollision implements IEnemyCollisionBehaviour {
 			// }
 
 		}
-
-		//have some code that checks whether tiles in 
-		//direction x are transparent/the hero
 
 		return false;
 	}
