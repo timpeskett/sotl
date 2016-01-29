@@ -3,6 +3,7 @@ package net.thirteen.sotl.actors;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import net.thirteen.sotl.levels.Level;
 
 public class Hero extends Actor {
 

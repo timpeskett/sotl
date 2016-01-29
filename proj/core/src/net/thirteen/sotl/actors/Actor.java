@@ -3,7 +3,7 @@ package net.thirteen.sotl.actors;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import net.thirteen.sotl.levels;
+import net.thirteen.sotl.levels.Level;
 
 public class Actor extends Sprite {
 
@@ -29,10 +29,14 @@ public class Actor extends Sprite {
     	rect.y = ypos;
 
     	//Ensure within a valid position
-    	if(!rect.overlaps(lev.getRekt()){
+    	if(!rect.overlaps(lev.getRekt())){
     		throw new IllegalArgumentException("Actor cannot exist outside of level");
     	}
         
+    }
+
+    public Rectangle getRekt(){
+        return rect;
     }
 
 }

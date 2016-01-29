@@ -12,7 +12,7 @@ public abstract class Tile {
     }
 
     protected void setTexture(Texture t) {
-        tex = t;
+        if(t != null) tex = t;
     }
 
     /* Returns the speed multiplier for this tile. Will usually be 1. Will
