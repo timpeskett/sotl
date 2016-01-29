@@ -25,8 +25,9 @@ public class MediumRangeCollision implements IEnemyCollisionBehaviour {
 	public boolean collide(Level lev, Rectangle rect, Direction direction){
 		
 		//convert from x/y co-ords to tile co-ords
-		float tileX = rect.x / lev.getTileWidth();
-		float tileY = rect.y / lev.getTileHeight();
+		Tuple tileTuple = lev.worldToTile(rect.x, rect.y);
+		int tileX = tileTuple.first();
+		int tileY = tileTuple.last();
 
 		//mediumRange can see 2 ahead
 		for(int i = 0; i < 2; i++){

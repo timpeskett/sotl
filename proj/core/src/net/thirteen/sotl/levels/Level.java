@@ -80,7 +80,7 @@ public class Level {
     }
 
     /* Converts a world coordinate to a tile coordinate */
-    public Tuple worldToTile(int x, int y) {
+    public Tuple worldToTile(float x, float y) {
         return new Tuple(x / getTileWidth(), y / getTileHeight());
     }
 
