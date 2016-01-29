@@ -5,17 +5,20 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.Gdx;
+import net.thirteen.sotl.scenes.GameHud;
 
-public class TitleScreen implements Screen {
+public class LevelScreen implements Screen {
 
 	private Main game;
-	private OrthographicCamera titleCam;
+	private OrthographicCamera levelCam;
+	private GameHud hud;
 
-	public TitleScreen(Main game) {
+	public LevelScreen(Main game) {
 		this.game = game;
+		hud = new GameHud(game.batch);
 
-		titleCam = new OrthographicCamera();
-		titleCam.setToOrtho(false, Main.WIDTH, Main.HEIGHT);
+		levelCam = new OrthographicCamera();
+		levelCam.setToOrtho(false, Main.WIDTH, Main.HEIGHT);
 	}
 
 	@Override
@@ -27,19 +30,13 @@ public class TitleScreen implements Screen {
 
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+		game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
+		hud.stage.draw();
 	}
 
 	public void update(float delta) {
-
-		handleInput(delta);
-
-	}
-
-	public void handleInput(float delta) {
-		if(Gdx.input.isTouched()) {
-			game.setScreen(new LevelScreen(game));
-			dispose();
-		}
+		hud.update(delta);
 	}
 
 
