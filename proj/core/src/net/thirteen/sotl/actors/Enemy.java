@@ -37,7 +37,34 @@ public class Enemy extends Actor {
     }
 
     public void move() {
-    	movementBehaviour.move(lev, rect, direction);
+    	Direction newDirection;
+
+    	newDirection = movementBehaviour.move(lev, rect, direction);
+
+    	//do not move when turning around
+    	if(newDirection == direction){
+    		moveInDirection(direction);
+    	}
+    	else{
+    		direction = newDirection;
+    	}
+    }
+
+    private void moveInDirection(Direction direction) {
+    	switch (direction){
+    		case UP:
+    			rect.y += rect.height;
+    			break;
+    		case RIGHT:
+    			rect.x += rect.width;
+    			break;
+    		case DOWN:
+    			rect.y -= rect.height;
+    			break;
+    		case LEFT:
+    			rect.x -= rect.width;
+    			break;
+    	}
     }
 
     public boolean checkHeroCollision() {
