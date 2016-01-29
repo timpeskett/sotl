@@ -2,13 +2,14 @@ package net.thirteen.sotl.tiles;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import net.thirteen.sotl.Main;
 
 public class GrassTile extends Tile {
     private static final double SPEED_MULT = 1.0;
     private Texture tex;
 
     public GrassTile() {
-        setTexture(new Texture(Gdx.files.internal("grass.png")));
+        setTexture(Main.manager.get("grass.png", Texture.class));
     }
 
     @Override
