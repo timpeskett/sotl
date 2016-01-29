@@ -9,6 +9,8 @@ import net.thirteen.sotl.scenes.GameHud;
 import net.thirteen.sotl.levels.Level;
 import com.badlogic.gdx.math.Rectangle;
 import net.thirteen.sotl.actors.Hero;
+import com.badlogic.gdx.Input;
+import net.thirteen.sotl.actors.Direction;
 
 public class LevelScreen implements Screen {
 
@@ -58,9 +60,47 @@ public class LevelScreen implements Screen {
 	}
 
 	public void update(float delta) {
+		handleInput(delta);
 		hud.update(delta);
 	}
 
+	public void handleInput(float delta) {
+
+		if(Gdx.input.isKeyPressed(Input.Keys.UP) 
+			|| Gdx.input.isKeyPressed(Input.Keys.W)) {
+
+			hero.setDirection(Direction.UP);
+			hero.setPosition( hero.getX(), hero.getY() 
+				+ hero.getSpeed() * Gdx.graphics.getDeltaTime());
+
+		}
+		if(Gdx.input.isKeyPressed(Input.Keys.DOWN) 
+			|| Gdx.input.isKeyPressed(Input.Keys.S)) {
+
+			hero.setDirection(Direction.DOWN);
+			hero.setPosition( hero.getX(), hero.getY() 
+				- hero.getSpeed() * Gdx.graphics.getDeltaTime());
+
+		}
+		if(Gdx.input.isKeyPressed(Input.Keys.LEFT) 
+			|| Gdx.input.isKeyPressed(Input.Keys.A)) {
+
+			hero.setDirection(Direction.LEFT);
+			hero.setPosition( hero.getX() - hero.getSpeed() 
+				* Gdx.graphics.getDeltaTime(), hero.getY());
+
+		}
+		if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) 
+			|| Gdx.input.isKeyPressed(Input.Keys.D)) {
+
+			hero.setDirection(Direction.RIGHT);
+			hero.setPosition( hero.getX() + hero.getSpeed() 
+				* Gdx.graphics.getDeltaTime(), hero.getY());
+				
+
+		}
+
+	}
 
 	@Override
 	public void resize(int width, int height) {}
