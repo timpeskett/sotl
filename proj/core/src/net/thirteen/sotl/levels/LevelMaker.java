@@ -45,7 +45,8 @@ public class LevelMaker {
         /*Add an enemy*/
         level.getEnemies().add(
             EnemyFactory.createEnemy(level, 
-                EnemyFactory.Difficulty.STATIONARY.val(),
+                EnemyFactory.Difficulty.STATIONARY.val() |
+                EnemyFactory.Difficulty.SHORT_RANGE.val(),
                 64, 64)
         );
 
