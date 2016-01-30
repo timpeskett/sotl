@@ -64,5 +64,8 @@ public class Main extends Game {
 	@Override public void dispose() {
 		batch.dispose();
 		manager.dispose();
+		font.dispose();
+		fontB.dispose();
+		world.dispose();
 	}
 }

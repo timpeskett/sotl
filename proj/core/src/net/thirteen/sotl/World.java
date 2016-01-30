@@ -6,11 +6,12 @@ import net.thirteen.sotl.levels.LevelMaker;
 import net.thirteen.sotl.actors.Hero;
 import net.thirteen.sotl.utils.Tuple;
 
+import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.math.Rectangle;
 
 import java.util.HashMap;
 
-public class World {
+public class World implements Disposable {
 
     private Hero hero;
     private HashMap<Tuple, Level> levelMap;
@@ -198,6 +199,10 @@ public class World {
         }
 
         return result;
+    }
+
+    @Override 
+    public void dispose(){
     }
 }
 
