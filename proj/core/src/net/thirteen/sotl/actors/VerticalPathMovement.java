@@ -53,11 +53,7 @@ public class VerticalPathMovement extends EnemyMovementBehaviour {
 		}
 
 		/*cannot go forward, turn around*/
-		if(direction == Direction.UP){
-			return Direction.DOWN;
-		}
-		else{
-			return Direction.UP;
-		}
+			return direction.flip();
+		
 	}
 }
