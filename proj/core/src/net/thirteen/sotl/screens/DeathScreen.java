@@ -9,7 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 
-public class IntroScreen implements Screen {
+public class DeathScreen implements Screen {
 
 	private Main game;
 	private OrthographicCamera titleCam;
@@ -17,7 +17,7 @@ public class IntroScreen implements Screen {
 	private float screenTimer;
 	private int twoSecondInterval;
 
-	public IntroScreen(Main game) {
+	public DeathScreen(Main game) {
 		this.game = game;
 		layout = new GlyphLayout();
 		screenTimer = 0;
@@ -63,22 +63,21 @@ public class IntroScreen implements Screen {
 				game.font.setColor(1, 1, 1, 1 - (screenTimer / 2));
 				break;
 			case 3:
-				game.setScreen(new TitleScreen(game));
 				dispose();
+				System.exit(0);
 				break;
 			default:
 				break;
 		}
 
-		layout.setText(game.font, "thirteen presents...");
+		layout.setText(game.font, "RIP...");//8==D~~
 
 	}
 
 	public void handleInput(float delta) {
-		if(Gdx.input.isTouched() || 
-		   Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
-			game.setScreen(new TitleScreen(game));
+		if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
 			dispose();
+			System.exit(0);
 		}
 	}
 
