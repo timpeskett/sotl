@@ -26,7 +26,7 @@ public abstract class EnemyCollisionBehaviour {
         	return true;
         }
 
-		//mediumRange can see 2 ahead
+		//mediumRange can see 1 ahead
 		for(int i = 0; i < distance; i++){
 
 			Tile checkTile;

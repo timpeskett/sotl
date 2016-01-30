@@ -10,7 +10,7 @@ public class LongRangeCollision extends EnemyCollisionBehaviour {
 
 	private LongRangeCollision(){
 		//singleton
-		distance = 4;
+		distance = 2;
 	}
 
 	public static LongRangeCollision getInstance(){

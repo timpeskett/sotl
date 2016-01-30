@@ -10,7 +10,7 @@ public class MediumRangeCollision extends EnemyCollisionBehaviour {
 
 	private MediumRangeCollision(){
 		//singleton
-		distance = 2;
+		distance = 1;
 	}
 
 	public static MediumRangeCollision getInstance(){
