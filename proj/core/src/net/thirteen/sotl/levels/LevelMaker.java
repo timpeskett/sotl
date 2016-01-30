@@ -4,9 +4,12 @@ import net.thirteen.sotl.tiles.Tile;
 import net.thirteen.sotl.tiles.DoorTile;
 import net.thirteen.sotl.tiles.WallTile;
 import net.thirteen.sotl.tiles.GrassTile;
+import net.thirteen.sotl.tiles.SlowTile;
 import net.thirteen.sotl.World;
 import net.thirteen.sotl.utils.Tuple;
 import net.thirteen.sotl.actors.EnemyFactory;
+import net.thirteen.sotl.levels.PathFinder;
+import net.thirteen.sotl.screens.DeathScreen;
 
 import com.badlogic.gdx.math.Rectangle;
 
@@ -35,6 +38,7 @@ public class LevelMaker {
         /* Create open map with walls all around */
         genBasicMap(tileMap);
         doors = genDoors(tileMap, world, levelTup, 2, prob);
+        genMaze(tileMap, doors);
 
         Level level = new Level(dimX, dimY, bounds, tileMap, world);
 
@@ -85,7 +89,7 @@ public class LevelMaker {
 
         while(numDoors < minDoors) { 
             if(leftDoor == null) {
-                leftDoor = genDoorTuple(world, level, new Tuple(level.first() -1, level.last()), probDoor);
+                leftDoor = genDoorTuple(world, level, level.firstDec(), probDoor);
                 if(leftDoor != null) {
                     tileMap[leftDoor.first()][leftDoor.last()] = new DoorTile();
                     doorList.add(leftDoor);
@@ -93,7 +97,7 @@ public class LevelMaker {
                 }
             }
             if(rightDoor == null) {
-                rightDoor = genDoorTuple(world, level, new Tuple(level.first() +1, level.last()), probDoor);
+                rightDoor = genDoorTuple(world, level, level.firstInc(), probDoor);
                 if(rightDoor != null) {
                     tileMap[rightDoor.first()][rightDoor.last()] = new DoorTile();
                     doorList.add(rightDoor);
@@ -101,7 +105,7 @@ public class LevelMaker {
                 }
             }
             if(topDoor == null) {
-                topDoor = genDoorTuple(world, level, new Tuple(level.first(), level.last() + 1), probDoor);
+                topDoor = genDoorTuple(world, level, level.lastInc(), probDoor);
                 if(topDoor != null) {
                     tileMap[topDoor.first()][topDoor.last()] = new DoorTile();
                     doorList.add(topDoor);
@@ -109,7 +113,7 @@ public class LevelMaker {
                 }
             }
             if(botDoor == null) {
-                botDoor = genDoorTuple(world, level, new Tuple(level.first(), level.last() - 1), probDoor);
+                botDoor = genDoorTuple(world, level, level.lastDec(), probDoor);
                 if(botDoor != null) {
                     tileMap[botDoor.first()][botDoor.last()] = new DoorTile();
                     doorList.add(botDoor);
@@ -119,6 +123,81 @@ public class LevelMaker {
         }
 
         return doorList;
+    }
+
+
+    private void genMaze(Tile [][] tileMap, ArrayList<Tuple> doors) {
+        int tMapWid = tileMap.length;
+        int tMapHei = tileMap[0].length;
+        ArrayList<Tuple> reservedSquares = new ArrayList<Tuple>();
+
+        for(int i = 0; i < doors.size(); i++) {
+            for(int j = i; j < doors.size(); j++) {
+                reservedSquares.addAll(genPath(tileMap, doors.get(i), doors.get(j), 100));
+            }
+        }
+
+        for(int i = 0; i < tMapWid; i++) {
+            for(int j = 0; j < tMapHei; j++) {
+                if(tileMap[i][j].isTileTraversable() && !reservedSquares.contains(new Tuple(i, j))) {
+                    tileMap[i][j] = new SlowTile();
+                }
+            }
+        }
+    }
+
+
+    /* Assumes that there is *always* at least one traversable tile
+     * in the map. Otherwise will infinite loop. */
+    private Tuple getRandomTraversableTilePos(Tile [][] tileMap) {
+        int tMapWid = tileMap.length;
+        int tMapHei = tileMap.length;
+        Tuple outTup = null;
+        int x, y;
+
+        while(outTup == null) {
+            x = (int)(Math.random() * (tMapWid - 2) + 1);
+            y = (int)(Math.random() * (tMapWid - 2) + 1);
+            if(tileMap[x][y].isTileTraversable()) {
+                outTup = new Tuple(x, y);
+            }
+        }
+
+        return outTup;
+    }
+
+
+    /* Generates a path in a map that goes from src to dest and
+     * passes through the tiles in intermediates. Will only pass through
+     * traversable tiles. */
+    /*private ArrayList<Tuple> genPath(Tile [][] tileMap, Tuple src, ArrayList<Tuple> intermediates, Tuple dest) {
+
+    }*/
+
+
+    /* Generates a path in a map that goes from src to dest. Will only
+     * pass through traversable tiles. src and dest must be traversable */
+    /*private ArrayList<Tuple> genPath(Tile [][] tileMap, Tuple src, Tuple dest) {
+        ArrayList<Tuple> frontier = new ArrayList<Tuple>();
+        ArrayList<Tuple> explored = new ArrayList<Tuple>();
+
+        frontier.add(src);
+        while(!frontier.isEmpty() && !dest.equals(frontier.get(0)) {
+            ArrayList<Tuple> expand = genAdjacentTraversableTiles(frontier.get(0));
+            if(expand.isEmpty() || frontier.containsAll(expand)) {
+                explored.add(frontier.remove(0));
+            }
+            Tuple minTup;
+            int min;
+            for(int i = 0; i < expand.size(); i++) {
+
+
+            }
+        }
+    }*/
+
+    private ArrayList<Tuple> genPath(Tile [][] tileMap, Tuple src, Tuple dest, int depth) {
+        return PathFinder.getPath(tileMap, src, dest);
     }
 
 
