@@ -106,7 +106,6 @@ public class World {
             throw new IllegalArgumentException("Both tuples must be instantiated");
         }
 
-
         if(levelMap.containsKey(to)){
             level = levelMap.get(to);
         }
@@ -120,32 +119,23 @@ public class World {
 
         doorX = doorY = -1;
 
-        System.out.println("Where she at?");
-
         /* Going to right */
         if(to.first() - from.first() == 1) {
-            System.out.println("Right");
             doorX = 0;
         }
         /* Going to left */
         else if(to.first() - from.first() == -1) {
-            System.out.println("left");
             doorX = dimX - 1;
         }
 
         /* Going up */
         if(to.last() - from.last() == 1) {
-            System.out.println("Up");
             doorY = 0;
         }
         /* Going down */
         else if(to.last() - from.last() == -1) {
-            System.out.println("Down");
             doorY = dimY - 1;
         }
-
-        System.out.println("from: " + from + " -- to: " + to);
-        System.out.println("Manhattan: " +  from.manhattan(to));
         
 
         /* Validate answer to ensure directly adjacent */

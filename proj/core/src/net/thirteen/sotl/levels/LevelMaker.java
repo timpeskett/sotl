@@ -58,19 +58,15 @@ public class LevelMaker {
 
 
         if(leftDoor != null) {
-            System.out.println("Left door: " + leftDoor);
             tileMap[leftDoor.first()][leftDoor.last()] = new DoorTile();
         }
         if(rightDoor != null) {
-            System.out.println("Right door: " + rightDoor);
             tileMap[rightDoor.first()][rightDoor.last()] = new DoorTile();
         }
         if(topDoor != null) {
-            System.out.println("Top door: " + topDoor);
             tileMap[topDoor.first()][topDoor.last()] = new DoorTile();
         }
         if(botDoor != null) {
-            System.out.println("Bottom door: " + botDoor);
             tileMap[botDoor.first()][botDoor.last()] = new DoorTile();
         }
 
@@ -122,7 +118,6 @@ public class LevelMaker {
         }
         else {
             outDoorTup = world.getDoorPos(adj, level);
-            System.out.println("New door at " + outDoorTup);
         }
 
         return outDoorTup;
