@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.audio.Sound;
 
 import net.thirteen.sotl.screens.IntroScreen;
 import net.thirteen.sotl.screens.TitleScreen;
@@ -45,6 +46,8 @@ public class Main extends Game {
 		manager.load("sheeprun.png", Texture.class);
 		manager.load("titleScreenBG.png", Texture.class);
 		manager.load("deathScreenBG.png", Texture.class);
+		manager.load("oi.mp3", Sound.class);
+		manager.load("bleet.mp3", Sound.class);
 		manager.finishLoading();
 
         world = new World(MAP_WIDTH, MAP_HEIGHT,

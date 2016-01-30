@@ -4,8 +4,10 @@ import net.thirteen.sotl.levels.Level;
 import net.thirteen.sotl.actors.Hero;
 import net.thirteen.sotl.tiles.Tile;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.audio.Sound;
 import net.thirteen.sotl.actors.Direction;
 import net.thirteen.sotl.utils.Tuple;
+import net.thirteen.sotl.Main;
 
 public abstract class EnemyCollisionBehaviour {
 
@@ -61,6 +63,7 @@ public abstract class EnemyCollisionBehaviour {
 			}
 
 			if(lev.isActorAtTile(lev.getHero(), (int)tileX, (int)tileY)){
+				Main.manager.get("bleet.mp3", Sound.class).play();
 				return true;
 			}
 

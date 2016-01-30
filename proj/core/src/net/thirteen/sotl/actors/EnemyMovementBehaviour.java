@@ -2,10 +2,12 @@ package net.thirteen.sotl.actors;
 
 import net.thirteen.sotl.levels.Level;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.audio.Sound;
 import net.thirteen.sotl.actors.Direction;
 import net.thirteen.sotl.utils.Tuple;
 import net.thirteen.sotl.tiles.Tile;
 import net.thirteen.sotl.levels.PathFinder;
+import net.thirteen.sotl.Main;
 
 import java.util.ArrayList;
 
@@ -55,6 +57,7 @@ public abstract class EnemyMovementBehaviour {
 		      sightRange > 0) {
 
 			if(lev.isActorAtTile(lev.getHero(), tileTuple.first(), tileTuple.last())){
+				Main.manager.get("oi.mp3", Sound.class).play();
 				return true;
 			}
 
