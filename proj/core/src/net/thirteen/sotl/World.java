@@ -67,7 +67,7 @@ public class World {
         curLevelTup = new Tuple(newLevelX, newLevelY);
 
         if(!levelMap.containsKey(curLevelTup)) {
-            levelMap.put(curLevelTup, maker.generate(this, 0, curLevelTup));
+            levelMap.put(curLevelTup, maker.generate(this, curLevelTup, 0));
         }
 
         return getCurrentLevel();
