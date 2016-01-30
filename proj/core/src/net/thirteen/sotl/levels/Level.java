@@ -124,7 +124,6 @@ public class Level {
     }
 
 
-    /* For testing */
     protected Tile [][] getTileMap() {
         return tileMap;
     }
