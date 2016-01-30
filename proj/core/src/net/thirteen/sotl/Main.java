@@ -7,7 +7,9 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
+import net.thirteen.sotl.screens.IntroScreen;
 import net.thirteen.sotl.screens.TitleScreen;
 import net.thirteen.sotl.World;
 import net.thirteen.sotl.levels.LevelMaker;
@@ -17,6 +19,8 @@ public class Main extends Game {
 	public SpriteBatch batch;
     public World world;
 	public static AssetManager manager;
+	public BitmapFont font;
+	public BitmapFont fontB;
 
 	public static final int TILE_SIZE = 32;
 	public static final int MAP_WIDTH = 20;
@@ -28,6 +32,8 @@ public class Main extends Game {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
+		font = new BitmapFont();
+		fontB = new BitmapFont();
 		manager = new AssetManager();
 		manager.load("grass.png", Texture.class);
 		manager.load("wall.png", Texture.class);
@@ -40,7 +46,7 @@ public class Main extends Game {
         world = new World(MAP_WIDTH, MAP_HEIGHT,
                           new Rectangle(0, 0, Main.WIDTH, Main.HEIGHT));
 
-		setScreen(new TitleScreen(this));
+		setScreen(new IntroScreen(this));
 
 	}
 
