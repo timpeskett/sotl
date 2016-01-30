@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Rectangle;
 import net.thirteen.sotl.actors.Direction;
 import net.thirteen.sotl.utils.Tuple;
 import net.thirteen.sotl.tiles.Tile;
+import net.thirteen.sotl.levels.PathFinder;
 
 public abstract class EnemyMovementBehaviour {
 
@@ -17,68 +18,22 @@ public abstract class EnemyMovementBehaviour {
 	protected static Direction seek(Level lev, Rectangle rect, Direction direction) {
 		Hero hero = lev.getHero();
 		Rectangle heroRect = hero.getBoundBox();
+		Tuple heroTuple = lev.worldToTile(heroRect.x, heroRect.y);
+		Tuple enemyTuple = lev.worldToTile(rect.x, rect.y);
 
-		double x = (rect.x + (rect.width/2)) - (heroRect.x + (heroRect.width/2));
-		double y = (rect.y + (rect.height/2)) - (heroRect.y + (heroRect.height/2));;
+		Tuple dest = PathFinder.getPath(lev, enemyTuple, heroTuple).get(1);
 
-		double angle = Math.atan2(y, x) + Math.PI;
-
-		/*degrees are better, suck it tim*/
-		angle *= (180.0/Math.PI);
-
-
-		if(angle >= 45.0f && angle < 135.0f){
-			direction = Direction.UP;
-
-			if(willHitWall(lev, rect, direction)){
-				if(angle < 90.0f){
-					direction = Direction.RIGHT;
-				}
-				else{
-					direction = Direction.LEFT;
-				}
-			}
+		if(dest.first() > enemyTuple.first()){
+			return Direction.RIGHT;
 		}
-		else if(angle >= 135.0f && angle < 225.0f){
-			direction = Direction.LEFT;
-		
-			if(willHitWall(lev, rect, direction)){
-				if(angle < 180.0f){
-					direction = Direction.UP;
-				}
-				else{
-					direction = Direction.DOWN;
-				}
-			}
+		if(dest.last() < enemyTuple.last()){
+			return Direction.DOWN;
 		}
-		else if(angle >= 225.0f && angle < 315.0f){
-			direction = Direction.DOWN;
-			
-			if(willHitWall(lev, rect, direction)){
-				if(angle < 270.0f){
-					direction = Direction.LEFT;
-				}
-				else{
-					direction = Direction.RIGHT;
-				}
-			}
-		}
-		else{
-			direction = Direction.RIGHT;
-			
-			if(willHitWall(lev, rect, direction)){
-				if(angle < 360.0f){
-					direction = Direction.DOWN;
-				}
-				else{
-					direction = Direction.UP;
-				}
-			}
+		if(dest.first() < enemyTuple.first()){
+			return Direction.LEFT;
 		}
 
-
-
-		return direction;
+		return Direction.UP;
 	}
 
 	public static boolean lineOfSight(Level lev, Rectangle rect, Direction direction) {
