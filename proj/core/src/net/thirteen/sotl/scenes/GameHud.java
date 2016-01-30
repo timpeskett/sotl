@@ -48,6 +48,10 @@ public class GameHud implements Disposable {
 
 	}
 
+	public float getTimeCount(){
+		return timeCount;
+	}
+
 	@Override
 	public void dispose() {
 		stage.dispose();

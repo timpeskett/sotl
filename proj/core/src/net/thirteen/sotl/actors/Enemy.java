@@ -21,6 +21,7 @@ public class Enemy extends Actor {
 
     /* speed in pixels per second */
 	private float speed;
+    private int sightRange;
     private Level lev;
     private boolean seenHero;
 
@@ -36,7 +37,8 @@ public class Enemy extends Actor {
     private Animation run;
 
 
-    public Enemy(Level lev, float xpos, float ypos, float speed,
+    public Enemy(Level lev, float xpos, float ypos, 
+                 float speed, int sightRange,
     	         EnemyCollisionBehaviour collisionBehaviour,
     	         EnemyMovementBehaviour movementBehaviour) {
     	
@@ -52,6 +54,7 @@ public class Enemy extends Actor {
         this.collisionBehaviour = collisionBehaviour;
         this.movementBehaviour = movementBehaviour;
         this.seenHero = false;
+        this.sightRange = sightRange;
 
         currState = State.STANDING;
         prevState = State.STANDING;
@@ -113,7 +116,7 @@ public class Enemy extends Actor {
     	Direction newDirection;
 
     	if(!seenHero){
-	    	seenHero = movementBehaviour.lineOfSight(lev, rect, direction);
+	    	seenHero = movementBehaviour.lineOfSight(lev, rect, direction, sightRange);
 	    }
 
     	if(seenHero){

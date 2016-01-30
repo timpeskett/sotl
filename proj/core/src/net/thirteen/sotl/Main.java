@@ -13,6 +13,7 @@ import net.thirteen.sotl.screens.IntroScreen;
 import net.thirteen.sotl.screens.TitleScreen;
 import net.thirteen.sotl.World;
 import net.thirteen.sotl.levels.LevelMaker;
+import net.thirteen.sotl.screens.LevelScreen;
 
 public class Main extends Game {
 
@@ -41,8 +42,9 @@ public class Main extends Game {
 		manager.load("hero.png", Texture.class);
 		manager.load("door.png", Texture.class);
 		manager.load("enemyrun.png", Texture.class);
-		manager.load("titleScreenBG.png", Texture.class);
 		manager.load("sheeprun.png", Texture.class);
+		manager.load("titleScreenBG.png", Texture.class);
+		manager.load("deathScreenBG.png", Texture.class);
 		manager.finishLoading();
 
         world = new World(MAP_WIDTH, MAP_HEIGHT,
@@ -50,6 +52,15 @@ public class Main extends Game {
 
 		setScreen(new IntroScreen(this));
 
+	}
+
+	public void reset(){
+		font = new BitmapFont();
+
+        world = new World(MAP_WIDTH, MAP_HEIGHT,
+                          new Rectangle(0, 0, Main.WIDTH, Main.HEIGHT));
+
+		setScreen(new TitleScreen(this));
 	}
 
 	@Override
