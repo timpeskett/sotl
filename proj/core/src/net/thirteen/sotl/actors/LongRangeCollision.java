@@ -28,3 +28,5 @@ public class LongRangeCollision extends EnemyCollisionBehaviour {
 	}
 
 }
+
+//8==D

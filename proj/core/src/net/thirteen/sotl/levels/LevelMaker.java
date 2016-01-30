@@ -135,21 +135,23 @@ public class LevelMaker {
                 /* These cases should all be mutually exclusive */
                 if(level.first() - adj.first() == 1) {
                     doorX = 0;
-                    doorY = (int)(Math.random() * (dimY - 2) + 1);
+                    doorY = (int)(Math.random() * (dimY - 3) + 1);
                 }
                 if(level.first() - adj.first() == -1) {
                     doorX = dimX - 1;
-                    doorY = (int)(Math.random() * (dimY - 2) + 1);
+                    doorY = (int)(Math.random() * (dimY - 3) + 1);
                 }
 
                 if(level.last() - adj.last() == 1) {
                     doorY = 0;
-                    doorX = (int)(Math.random() * (dimX - 2) + 1);
+                    doorX = (int)(Math.random() * (dimX - 3) + 1);
                 }
                 if(level.last() - adj.last() == -1) {
                     doorY = dimY - 1;
-                    doorX = (int)(Math.random() * (dimX - 2) + 1);
+                    doorX = (int)(Math.random() * (dimX - 3) + 1);
                 }
+
+                System.out.println("doorx: " + doorX + "\ndoory: "+ doorY);
 
                 outDoorTup = new Tuple(doorX, doorY);
             }
