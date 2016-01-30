@@ -86,6 +86,16 @@ public class Level {
         return new Tuple((int)x / getTileWidth(), (int)y / getTileHeight());
     }
 
+    /* Returns the X coord of the center (in world coordinates) of the tile
+     * addressed by tile */
+    public float tileToWorldX(Tuple tile) {
+        return tile.first() * getTileWidth() + getTileWidth() / 2;
+    }
+
+    public float tileToWorldY(Tuple tile) {
+        return tile.last() * getTileHeight() + getTileHeight() / 2;
+    }
+
     public void setEnemies(ArrayList<Enemy> enemies) {
         this.enemies = enemies;
     }

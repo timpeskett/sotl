@@ -8,6 +8,7 @@ import net.thirteen.sotl.tiles.SlowTile;
 import net.thirteen.sotl.World;
 import net.thirteen.sotl.utils.Tuple;
 import net.thirteen.sotl.actors.EnemyFactory;
+import net.thirteen.sotl.actors.Enemy;
 import net.thirteen.sotl.levels.PathFinder;
 import net.thirteen.sotl.screens.DeathScreen;
 import net.thirteen.sotl.tiles.MapTileFactory;
@@ -44,15 +45,25 @@ public class LevelMaker {
 
         Level level = new Level(dimX, dimY, bounds, tileMap, world);
 
-        /*Add an enemy*/
-        level.getEnemies().add(
-            EnemyFactory.createEnemy(level, 
-                EnemyFactory.Difficulty.STATIONARY.val() |
-                EnemyFactory.Difficulty.SHORT_RANGE.val(),
-                64, 64)
-        );
-
+        level.setEnemies(genEnemies(level, doors, prob));
+        
         return level;
+    }
+
+    private ArrayList<Enemy> genEnemies(Level level, ArrayList<Tuple> doors, float enemiesPerTile) {
+        ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+        Tile [][] tileMap = level.getTileMap();
+
+        /* Temporary */
+        for(int i = 0; i < 4; i++) {
+            Tuple t = getRandomTraversableTilePos(tileMap);
+            enemies.add(
+                    EnemyFactory.createEnemy(level,
+                        (float)Math.random(),
+                        level.tileToWorldX(t), level.tileToWorldY(t)));
+        }
+
+        return enemies;
     }
 
 
@@ -280,7 +291,6 @@ public class LevelMaker {
             type = parts[2];
             name = parts.length >= 4 ? parts[3] : "";
 
-            System.out.println("Setting element: x - " + x + " y - " + y);
             tileMap[x][y] = mtf.makeTile(type, name);
         }
 
