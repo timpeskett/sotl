@@ -103,6 +103,10 @@ public class Enemy extends Actor {
     	return collisionBehaviour.collide(lev, rect, direction);
     }
 
+    public void attackAnimation(){
+    	collisionBehaviour.attackAnimation(lev, rect, direction);
+    }
+
     private void checkCollisions() {
 
     	//Loop through other enemies for collisions
