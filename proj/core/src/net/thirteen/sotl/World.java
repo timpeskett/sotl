@@ -55,16 +55,16 @@ public class World {
         newLevelY = curLevelTup.last();
 
         if(exitTile.first() == 0) {
-            newLevelX -= 1;
+            newLevelX = -1;
         }
         if(exitTile.first() == curLevel.getTilesX() - 1) {
-            newLevelX += 1;
+            newLevelX = 1;
         }
         if(exitTile.last() == 0) {
-            newLevelY -= 1;
+            newLevelY = -1;
         }
         if(exitTile.last() == curLevel.getTilesY() - 1) {
-            newLevelY += 1;
+            newLevelY = 1;
         }
 
         curLevelTup = new Tuple(newLevelX, newLevelY);
@@ -103,63 +103,78 @@ public class World {
         Level level;
 
         if(from == null || to == null) {
-            throw new IllegalArgumentException("At least one tuple must be instantiated");
+            throw new IllegalArgumentException("Both tuples must be instantiated");
         }
 
-        if(levelMap.containsKey(from)) {
-            level = levelMap.get(from);
-        }
-        else if(levelMap.containsKey(to)){
+
+        if(levelMap.containsKey(to)){
             level = levelMap.get(to);
+        }
+        else if(levelMap.containsKey(from)) {
+            level = levelMap.get(from);
             flipped = true;
         }
         else {
             throw new IllegalArgumentException("Must be a level corresponding to at least one of the tuples.");
         }
 
-        doorX = doorY = 0;
+        doorX = doorY = -1;
+
+        System.out.println("Where she at?");
 
         /* Going to right */
         if(to.first() - from.first() == 1) {
+            System.out.println("Right");
             doorX = 0;
-            doorY = findDoorInRow(level, doorX);
         }
         /* Going to left */
         else if(to.first() - from.first() == -1) {
-            doorX = dimX;
-            doorY = findDoorInRow(level, doorX);
+            System.out.println("left");
+            doorX = dimX - 1;
         }
 
         /* Going up */
         if(to.last() - from.last() == 1) {
-            doorY = dimY;
-            doorX = findDoorInCol(level, doorY);
+            System.out.println("Up");
+            doorY = 0;
         }
         /* Going down */
         else if(to.last() - from.last() == -1) {
-            doorY = dimY;
-            doorX = findDoorInCol(level, doorY);
+            System.out.println("Down");
+            doorY = dimY - 1;
         }
 
+        System.out.println("from: " + from + " -- to: " + to);
+        System.out.println("Manhattan: " +  from.manhattan(to));
+        
 
         /* Validate answer to ensure directly adjacent */
         if(from.manhattan(to) == 1) {
-            if(flipped) {
-                if(doorX == 0 || doorX == dimX) {
-                    doorX = doorX == 0 ? dimX : 0;
+            if(!flipped) {
+                if(doorX == -1) {
+                    doorX = findDoorInRow(level, doorY);
                 }
-                if(doorY == 0 || doorY == dimY) {
-                    doorY = ((doorY == 0) ? dimY : 0);
+                if(doorY == -1) {
+                    doorY = findDoorInCol(level, doorX);
                 }
             }
             else {
-                outTuple = new Tuple(doorX, doorY);
+                if(doorX == -1) {
+                    int tempDoorY = ((doorY == 0) ? dimY - 1 : 0);
+                    doorX = findDoorInRow(level, tempDoorY);
+                }
+                else if(doorY == -1) {
+                    int tempDoorX = doorX == 0 ? dimX - 1 : 0;
+                    doorY = findDoorInCol(level, tempDoorX);
+                }
             }
-
+            outTuple = new Tuple(doorX, doorY);
         }
         else {
             outTuple = null;
         }
+
+        System.out.println("Result:" + outTuple);
 
         return outTuple;
     }

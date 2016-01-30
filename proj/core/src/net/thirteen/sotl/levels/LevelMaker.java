@@ -50,19 +50,11 @@ public class LevelMaker {
             tileMap[dimX-1][y] = new WallTile();
         }
 
-        //need at least two doors
-        while(numDoors < 2) {
-            numDoors = 0;
 
-            leftDoor = genDoorTuple(world, to, new Tuple(to.first() -1, to.last()), prob);
-            if(leftDoor != null) numDoors++;
-            rightDoor = genDoorTuple(world, to, new Tuple(to.first() +1, to.last()), prob);
-            if(rightDoor != null) numDoors++;
-            topDoor = genDoorTuple(world, to, new Tuple(to.first(), to.last() + 1), prob);
-            if(topDoor != null) numDoors++;
-            botDoor = genDoorTuple(world, to, new Tuple(to.first(), to.last() - 1), prob);
-            if(botDoor != null) numDoors++;
-        }
+        leftDoor = genDoorTuple(world, to, new Tuple(to.first() -1, to.last()), prob);
+        rightDoor = genDoorTuple(world, to, new Tuple(to.first() +1, to.last()), prob);
+        topDoor = genDoorTuple(world, to, new Tuple(to.first(), to.last() + 1), prob);
+        botDoor = genDoorTuple(world, to, new Tuple(to.first(), to.last() - 1), prob);
 
 
         if(leftDoor != null) {
@@ -129,7 +121,8 @@ public class LevelMaker {
             }
         }
         else {
-            outDoorTup = world.getDoorPos(level, adj);
+            outDoorTup = world.getDoorPos(adj, level);
+            System.out.println("New door at " + outDoorTup);
         }
 
         return outDoorTup;
