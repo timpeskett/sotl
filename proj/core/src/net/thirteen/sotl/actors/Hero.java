@@ -29,18 +29,25 @@ public class Hero extends Actor {
     private State prevState;
     private float stateTimer;
 
+    private TextureRegion sheepStand;
+
     public Hero(World world, float xpos, float ypos, float width, float height, float speed) {
-        super(Main.manager.get("hero.png", Texture.class),
+        super(Main.manager.get("sheeprun.png", Texture.class),
         	xpos, 
         	ypos,
             width,
             height
         );
 
-        Rectangle boundBox = getBoundBox();
+        sheepStand = new TextureRegion(getTexture(), 0, 0, 17, 26);
+        System.out.println(sheepStand.getRegionWidth() + "\t" + sheepStand.getRegionHeight());
+        setRegion(sheepStand);
+        setBounds(0, 0, 17, 26);
 
+        Rectangle boundBox = getBoundBox();
         setCenter(boundBox.getCenter(new Vector2()).x, 
             boundBox.getCenter(new Vector2()).y);
+        setOriginCenter();
 
         this.speed = speed;
         this.world = world;
