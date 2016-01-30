@@ -21,15 +21,6 @@ public class StationaryMovement extends EnemyMovementBehaviour {
 	}
 
 	public Direction move(Level lev, Rectangle rect, Direction direction){
-		switch (direction) {
-			case UP:
-				return Direction.RIGHT;
-			case RIGHT:
-				return Direction.DOWN;
-			case DOWN:
-				return Direction.LEFT;
-			default:
-				return Direction.UP;
-		}
+		return direction;
 	}
 }
