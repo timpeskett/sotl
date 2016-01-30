@@ -65,10 +65,36 @@ public class Hero extends Actor {
             Tile t = world.getCurrentLevel().getTile(tpl);
 
             if(t instanceof DoorTile) {
-                world.changeLevel(tpl);
-            }
+                Tuple curLevel, newLevel, newCharPos;
+                float newX, newY;
 
-            setPosition(getX() + speed * dx, getY() + speed * dy);
+                Level currLev = world.getCurrentLevel();
+
+                curLevel = world.getCurrentLevelTup();
+                newLevel = world.changeLevel(tpl);
+                newCharPos = world.getDoorPos(curLevel, newLevel);
+                if(newCharPos.first() == 0) {
+                    newCharPos = newCharPos.firstInc();
+                }
+                if(newCharPos.last() == 0) {
+                    newCharPos = newCharPos.lastInc();
+                }
+                if(newCharPos.first() == currLev.getTilesX() - 1) {
+                    newCharPos = newCharPos.firstDec();
+                }
+                if(newCharPos.last() == currLev.getTilesY() - 1) {
+                    newCharPos = newCharPos.lastDec();
+                }
+
+                setPosition(newCharPos.first() * Main.TILE_SIZE, newCharPos.last() * Main.TILE_SIZE);
+                boundBox.x = newCharPos.first() * Main.TILE_SIZE;
+                boundBox.y = newCharPos.last() * Main.TILE_SIZE;
+
+            } else {
+
+                setPosition(getX() + speed * dx, getY() + speed * dy);
+
+            }
 
             setBoundBox(boundBox);
         }

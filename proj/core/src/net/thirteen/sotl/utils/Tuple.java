@@ -47,7 +47,7 @@ public class Tuple {
     }
 
     public int manhattan(Tuple t) {
-        return Math.abs(t.first() - first()) + Math.abs(t.last() + last());
+        return Math.abs(t.first() - first()) + Math.abs(t.last() - last());
     }
 
     public float distance(Tuple t) {

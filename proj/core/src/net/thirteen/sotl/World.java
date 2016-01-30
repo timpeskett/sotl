@@ -60,20 +60,19 @@ public class World {
         newLevelY = curLevelTup.last();
 
         if(exitTile.first() == 0) {
-            newLevelX = -1;
+            newLevelX += -1;
         }
         if(exitTile.first() == curLevel.getTilesX() - 1) {
-            newLevelX = 1;
+            newLevelX += 1;
         }
         if(exitTile.last() == 0) {
-            newLevelY = -1;
+            newLevelY += -1;
         }
         if(exitTile.last() == curLevel.getTilesY() - 1) {
-            newLevelY = 1;
+            newLevelY += 1;
         }
 
         curLevelTup = new Tuple(newLevelX, newLevelY);
-
         if(!levelMap.containsKey(curLevelTup)) {
             levelMap.put(curLevelTup, maker.generate(this, curLevelTup, 0));
         }
