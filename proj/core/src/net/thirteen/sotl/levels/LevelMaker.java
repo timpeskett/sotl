@@ -4,10 +4,12 @@ import net.thirteen.sotl.tiles.Tile;
 import net.thirteen.sotl.tiles.DoorTile;
 import net.thirteen.sotl.tiles.WallTile;
 import net.thirteen.sotl.tiles.GrassTile;
+import net.thirteen.sotl.tiles.SlowTile;
 import net.thirteen.sotl.World;
 import net.thirteen.sotl.utils.Tuple;
 import net.thirteen.sotl.actors.EnemyFactory;
 import net.thirteen.sotl.levels.PathFinder;
+import net.thirteen.sotl.screens.DeathScreen;
 
 import com.badlogic.gdx.math.Rectangle;
 
