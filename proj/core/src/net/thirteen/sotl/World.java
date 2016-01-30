@@ -46,8 +46,13 @@ public class World {
         return levelMap.get(curLevelTup);
     }
 
+    public Tuple getCurrentLevelTup() {
+        return curLevelTup;
+    }
 
-    public Level changeLevel(Tuple exitTile) {
+
+    /* Returns the coordinates of the level in the world map */
+    public Tuple changeLevel(Tuple exitTile) {
         Level curLevel = getCurrentLevel();
         int newLevelX, newLevelY;
 
@@ -75,7 +80,7 @@ public class World {
 
         levelChanged = true;
 
-        return getCurrentLevel();
+        return curLevelTup;
     }
 
     public boolean hasLevelChanged() {
