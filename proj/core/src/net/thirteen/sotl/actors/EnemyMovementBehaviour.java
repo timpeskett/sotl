@@ -117,6 +117,8 @@ public abstract class EnemyMovementBehaviour {
 				break;
 		}	
 
+
+		/*Gross hacks that work are the best hacks*/
 		if(posx > (lev.getRekt().width - lev.getTileWidth())){
 			posx = (lev.getRekt().width - lev.getTileWidth());
 		}
