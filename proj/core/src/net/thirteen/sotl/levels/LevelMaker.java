@@ -10,8 +10,10 @@ import net.thirteen.sotl.utils.Tuple;
 import net.thirteen.sotl.actors.EnemyFactory;
 import net.thirteen.sotl.levels.PathFinder;
 import net.thirteen.sotl.screens.DeathScreen;
+import net.thirteen.sotl.tiles.MapTileFactory;
 
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.Gdx;
 
 import java.util.HashMap;
 import java.util.ArrayList;
@@ -60,10 +62,13 @@ public class LevelMaker {
         int tMapWid = tileMap.length;
         int tMapHei = tileMap[0].length;
 
+        MapTileFactory mtf = new MapTileFactory();
+
         /* Start simple. Fill map with grass */
         for(int x = 0; x < tMapWid; x++) {
             for(int y = 0; y < tMapHei; y++) {
-                tileMap[x][y] = new GrassTile();
+                tileMap[x][y] = mtf.makeGroundTile("grass.png");
+                /*tileMap[x][y] = new GrassTile();*/
             }
         }
 
@@ -243,7 +248,43 @@ public class LevelMaker {
     }
 
     
-    public Level load(/* Load from file */) {
-        throw new UnsupportedOperationException("Not yet implemented");
+    public Level load(World world, String fileName) {
+        String [] levData = Gdx.files.internal(fileName).readString().split("\n");
+        Tile [][] tileMap;
+        MapTileFactory mtf = new MapTileFactory();
+
+        tileMap = new Tile[dimX][dimY];
+
+        int inX, inY;
+
+        inX = Integer.valueOf(levData[0].split(" ")[0]);
+        inY = Integer.valueOf(levData[0].split(" ")[1]);
+
+        if(inX != dimX && inY != dimY) {
+            throw new IllegalStateException("File map size does not fit");
+        }
+
+        for(int i = 1; i < levData.length; i++) {
+            if(levData[i].equals("") || levData[i].charAt(0) == '#') {
+                continue;
+            }
+            String [] parts = levData[i].split(" ");
+            int x, y;
+            String type;
+            String name;
+
+            x = Integer.valueOf(parts[0]);
+            y = Integer.valueOf(parts[1]);
+
+            type = parts[2];
+            name = parts.length >= 4 ? parts[3] : "";
+
+            System.out.println("Setting element: x - " + x + " y - " + y);
+            tileMap[x][y] = mtf.makeTile(type, name);
+        }
+
+        Level level = new Level(dimX, dimY, bounds, tileMap, world);
+
+        return level;
     }
 }

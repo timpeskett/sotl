@@ -31,7 +31,8 @@ public class World implements Disposable {
         levelMap = new HashMap<Tuple, Level>();
         curLevelTup = new Tuple(0, 0);
         /* Set up initial level. (Eventually load) */
-        Level curLevel = maker.generate(this, new Tuple(0, 0), 0);
+        /*Level curLevel = maker.generate(this, new Tuple(0, 0), 0);*/
+        Level curLevel = maker.load(this, "start_map.dat");
         levelMap.put(curLevelTup, curLevel);
 
         levelChanged = false;
