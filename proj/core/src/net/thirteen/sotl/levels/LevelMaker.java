@@ -232,11 +232,9 @@ public class LevelMaker {
 
                 outDoorTup = new Tuple(doorX, doorY);
             }
-            System.out.println("if " +outDoorTup);
         }
         else {
             outDoorTup = world.getDoorPos(adj, level);
-            System.out.println("else " + outDoorTup);
         }
 
 

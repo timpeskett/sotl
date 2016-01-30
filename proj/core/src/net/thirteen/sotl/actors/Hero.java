@@ -45,8 +45,11 @@ public class Hero extends Actor {
         Rectangle boundBox = new Rectangle(getBoundBox());
         boolean validMove = true;
 
-        boundBox.x += speed * dx;
-        boundBox.y += speed * dy;
+        Tuple tilePos = world.getCurrentLevel().worldToTile(boundBox.x, boundBox.y);
+        Tile tile = world.getCurrentLevel().getTile(tilePos.first(), tilePos.last());
+
+        boundBox.x += speed * dx * tile.getSpeedMult();
+        boundBox.y += speed * dy * tile.getSpeedMult();
 
         for(Tile t : world.getCurrentLevel().getTilesInRect(boundBox).values()) {
             if(!t.isTileTraversable()) {
@@ -92,7 +95,7 @@ public class Hero extends Actor {
 
             } else {
 
-                setPosition(getX() + speed * dx, getY() + speed * dy);
+                setPosition(getX() + speed * dx * tile.getSpeedMult(), getY() + speed * dy * tile.getSpeedMult());
 
             }
 
