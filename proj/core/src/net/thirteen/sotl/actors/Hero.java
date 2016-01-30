@@ -7,9 +7,11 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 import net.thirteen.sotl.tiles.Tile;
+import net.thirteen.sotl.tiles.DoorTile;
 import net.thirteen.sotl.World;
 import net.thirteen.sotl.levels.Level;
 import net.thirteen.sotl.Main;
+import net.thirteen.sotl.utils.Tuple;
 
 public class Hero extends Actor {
 
@@ -53,6 +55,20 @@ public class Hero extends Actor {
         }
 
         if(validMove) {
+
+            /* checking for door and spawning new level bro */
+
+            Tuple tpl = world.getCurrentLevel().worldToTile(
+                boundBox.getCenter(new Vector2()).x,
+                boundBox.getCenter(new Vector2()).y);
+
+            Tile t = world.getCurrentLevel().getTile(tpl);
+
+            if(t instanceof DoorTile) {
+                System.out.println("door");
+                world.changeLevel(tpl);
+            }
+
             setPosition(getX() + speed * dx, getY() + speed * dy);
 
             setBoundBox(boundBox);
