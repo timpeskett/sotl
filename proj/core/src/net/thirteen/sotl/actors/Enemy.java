@@ -106,8 +106,11 @@ public class Enemy extends Actor {
     private void checkCollisions() {
 
     	//Loop through other enemies for collisions
-    	for(Enemy enemy: lev.getEnemies()){
-    		direction = direction.flip();
+    	for(Enemy e: lev.getEnemies()){
+
+    		if(e != this && e.overlaps(this)){
+    			direction = direction.flip();
+    		}
     	}
     }
 
