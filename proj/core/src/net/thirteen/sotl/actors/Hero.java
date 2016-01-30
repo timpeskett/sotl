@@ -41,9 +41,7 @@ public class Hero extends Actor {
         boundBox.y += speed * dy;
 
         for(Tile t : world.getCurrentLevel().getTilesInRect(boundBox).values()) {
-            System.out.println("Checking");
             if(!t.isTileTraversable()) {
-                System.out.println("Invalid");
                 validMove = false;
             }
         }

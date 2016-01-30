@@ -25,12 +25,13 @@ public class EnemyFactory {
 	}
 
 
-	public static Enemy createEnemy(int difficulty, Level lev, float xpos, float ypos){
+	public static Enemy createEnemy(Level lev, int difficulty, float xpos, float ypos){
 
 		EnemyCollisionBehaviour collisionBehaviour;
 		IEnemyMovementBehaviour movementBehaviour;
 
 
+		//Attack range
 		if((difficulty & Difficulty.LONG_RANGE.val()) != 0){
 			collisionBehaviour = LongRangeCollision.getInstance();
 		}
@@ -42,8 +43,9 @@ public class EnemyFactory {
 		}
 
 
+		//Movement pattern
 		if((difficulty & Difficulty.SEEKING.val()) != 0){
-			movementBehaviour = null;
+			movementBehaviour = SeekingMovement.getInstance();
 		}
 		else if((difficulty & Difficulty.HOR_PATH.val()) != 0){
 			movementBehaviour = HorizontalPathMovement.getInstance();
@@ -55,7 +57,7 @@ public class EnemyFactory {
 			movementBehaviour = StationaryMovement.getInstance();
 		}
 
-		return new Enemy(lev, xpos, ypos,
+		return new Enemy(lev, xpos, ypos, 200f,
     	                 collisionBehaviour, 
     	                 movementBehaviour);
 	}

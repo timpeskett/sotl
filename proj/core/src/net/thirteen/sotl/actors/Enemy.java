@@ -9,12 +9,15 @@ import com.badlogic.gdx.math.Rectangle;
 
 public class Enemy extends Actor {
 
+    /* speed in pixels per second */
+	private float speed;
     private Level lev;
 
 	protected EnemyCollisionBehaviour collisionBehaviour;
 	protected IEnemyMovementBehaviour movementBehaviour;
 
-    public Enemy(Level lev, float xpos, float ypos,
+
+    public Enemy(Level lev, float xpos, float ypos, float speed,
     	         EnemyCollisionBehaviour collisionBehaviour,
     	         IEnemyMovementBehaviour movementBehaviour) {
     	
@@ -26,14 +29,15 @@ public class Enemy extends Actor {
         );
 
         this.lev = lev;
-
+        this.speed = speed;
         this.collisionBehaviour = collisionBehaviour;
         this.movementBehaviour = movementBehaviour;
         
     }
 
+
     public void update() {
-    	//checkCollisions();
+    	move();
     }
 
     public void move() {
@@ -53,18 +57,20 @@ public class Enemy extends Actor {
     private void moveInDirection(Direction direction) {
     	switch (direction){
     		case UP:
-    			rect.y += rect.height;
+    			rect.y += Gdx.graphics.getDeltaTime() * speed;
     			break;
     		case RIGHT:
-    			rect.x += rect.width;
+    			rect.x += Gdx.graphics.getDeltaTime() * speed;
     			break;
     		case DOWN:
-    			rect.y -= rect.height;
+    			rect.y -= Gdx.graphics.getDeltaTime() * speed;
     			break;
     		case LEFT:
-    			rect.x -= rect.width;
+    			rect.x -= Gdx.graphics.getDeltaTime() * speed;
     			break;
     	}
+
+    	setPosition(rect.x, rect.y);
     }
 
     public boolean checkHeroCollision() {
