@@ -163,10 +163,10 @@ public class World implements Disposable {
                     doorY = findDoorInCol(level, tempDoorX);
                 }
             }
-            outTuple = new Tuple(doorX, doorY);
-        }
-        else {
-            outTuple = null;
+
+            if(doorX != -1 && doorY != -1) {
+                outTuple = new Tuple(doorX, doorY);
+            }
         }
 
         return outTuple;

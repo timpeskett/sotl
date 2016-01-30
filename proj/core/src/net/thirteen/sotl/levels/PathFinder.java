@@ -9,7 +9,11 @@ import net.thirteen.sotl.utils.Tuple;
 public class PathFinder {
 
     /* Change from tileMap */
-    public static ArrayList<Tuple> getPath(Tile [][] tileMap, Tuple src, Tuple dest) {
+    public static ArrayList<Tuple> getPath(Level level, Tuple src, Tuple dest) {
+        return getPath(level.getTileMap(), src, dest);
+    }
+
+    protected static ArrayList<Tuple> getPath(Tile [][] tileMap, Tuple src, Tuple dest) {
         HashMap<Tuple, ArrayList<Tuple>> paths;
         ArrayList<Tuple> frontier = new ArrayList<Tuple>();
         ArrayList<Tuple> explored = new ArrayList<Tuple>();
@@ -55,6 +59,8 @@ public class PathFinder {
         return outPath;
     }
 
+
+
     private static ArrayList<Tuple> getExpandNodes(Tile [][] tileMap, Tuple tile) {
         int dimX = tileMap.length;
         int dimY = tileMap[0].length;
@@ -88,8 +94,4 @@ public class PathFinder {
 
         return outTiles;
     }
-
-
-
-
-    }
+}

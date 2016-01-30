@@ -87,7 +87,10 @@ public class LevelMaker {
         ArrayList<Tuple> doorList = new ArrayList<Tuple>();
         int numDoors = 0;
 
-        while(numDoors < minDoors) { 
+        /* To guard against an infinite loop */
+        int infGuard = 0;
+
+        while(numDoors < minDoors && infGuard++ < 10) { 
             if(leftDoor == null) {
                 leftDoor = genDoorTuple(world, level, level.firstDec(), probDoor);
                 if(leftDoor != null) {
@@ -130,10 +133,15 @@ public class LevelMaker {
         int tMapWid = tileMap.length;
         int tMapHei = tileMap[0].length;
         ArrayList<Tuple> reservedSquares = new ArrayList<Tuple>();
+        ArrayList<Tuple> keySquares = new ArrayList<Tuple>();
+
+        for(int i = 0; i < 15; i++) {
+            keySquares.add(getRandomTraversableTilePos(tileMap));
+        }
 
         for(int i = 0; i < doors.size(); i++) {
             for(int j = i; j < doors.size(); j++) {
-                reservedSquares.addAll(genPath(tileMap, doors.get(i), doors.get(j), 100));
+                reservedSquares.addAll(genPath(tileMap, doors.get(i), keySquares, doors.get(j)));
             }
         }
 
@@ -151,13 +159,13 @@ public class LevelMaker {
      * in the map. Otherwise will infinite loop. */
     private Tuple getRandomTraversableTilePos(Tile [][] tileMap) {
         int tMapWid = tileMap.length;
-        int tMapHei = tileMap.length;
+        int tMapHei = tileMap[0].length;
         Tuple outTup = null;
         int x, y;
 
         while(outTup == null) {
             x = (int)(Math.random() * (tMapWid - 2) + 1);
-            y = (int)(Math.random() * (tMapWid - 2) + 1);
+            y = (int)(Math.random() * (tMapHei - 2) + 1);
             if(tileMap[x][y].isTileTraversable()) {
                 outTup = new Tuple(x, y);
             }
@@ -170,33 +178,25 @@ public class LevelMaker {
     /* Generates a path in a map that goes from src to dest and
      * passes through the tiles in intermediates. Will only pass through
      * traversable tiles. */
-    /*private ArrayList<Tuple> genPath(Tile [][] tileMap, Tuple src, ArrayList<Tuple> intermediates, Tuple dest) {
+    private ArrayList<Tuple> genPath(Tile [][] tileMap, Tuple src, ArrayList<Tuple> intermediates, Tuple dest) {
+        ArrayList<Tuple> points = new ArrayList<Tuple>();
+        ArrayList<Tuple> curPath; 
 
-    }*/
+        points.add(src);
+        points.addAll(intermediates);
+        points.add(dest);
 
+        curPath = genPath(tileMap, src, points.get(0));
 
-    /* Generates a path in a map that goes from src to dest. Will only
-     * pass through traversable tiles. src and dest must be traversable */
-    /*private ArrayList<Tuple> genPath(Tile [][] tileMap, Tuple src, Tuple dest) {
-        ArrayList<Tuple> frontier = new ArrayList<Tuple>();
-        ArrayList<Tuple> explored = new ArrayList<Tuple>();
-
-        frontier.add(src);
-        while(!frontier.isEmpty() && !dest.equals(frontier.get(0)) {
-            ArrayList<Tuple> expand = genAdjacentTraversableTiles(frontier.get(0));
-            if(expand.isEmpty() || frontier.containsAll(expand)) {
-                explored.add(frontier.remove(0));
-            }
-            Tuple minTup;
-            int min;
-            for(int i = 0; i < expand.size(); i++) {
-
-
-            }
+        for(int i = 0; i < points.size() - 1; i++) {
+            curPath.addAll(genPath(tileMap, points.get(i), points.get(i + 1)));
         }
-    }*/
 
-    private ArrayList<Tuple> genPath(Tile [][] tileMap, Tuple src, Tuple dest, int depth) {
+        return curPath;
+    }
+
+
+    private ArrayList<Tuple> genPath(Tile [][] tileMap, Tuple src, Tuple dest) {
         return PathFinder.getPath(tileMap, src, dest);
     }
 
@@ -242,41 +242,7 @@ public class LevelMaker {
         return outDoorTup;
     }
 
-
     
-    public Level generate(HashMap<Tuple, DoorTile> entrances, int difficulty, World world) {
-        Tile [][] tileMap = new Tile[dimX][dimY];
-
-        /* Start simple. Fill map with grass */
-        for(int x = 0; x < dimX; x++) {
-            for(int y = 0; y < dimY; y++) {
-                tileMap[x][y] = new GrassTile();
-            }
-        }
-
-        for(int x = 0; x < dimX; x++) {
-            tileMap[x][dimY-1] = new WallTile();
-            tileMap[x][0] = new WallTile();
-        }
-            
-        for(int y = 0; y < dimY; y++) {
-            tileMap[0][y] = new WallTile();
-            tileMap[dimX-1][y] = new WallTile();
-        }
-
-
-        Level level = new Level(dimX, dimY, bounds, tileMap, world);
-
-        /*Add an enemy*/
-        level.getEnemies().add(
-            EnemyFactory.createEnemy(level, 
-                EnemyFactory.Difficulty.SEEKING.val(),
-                64, 64)
-        );
-
-        return level;
-    }
-
     public Level load(/* Load from file */) {
         throw new UnsupportedOperationException("Not yet implemented");
     }
