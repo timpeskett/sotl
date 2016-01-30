@@ -87,7 +87,10 @@ public class LevelMaker {
         ArrayList<Tuple> doorList = new ArrayList<Tuple>();
         int numDoors = 0;
 
-        while(numDoors < minDoors) { 
+        /* To guard against an infinite loop */
+        int infGuard = 0;
+
+        while(numDoors < minDoors && infGuard++ < 10) { 
             if(leftDoor == null) {
                 leftDoor = genDoorTuple(world, level, level.firstDec(), probDoor);
                 if(leftDoor != null) {

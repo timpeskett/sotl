@@ -7,6 +7,8 @@ import net.thirteen.sotl.utils.Tuple;
 import net.thirteen.sotl.tiles.Tile;
 import net.thirteen.sotl.levels.PathFinder;
 
+import java.util.ArrayList;
+
 public abstract class EnemyMovementBehaviour {
 
 
@@ -21,17 +23,22 @@ public abstract class EnemyMovementBehaviour {
 		Tuple heroTuple = lev.worldToTile(heroRect.x, heroRect.y);
 		Tuple enemyTuple = lev.worldToTile(rect.x, rect.y);
 
-		Tuple dest = PathFinder.getPath(lev, enemyTuple, heroTuple).get(1);
+        ArrayList<Tuple> path = PathFinder.getPath(lev, enemyTuple, heroTuple);
 
-		if(dest.first() > enemyTuple.first()){
-			return Direction.RIGHT;
-		}
-		if(dest.last() < enemyTuple.last()){
-			return Direction.DOWN;
-		}
-		if(dest.first() < enemyTuple.first()){
-			return Direction.LEFT;
-		}
+        /* Ensure not on the same tile as the hero */
+        if(path.size() > 1) {
+            Tuple dest = path.get(1);
+
+            if(dest.first() > enemyTuple.first()){
+                return Direction.RIGHT;
+            }
+            if(dest.last() < enemyTuple.last()){
+                return Direction.DOWN;
+            }
+            if(dest.first() < enemyTuple.first()){
+                return Direction.LEFT;
+            }
+        }
 
 		return Direction.UP;
 	}
