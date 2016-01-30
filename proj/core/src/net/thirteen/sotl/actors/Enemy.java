@@ -3,6 +3,12 @@ package net.thirteen.sotl.actors;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.Input;
 import net.thirteen.sotl.levels.Level;
 import net.thirteen.sotl.Main;
 import com.badlogic.gdx.math.Rectangle;
@@ -10,6 +16,8 @@ import net.thirteen.sotl.utils.Tuple;
 import net.thirteen.sotl.tiles.Tile;
 
 public class Enemy extends Actor {
+
+    public enum State { STANDING, RUNNING };
 
     /* speed in pixels per second */
 	private float speed;
@@ -19,12 +27,20 @@ public class Enemy extends Actor {
 	protected EnemyCollisionBehaviour collisionBehaviour;
 	protected EnemyMovementBehaviour movementBehaviour;
 
+    private State currState;
+    private State prevState;
+    private float stateTimer;
+
+    private TextureRegion enemyStand;
+
+    private Animation run;
+
 
     public Enemy(Level lev, float xpos, float ypos, float speed,
     	         EnemyCollisionBehaviour collisionBehaviour,
     	         EnemyMovementBehaviour movementBehaviour) {
     	
-    	super(Main.manager.get("enemy.png", Texture.class),
+    	super(Main.manager.get("enemyrun.png", Texture.class),
         	xpos, 
         	ypos,
             lev.getTileWidth(),
@@ -36,14 +52,62 @@ public class Enemy extends Actor {
         this.collisionBehaviour = collisionBehaviour;
         this.movementBehaviour = movementBehaviour;
         this.seenHero = false;
+
+        currState = State.STANDING;
+        prevState = State.STANDING;
+        stateTimer = 0;
+
         
+        Array<TextureRegion> frames = new Array<TextureRegion>();
+        
+        frames.add(new TextureRegion(getTexture(), 1, 1, 23, 23));
+        frames.add(new TextureRegion(getTexture(), 1, 26, 23, 23));
+        frames.add(new TextureRegion(getTexture(), 1, 51, 23, 23));
+        frames.add(new TextureRegion(getTexture(), 1, 76, 23, 23));
+        frames.add(new TextureRegion(getTexture(), 1, 101, 23, 23));
+        frames.add(new TextureRegion(getTexture(), 1, 126, 23, 22));
+        frames.add(new TextureRegion(getTexture(), 1, 150, 23, 22));
+        frames.add(new TextureRegion(getTexture(), 1, 174, 23, 22));
+
+        run = new Animation(0.1f, frames);
+
+        enemyStand = new TextureRegion(getTexture(), 1, 126, 23, 22);
+        setRegion(enemyStand);
+        setBounds(1, 126, 23, 22);
+        Rectangle boundBox = getBoundBox();
+        setCenter(boundBox.getCenter(new Vector2()).x, 
+            boundBox.getCenter(new Vector2()).y);
+        setOriginCenter();
     }
 
 
     public void update() {
     	move();
+        setRegion(getFrame(Gdx.graphics.getDeltaTime()));
     	checkCollisions();
     }
+
+
+    public TextureRegion getFrame(float delta) {
+
+        TextureRegion region;
+
+        switch(currState) {
+            case RUNNING:
+                region = run.getKeyFrame(stateTimer, true);
+                break;
+            case STANDING:
+            default:
+                region = enemyStand;
+                break;
+        }
+
+        stateTimer = currState == prevState ? stateTimer + delta : 0;
+        prevState = currState;
+
+        return region;
+    }
+
 
     public void move() {
     	Direction newDirection;
@@ -69,9 +133,11 @@ public class Enemy extends Actor {
     	//do not move when turning around or if stationary
     	if(newDirection == direction && !(movementBehaviour instanceof StationaryMovement)){
     		moveInDirection(direction);
+            currState = State.RUNNING;
     	}
     	else{
     		setDirection(newDirection);
+            currState = State.STANDING;
     	}
     }
 

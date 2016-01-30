@@ -40,8 +40,9 @@ public class Main extends Game {
 		manager.load("wall.png", Texture.class);
 		manager.load("hero.png", Texture.class);
 		manager.load("door.png", Texture.class);
-		manager.load("enemy.png", Texture.class);
+		manager.load("enemyrun.png", Texture.class);
 		manager.load("titleScreenBG.png", Texture.class);
+		manager.load("sheeprun.png", Texture.class);
 		manager.finishLoading();
 
         world = new World(MAP_WIDTH, MAP_HEIGHT,

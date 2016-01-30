@@ -117,6 +117,15 @@ public abstract class EnemyMovementBehaviour {
 				break;
 		}	
 
+
+		/*Gross hacks that work are the best hacks*/
+		if(posx > (lev.getRekt().width - lev.getTileWidth())){
+			posx = (lev.getRekt().width - lev.getTileWidth());
+		}
+		if(posy > (lev.getRekt().height - lev.getTileHeight())){
+			posy = (lev.getRekt().height - lev.getTileHeight());
+		}
+
 		Tuple tileTuple = lev.worldToTile(posx, posy);
 		return lev.getTile(tileTuple.first(), tileTuple.last());
 	}

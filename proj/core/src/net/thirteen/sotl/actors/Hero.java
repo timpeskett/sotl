@@ -3,8 +3,12 @@ package net.thirteen.sotl.actors;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.Input;
 
 import net.thirteen.sotl.tiles.Tile;
 import net.thirteen.sotl.tiles.DoorTile;
@@ -15,33 +19,101 @@ import net.thirteen.sotl.utils.Tuple;
 
 public class Hero extends Actor {
 
+    public enum State { STANDING, RUNNING};
+
     /* speed in pixels per second */
 	private float speed;
 
     private World world;
 
+    private State currState;
+    private State prevState;
+    private float stateTimer;
+
+    private TextureRegion sheepStand;
+
+    private Animation run;
+
     public Hero(World world, float xpos, float ypos, float width, float height, float speed) {
-        super(Main.manager.get("hero.png", Texture.class),
+        super(Main.manager.get("sheeprun.png", Texture.class),
         	xpos, 
         	ypos,
             width,
             height
         );
 
-        Rectangle boundBox = getBoundBox();
-
-        setCenter(boundBox.getCenter(new Vector2()).x, 
-            boundBox.getCenter(new Vector2()).y);
-
         this.speed = speed;
         this.world = world;
+
+        currState = State.STANDING;
+        prevState = State.STANDING;
+        stateTimer = 0;
+
+        Array<TextureRegion> frames = new Array<TextureRegion>();
+        
+        frames.add(new TextureRegion(getTexture(), 1, 1, 17, 28));
+        frames.add(new TextureRegion(getTexture(), 1, 31, 17, 28));
+        frames.add(new TextureRegion(getTexture(), 1, 61, 17, 28));
+        frames.add(new TextureRegion(getTexture(), 1, 91, 17, 27));
+        frames.add(new TextureRegion(getTexture(), 1, 120, 17, 26));
+        frames.add(new TextureRegion(getTexture(), 1, 148, 17, 26));
+        frames.add(new TextureRegion(getTexture(), 1, 176, 17, 26));
+
+        run = new Animation(0.1f, frames);
+
+        sheepStand = new TextureRegion(getTexture(), 0, 0, 17, 26);
+        setRegion(sheepStand);
+        setBounds(0, 0, 17, 26);
+        Rectangle boundBox = getBoundBox();
+        setCenter(boundBox.getCenter(new Vector2()).x, 
+            boundBox.getCenter(new Vector2()).y);
+        setOriginCenter();
+
     }
 
     public float getSpeed() {
     	return speed;
     }
 
+    public TextureRegion getFrame(float delta) {
+        currState = getState();
+
+        TextureRegion region;
+
+        switch(currState) {
+            case RUNNING:
+                region = run.getKeyFrame(stateTimer, true);
+                break;
+            case STANDING:
+            default:
+                region = sheepStand;
+                break;
+        }
+
+        stateTimer = currState == prevState ? stateTimer + delta : 0;
+        prevState = currState;
+
+        return region;
+    }
+
+    public State getState() {
+        if (
+            Gdx.input.isKeyPressed(Input.Keys.UP) ||
+            Gdx.input.isKeyPressed(Input.Keys.W) ||
+            Gdx.input.isKeyPressed(Input.Keys.LEFT) ||
+            Gdx.input.isKeyPressed(Input.Keys.A) ||
+            Gdx.input.isKeyPressed(Input.Keys.RIGHT) ||
+            Gdx.input.isKeyPressed(Input.Keys.D) ||
+            Gdx.input.isKeyPressed(Input.Keys.DOWN) ||
+            Gdx.input.isKeyPressed(Input.Keys.S)) {
+            return State.RUNNING;
+        } else {
+            return State.STANDING;
+        }
+    }
+
     public void move(float dx, float dy) {
+        setRegion(getFrame(Gdx.graphics.getDeltaTime()));
         Rectangle boundBox = new Rectangle(getBoundBox());
         boolean validMove = true;
 
