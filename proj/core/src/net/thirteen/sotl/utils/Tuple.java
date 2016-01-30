@@ -51,7 +51,7 @@ public class Tuple {
     }
 
     public float distance(Tuple t) {
-        return Math.sqrt(pow(t.first() - first(), 2) + pow(t.last() + last(), 2));
+        return (float)Math.sqrt(Math.pow(t.first() - first(), 2) + (float)Math.pow(t.last() + last(), 2));
     }
 
     public int hashCode() {
