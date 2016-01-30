@@ -115,7 +115,7 @@ public class EnemyFactory {
 		}
 
 		return new Enemy(lev, xpos, ypos, 
-						 150f /*speed*/, 
+						 100f /*speed*/, 
 			             5 /*sightRange*/,
     	                 collisionBehaviour, 
     	                 movementBehaviour);
