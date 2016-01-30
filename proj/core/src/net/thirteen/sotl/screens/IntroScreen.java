@@ -64,6 +64,7 @@ public class IntroScreen implements Screen {
 				break;
 			case 3:
 				game.setScreen(new TitleScreen(game));
+				dispose();
 				break;
 			default:
 				break;

@@ -151,14 +151,16 @@ public class LevelMaker {
                     doorX = (int)(Math.random() * (dimX - 3) + 1);
                 }
 
-                System.out.println("doorx: " + doorX + "\ndoory: "+ doorY);
-
                 outDoorTup = new Tuple(doorX, doorY);
             }
+            System.out.println("if " +outDoorTup);
         }
         else {
             outDoorTup = world.getDoorPos(adj, level);
+            System.out.println("else " + outDoorTup);
         }
+
+
 
         return outDoorTup;
     }
