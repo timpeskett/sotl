@@ -1,0 +1,54 @@
+Sheep-Run.png
+size: 19, 203
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Sheep-Run 0001
+  rotate: false
+  xy: 1, 120
+  size: 17, 26
+  orig: 17, 28
+  offset: 0, 2
+  index: -1
+Sheep-Run 0002
+  rotate: false
+  xy: 1, 148
+  size: 17, 26
+  orig: 17, 28
+  offset: 0, 2
+  index: -1
+Sheep-Run 0003
+  rotate: false
+  xy: 1, 1
+  size: 17, 28
+  orig: 17, 28
+  offset: 0, 0
+  index: -1
+Sheep-Run 0004
+  rotate: false
+  xy: 1, 31
+  size: 17, 28
+  orig: 17, 28
+  offset: 0, 0
+  index: -1
+Sheep-Run 0005
+  rotate: false
+  xy: 1, 61
+  size: 17, 28
+  orig: 17, 28
+  offset: 0, 0
+  index: -1
+Sheep-Run 0006
+  rotate: false
+  xy: 1, 91
+  size: 17, 27
+  orig: 17, 28
+  offset: 0, 1
+  index: -1
+Sheep-Run 0007
+  rotate: false
+  xy: 1, 176
+  size: 17, 26
+  orig: 17, 28
+  offset: 0, 2
+  index: -1
