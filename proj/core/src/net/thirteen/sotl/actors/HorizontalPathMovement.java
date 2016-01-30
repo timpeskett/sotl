@@ -53,11 +53,6 @@ public class HorizontalPathMovement extends EnemyMovementBehaviour {
 		}
 
 		/*cannot go forward, turn around*/
-		if(direction == Direction.RIGHT){
-			return Direction.LEFT;
-		}
-		else{
-			return Direction.RIGHT;
-		}
+		return direction.flip();
 	}
 }

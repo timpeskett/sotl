@@ -42,6 +42,7 @@ public class Enemy extends Actor {
 
     public void update() {
     	move();
+    	checkCollisions();
     }
 
     public void move() {
@@ -102,13 +103,13 @@ public class Enemy extends Actor {
     	return collisionBehaviour.collide(lev, rect, direction);
     }
 
-    // private void checkCollisions() {
+    private void checkCollisions() {
 
-    // 	//Loop through other enemies for collisions
-    // 	for(Enemy enemy: lev.getEnemies()){
-    // 		//do something?
-    // 	}
-    // }
+    	//Loop through other enemies for collisions
+    	for(Enemy enemy: lev.getEnemies()){
+    		direction = direction.flip();
+    	}
+    }
 
 
 
