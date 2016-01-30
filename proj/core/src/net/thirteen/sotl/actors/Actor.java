@@ -38,6 +38,10 @@ public class Actor extends Sprite {
         return getRekt();
     }
 
+    public boolean overlaps(Actor actor){
+        return actor.getBoundBox().overlaps(rect);
+    }
+
     public Rectangle getRekt(){
         return rect;
     }

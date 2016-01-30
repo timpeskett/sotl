@@ -46,7 +46,6 @@ public class World {
         return levelMap.get(curLevelTup);
     }
 
-rn
     public Tuple getCurrentLevelTup() {
         return curLevelTup;
     }
