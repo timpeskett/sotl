@@ -47,6 +47,10 @@ public class Enemy extends Actor {
     public void move() {
     	Direction newDirection;
 
+    	if(!seenHero){
+	    	seenHero = movementBehaviour.lineOfSight(lev, rect, direction);
+	    }
+
     	if(seenHero){
     		newDirection = movementBehaviour.seek(lev, rect, direction);
     	}

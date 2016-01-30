@@ -81,8 +81,62 @@ public abstract class EnemyMovementBehaviour {
 		return direction;
 	}
 
+	public static boolean lineOfSight(Level lev, Rectangle rect, Direction direction) {
+		Tuple tileTuple = lev.worldToTile(rect.x, rect.y);
+
+		Rectangle newRect = new Rectangle(rect);
+
+		while(tileTuple.first() < lev.getTilesX() &&
+			  tileTuple.first() >= 0 &&
+		      tileTuple.last() < lev.getTilesY() &&
+		      tileTuple.last() >= 0) {
+
+			if(lev.isActorAtTile(lev.getHero(), tileTuple.first(), tileTuple.last())){
+				return true;
+			}
+
+			if(!canSeeThrough(lev, newRect, direction)){
+				break;
+			}
+
+			switch (direction) {
+				case UP:
+					tileTuple.setLast(tileTuple.last()+1);
+					newRect.y += newRect.height;
+					break;
+				case DOWN:
+					tileTuple.setLast(tileTuple.last()-1);
+					newRect.y -= newRect.height;
+					break;
+				case LEFT:
+					tileTuple.setFirst(tileTuple.first()-1);
+					newRect.x -= newRect.width;
+					break;
+				case RIGHT:
+					tileTuple.setFirst(tileTuple.first()+1);
+					newRect.x += newRect.width;
+					break;
+			}
+			
+		}
+		return false;
+	}
+
 	private static boolean willHitWall(Level lev, Rectangle rect, Direction direction){
 
+		Tile proposedTile = tileInteraction(lev, rect, direction);
+
+		return !proposedTile.isTileTraversable();	
+	}
+
+	private static boolean canSeeThrough(Level lev, Rectangle rect, Direction direction) {
+		
+		Tile proposedTile = tileInteraction(lev, rect, direction);
+
+		return proposedTile.isTileTransparent();	
+	}
+
+	private static Tile tileInteraction(Level lev, Rectangle rect, Direction direction) {
 		float posx = rect.x;
 		float posy = rect.y;
 
@@ -102,9 +156,7 @@ public abstract class EnemyMovementBehaviour {
 		}	
 
 		Tuple tileTuple = lev.worldToTile(posx, posy);
-		Tile proposedTile = lev.getTile(tileTuple.first(), tileTuple.last());
-
-		return !proposedTile.isTileTraversable();	
+		return lev.getTile(tileTuple.first(), tileTuple.last());
 	}
 
 }

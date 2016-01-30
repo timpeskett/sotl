@@ -88,7 +88,7 @@ public class LevelMaker {
         /*Add an enemy*/
         level.getEnemies().add(
             EnemyFactory.createEnemy(level, 
-                EnemyFactory.Difficulty.SEEKING.val(),
+                EnemyFactory.Difficulty.STATIONARY.val(),
                 64, 64)
         );
 
