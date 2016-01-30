@@ -30,6 +30,10 @@ public class Tuple {
         this.y = y;
     }
 
+    public int manhattan(Tuple t) {
+        return Math.abs(t.first() - first()) + Math.abs(t.last() + last());
+    }
+
     public int hashCode() {
         return first() + 100 * last();
     }
@@ -40,5 +44,9 @@ public class Tuple {
             return t.first() == first() && t.last() == last();
         }
         return false;
+    }
+
+    public String toString() {
+        return "Tuple object { x: " + x + " y: " + y + "}";
     }
 }

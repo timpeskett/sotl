@@ -37,9 +37,8 @@ public class Main extends Game {
 		manager.load("titleScreenBG.png", Texture.class);
 		manager.finishLoading();
 
-        world = new World(new LevelMaker(MAP_WIDTH, 
-                                         MAP_HEIGHT,
-                                         new Rectangle(0, 0, Main.WIDTH, Main.HEIGHT)));
+        world = new World(MAP_WIDTH, MAP_HEIGHT,
+                          new Rectangle(0, 0, Main.WIDTH, Main.HEIGHT));
 
 		setScreen(new TitleScreen(this));
 
