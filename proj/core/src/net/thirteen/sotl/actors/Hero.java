@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 
 import net.thirteen.sotl.tiles.Tile;
 import net.thirteen.sotl.World;
@@ -24,6 +25,11 @@ public class Hero extends Actor {
             width,
             height
         );
+
+        Rectangle boundBox = getBoundBox();
+
+        setCenter(boundBox.getCenter(new Vector2()).x, 
+            boundBox.getCenter(new Vector2()).y);
 
         this.speed = speed;
         this.world = world;
