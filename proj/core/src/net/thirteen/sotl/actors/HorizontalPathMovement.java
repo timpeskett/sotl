@@ -6,7 +6,7 @@ import net.thirteen.sotl.levels.Level;
 import net.thirteen.sotl.utils.Tuple;
 import net.thirteen.sotl.tiles.Tile;
 
-public class HorizontalPathMovement implements IEnemyMovementBehaviour {
+public class HorizontalPathMovement extends EnemyMovementBehaviour {
 
 	private static HorizontalPathMovement instance;
 

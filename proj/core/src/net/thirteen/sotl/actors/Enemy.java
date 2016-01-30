@@ -14,12 +14,12 @@ public class Enemy extends Actor {
     private Level lev;
 
 	protected EnemyCollisionBehaviour collisionBehaviour;
-	protected IEnemyMovementBehaviour movementBehaviour;
+	protected EnemyMovementBehaviour movementBehaviour;
 
 
     public Enemy(Level lev, float xpos, float ypos, float speed,
     	         EnemyCollisionBehaviour collisionBehaviour,
-    	         IEnemyMovementBehaviour movementBehaviour) {
+    	         EnemyMovementBehaviour movementBehaviour) {
     	
     	super(Main.manager.get("enemy.png", Texture.class),
         	xpos, 

@@ -4,7 +4,7 @@ import net.thirteen.sotl.levels.Level;
 import com.badlogic.gdx.math.Rectangle;
 import net.thirteen.sotl.levels.Level;
 
-public class StationaryMovement implements IEnemyMovementBehaviour {
+public class StationaryMovement extends EnemyMovementBehaviour {
 
 	private static StationaryMovement instance;
 

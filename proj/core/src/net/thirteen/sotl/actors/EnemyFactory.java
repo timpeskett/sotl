@@ -28,7 +28,7 @@ public class EnemyFactory {
 	public static Enemy createEnemy(Level lev, int difficulty, float xpos, float ypos){
 
 		EnemyCollisionBehaviour collisionBehaviour;
-		IEnemyMovementBehaviour movementBehaviour;
+		EnemyMovementBehaviour movementBehaviour;
 
 
 		//Attack range
