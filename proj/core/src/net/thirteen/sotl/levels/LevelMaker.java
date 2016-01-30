@@ -55,7 +55,7 @@ public class LevelMaker {
         Tile [][] tileMap = level.getTileMap();
 
         /* Temporary */
-        for(int i = 0; i < 4; i++) {
+        for(int i = 0; i < 3; i++) {
             Tuple t = getRandomTraversableTilePos(tileMap);
             enemies.add(
                     EnemyFactory.createEnemy(level,
@@ -165,7 +165,7 @@ public class LevelMaker {
         for(int i = 0; i < tMapWid; i++) {
             for(int j = 0; j < tMapHei; j++) {
                 if(tileMap[i][j].isTileTraversable() && !reservedSquares.contains(new Tuple(i, j))) {
-                    tileMap[i][j] = new SlowTile();
+                    tileMap[i][j] = new WallTile();
                 }
             }
         }
