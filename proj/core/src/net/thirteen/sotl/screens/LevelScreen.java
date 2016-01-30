@@ -55,6 +55,7 @@ public class LevelScreen implements Screen {
 		hero.draw(game.batch);
         for(Enemy e : level.getEnemies()) {
             e.draw(game.batch);
+            e.update();
         }
 
 		game.batch.end();

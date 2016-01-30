@@ -6,6 +6,7 @@ import net.thirteen.sotl.tiles.WallTile;
 import net.thirteen.sotl.tiles.GrassTile;
 import net.thirteen.sotl.World;
 import net.thirteen.sotl.utils.Tuple;
+import net.thirteen.sotl.actors.EnemyFactory;
 
 import com.badlogic.gdx.math.Rectangle;
 
@@ -116,6 +117,7 @@ public class LevelMaker {
     
     public Level generate(HashMap<Tuple, DoorTile> entrances, int difficulty, World world) {
         Tile [][] tileMap = new Tile[dimX][dimY];
+        Level level;
 
         /* Start simple. Fill map with grass */
         for(int x = 0; x < dimX; x++) {
@@ -141,8 +143,17 @@ public class LevelMaker {
             tileMap[dimX-1][y] = new WallTile();
         }
 
-        return new Level(dimX, dimY, bounds, tileMap, world);
 
+        level = new Level(dimX, dimY, bounds, tileMap, world);
+
+        /*Add an enemy*/
+        level.getEnemies().add(
+            EnemyFactory.createEnemy(level, 
+                EnemyFactory.Difficulty.SEEKING.val(),
+                64, 64)
+        );
+
+        return level;
     }
 
     public Level load(/* Load from file */) {
