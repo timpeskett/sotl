@@ -31,16 +31,24 @@ public abstract class EnemyCollisionBehaviour {
 
 			switch (direction){
 				case UP:
-					tileY++;
+					if(tileY < lev.getTilesY() - 1){
+						tileY++;
+					}
 					break;
 				case DOWN:
-					tileY--;
+					if(tileY > 0){
+						tileY--;
+					}
 					break;
 				case RIGHT:
-					tileX++;
+					if(tileX < lev.getTilesX() - 1){
+						tileX++;
+					}
 					break;
 				case LEFT:
-					tileX--;
+					if(tileX > 0){
+						tileX--;
+					}
 					break;
 			}
 

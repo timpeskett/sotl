@@ -29,60 +29,60 @@ public class EnemyFactory {
 		difficulty *= 12;
 		int difficultyMask = 0;
 
-		if(difficulty <= 1){
-			difficultyMask &= Difficulty.STATIONARY.val();
-			difficultyMask &= Difficulty.SHORT_RANGE.val();
+		if(difficulty <= 1f){
+			difficultyMask |= Difficulty.STATIONARY.val();
+			difficultyMask |= Difficulty.SHORT_RANGE.val();
 		}
-		else if(difficulty <= 2){
-			difficultyMask &= Difficulty.STATIONARY.val();
-			difficultyMask &= Difficulty.MEDIUM_RANGE.val();
+		else if(difficulty <= 2f){
+			difficultyMask |= Difficulty.STATIONARY.val();
+			difficultyMask |= Difficulty.MEDIUM_RANGE.val();
 		}
-		else if(difficulty <= 3){
-			difficultyMask &= Difficulty.STATIONARY.val();
-			difficultyMask &= Difficulty.LONG_RANGE.val();
+		else if(difficulty <= 3f){
+			difficultyMask |= Difficulty.STATIONARY.val();
+			difficultyMask |= Difficulty.LONG_RANGE.val();
 		}
-		else if(difficulty <= 4){
-			difficultyMask &= Difficulty.HOR_PATH.val();
-			difficultyMask &= Difficulty.SHORT_RANGE.val();
+		else if(difficulty <= 4f){
+			difficultyMask |= Difficulty.HOR_PATH.val();
+			difficultyMask |= Difficulty.SHORT_RANGE.val();
 		}
-		else if(difficulty <= 5){
-			difficultyMask &= Difficulty.VERT_PATH.val();
-			difficultyMask &= Difficulty.SHORT_RANGE.val();
+		else if(difficulty <= 5f){
+			difficultyMask |= Difficulty.VERT_PATH.val();
+			difficultyMask |= Difficulty.SHORT_RANGE.val();
 		}
-		else if(difficulty <= 6){
-			difficultyMask &= Difficulty.HOR_PATH.val();
-			difficultyMask &= Difficulty.MEDIUM_RANGE.val();
+		else if(difficulty <= 6f){
+			difficultyMask |= Difficulty.HOR_PATH.val();
+			difficultyMask |= Difficulty.MEDIUM_RANGE.val();
 		}
-		else if(difficulty <= 7){
-			difficultyMask &= Difficulty.VERT_PATH.val();
-			difficultyMask &= Difficulty.MEDIUM_RANGE.val();
+		else if(difficulty <= 7f){
+			difficultyMask |= Difficulty.VERT_PATH.val();
+			difficultyMask |= Difficulty.MEDIUM_RANGE.val();
 		}
-		else if(difficulty <= 8){
-			difficultyMask &= Difficulty.HOR_PATH.val();
-			difficultyMask &= Difficulty.LONG_RANGE.val();
+		else if(difficulty <= 8f){
+			difficultyMask |= Difficulty.HOR_PATH.val();
+			difficultyMask |= Difficulty.LONG_RANGE.val();
 		}
-		else if(difficulty <= 9){
-			difficultyMask &= Difficulty.VERT_PATH.val();
-			difficultyMask &= Difficulty.LONG_RANGE.val();
+		else if(difficulty <= 9f){
+			difficultyMask |= Difficulty.VERT_PATH.val();
+			difficultyMask |= Difficulty.LONG_RANGE.val();
 		}
-		else if(difficulty <= 10){
-			difficultyMask &= Difficulty.SEEKING.val();
-			difficultyMask &= Difficulty.SHORT_RANGE.val();
+		else if(difficulty <= 10f){
+			difficultyMask |= Difficulty.SEEKING.val();
+			difficultyMask |= Difficulty.SHORT_RANGE.val();
 		}
-		else if(difficulty <= 11){
-			difficultyMask &= Difficulty.SEEKING.val();
-			difficultyMask &= Difficulty.MEDIUM_RANGE.val();
+		else if(difficulty <= 11f){
+			difficultyMask |= Difficulty.SEEKING.val();
+			difficultyMask |= Difficulty.MEDIUM_RANGE.val();
 		}
 		else{
-			difficultyMask &= Difficulty.SEEKING.val();
-			difficultyMask &= Difficulty.LONG_RANGE.val();
+			difficultyMask |= Difficulty.SEEKING.val();
+			difficultyMask |= Difficulty.LONG_RANGE.val();
 		}
 
 		return createEnemy(lev, difficultyMask, xpos, ypos);
 	}
 
 
-	public static Enemy createEnemy(Level lev, int difficulty, float xpos, float ypos){
+	protected static Enemy createEnemy(Level lev, int difficulty, float xpos, float ypos){
 
 		EnemyCollisionBehaviour collisionBehaviour;
 		EnemyMovementBehaviour movementBehaviour;
