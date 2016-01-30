@@ -23,7 +23,7 @@ public abstract class Tile {
      * whether getSpeedMult == 0, but without the worries of floating
      * point errors. */
     public boolean isTileTraversable() {
-        return getSpeedMult() > 0.0;
+        return getSpeedMult() > 0.005;
     }
     public abstract boolean isTileTransparent();
 }

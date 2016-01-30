@@ -30,6 +30,14 @@ public class Actor extends Sprite {
 
     }
 
+    public void setBoundBox(Rectangle rect) {
+        this.rect = rect;
+    }
+
+    public Rectangle getBoundBox() {
+        return getRekt();
+    }
+
     public Rectangle getRekt(){
         return rect;
     }

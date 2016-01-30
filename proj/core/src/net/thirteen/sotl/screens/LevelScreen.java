@@ -10,6 +10,7 @@ import com.badlogic.gdx.Input;
 import net.thirteen.sotl.Main;
 import net.thirteen.sotl.World;
 import net.thirteen.sotl.actors.Hero;
+import net.thirteen.sotl.actors.Enemy;
 import net.thirteen.sotl.actors.Direction;
 import net.thirteen.sotl.scenes.GameHud;
 import net.thirteen.sotl.levels.Level;
@@ -27,10 +28,8 @@ public class LevelScreen implements Screen {
 		this.game = game;
 		hud = new GameHud(game.batch);
 
-        /* Temporary code for working with world while it's stubbed */
 		level = game.world.getCurrentLevel();
 		hero = game.world.getHero();
-
 
 		levelCam = new OrthographicCamera();
 		levelCam.setToOrtho(false, Main.WIDTH, Main.HEIGHT);
@@ -54,6 +53,9 @@ public class LevelScreen implements Screen {
 			}
 		}
 		hero.draw(game.batch);
+        for(Enemy e : level.getEnemies()) {
+            e.draw(game.batch);
+        }
 
 		game.batch.end();
 
@@ -72,34 +74,26 @@ public class LevelScreen implements Screen {
 			|| Gdx.input.isKeyPressed(Input.Keys.W)) {
 
 			hero.setDirection(Direction.UP);
-			hero.setPosition( hero.getX(), hero.getY() 
-				+ hero.getSpeed() * Gdx.graphics.getDeltaTime());
-
+            hero.move(0, Gdx.graphics.getDeltaTime());
 		}
 		if(Gdx.input.isKeyPressed(Input.Keys.DOWN) 
 			|| Gdx.input.isKeyPressed(Input.Keys.S)) {
 
 			hero.setDirection(Direction.DOWN);
-			hero.setPosition( hero.getX(), hero.getY() 
-				- hero.getSpeed() * Gdx.graphics.getDeltaTime());
+            hero.move(0, -Gdx.graphics.getDeltaTime());
 
 		}
 		if(Gdx.input.isKeyPressed(Input.Keys.LEFT) 
 			|| Gdx.input.isKeyPressed(Input.Keys.A)) {
 
 			hero.setDirection(Direction.LEFT);
-			hero.setPosition( hero.getX() - hero.getSpeed() 
-				* Gdx.graphics.getDeltaTime(), hero.getY());
-
+            hero.move(-Gdx.graphics.getDeltaTime(), 0);
 		}
 		if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) 
 			|| Gdx.input.isKeyPressed(Input.Keys.D)) {
 
 			hero.setDirection(Direction.RIGHT);
-			hero.setPosition( hero.getX() + hero.getSpeed() 
-				* Gdx.graphics.getDeltaTime(), hero.getY());
-				
-
+            hero.move(Gdx.graphics.getDeltaTime(), 0);
 		}
 
 	}

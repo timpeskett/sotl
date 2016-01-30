@@ -1,6 +1,7 @@
 package net.thirteen.sotl.levels;
 
 import net.thirteen.sotl.tiles.Tile;
+import net.thirteen.sotl.tiles.DoorTile;
 import net.thirteen.sotl.actors.Enemy;
 import net.thirteen.sotl.actors.Hero;
 import net.thirteen.sotl.actors.Actor;
@@ -11,6 +12,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Level {
     private Tile [][] tileMap;
@@ -87,6 +89,41 @@ public class Level {
     public void setEnemies(ArrayList<Enemy> enemies) {
         this.enemies = enemies;
     }
+
+    public HashMap<Tuple, DoorTile> getDoors() {
+        HashMap<Tuple, DoorTile> doors = new HashMap<Tuple, DoorTile>();
+
+        for(int i = 0; i < dimX; i++) {
+            for(int j = 0; j < dimY; j++) {
+                if(getTile(i, j) instanceof DoorTile) {
+                    /* This is a safe downcast */
+                    doors.put(new Tuple(i, j), (DoorTile)getTile(i, j));
+                }
+            }
+        }
+        return doors;
+    }
+
+
+    /* Returns the tiles that are within a certain rectangle, described in
+     * world coordinates */
+    public HashMap<Tuple, Tile> getTilesInRect(Rectangle r) {
+        HashMap<Tuple, Tile> tiles = new HashMap<Tuple, Tile>();
+        Tuple botLeft, topRight;
+
+        botLeft = worldToTile(r.x, r.y);
+        topRight = worldToTile(r.x + r.width, r.y + r.height);
+
+        for(int i = botLeft.first(); i <= topRight.first(); i++) {
+            for(int j = botLeft.last(); j <= topRight.last(); j++) {
+                tiles.put(new Tuple(i, j), getTile(i, j));
+            }
+        }
+
+        return tiles;
+    }
+
+
     /* For testing */
     protected Tile [][] getTileMap() {
         return tileMap;

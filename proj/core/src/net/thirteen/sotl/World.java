@@ -19,7 +19,7 @@ public class World {
     public World(LevelMaker lm) {
         this.maker = lm;
 
-		hero = new Hero(this, 10 * Main.TILE_SIZE, 7 * Main.TILE_SIZE, Main.TILE_SIZE, Main.TILE_SIZE);
+		hero = new Hero(this, 10 * Main.TILE_SIZE, 7 * Main.TILE_SIZE, Main.TILE_SIZE, Main.TILE_SIZE, 200);
 
         levelMap = new HashMap<Tuple, Level>();
         curLevelTup = new Tuple(0, 0);
