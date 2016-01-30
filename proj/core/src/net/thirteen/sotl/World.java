@@ -144,7 +144,7 @@ public class World {
                 if(doorX == -1) {
                     doorX = findDoorInRow(level, doorY);
                 }
-                if(doorY == -1) {
+                else if(doorY == -1) {
                     doorY = findDoorInCol(level, doorX);
                 }
             }
@@ -163,8 +163,6 @@ public class World {
         else {
             outTuple = null;
         }
-
-        System.out.println("Result:" + outTuple);
 
         return outTuple;
     }

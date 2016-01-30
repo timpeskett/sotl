@@ -11,6 +11,7 @@ import net.thirteen.sotl.actors.EnemyFactory;
 import com.badlogic.gdx.math.Rectangle;
 
 import java.util.HashMap;
+import java.util.ArrayList;
 
 public class LevelMaker {
     private int dimX, dimY;
@@ -26,50 +27,14 @@ public class LevelMaker {
     }
 
 
-    public Level generate(World world, Tuple to, int difficulty) {
-        Tuple leftDoor = null, topDoor = null, rightDoor = null, botDoor = null;
-        int numDoors = 0;
+    public Level generate(World world, Tuple levelTup, int difficulty) {
         Tile [][] tileMap = new Tile[dimX][dimY];
+        ArrayList<Tuple> doors;
         float prob = 0.5f;
 
-
-        /* Start simple. Fill map with grass */
-        for(int x = 0; x < dimX; x++) {
-            for(int y = 0; y < dimY; y++) {
-                tileMap[x][y] = new GrassTile();
-            }
-        }
-
-        for(int x = 0; x < dimX; x++) {
-            tileMap[x][dimY-1] = new WallTile();
-            tileMap[x][0] = new WallTile();
-        }
-            
-        for(int y = 0; y < dimY; y++) {
-            tileMap[0][y] = new WallTile();
-            tileMap[dimX-1][y] = new WallTile();
-        }
-
-
-        leftDoor = genDoorTuple(world, to, new Tuple(to.first() -1, to.last()), prob);
-        rightDoor = genDoorTuple(world, to, new Tuple(to.first() +1, to.last()), prob);
-        topDoor = genDoorTuple(world, to, new Tuple(to.first(), to.last() + 1), prob);
-        botDoor = genDoorTuple(world, to, new Tuple(to.first(), to.last() - 1), prob);
-
-
-        if(leftDoor != null) {
-            tileMap[leftDoor.first()][leftDoor.last()] = new DoorTile();
-        }
-        if(rightDoor != null) {
-            tileMap[rightDoor.first()][rightDoor.last()] = new DoorTile();
-        }
-        if(topDoor != null) {
-            tileMap[topDoor.first()][topDoor.last()] = new DoorTile();
-        }
-        if(botDoor != null) {
-            tileMap[botDoor.first()][botDoor.last()] = new DoorTile();
-        }
-
+        /* Create open map with walls all around */
+        genBasicMap(tileMap);
+        doors = genDoors(tileMap, world, levelTup, 2, prob);
 
         Level level = new Level(dimX, dimY, bounds, tileMap, world);
 
@@ -81,6 +46,79 @@ public class LevelMaker {
         );
 
         return level;
+    }
+
+
+    /* Note: Assumes that tMap is a rectangular matrix, and not a jagged
+     * arrays of arrays.*/
+    private void genBasicMap(Tile [][] tileMap) {
+        /* These used instead of dimX and dimY for generality */
+        int tMapWid = tileMap.length;
+        int tMapHei = tileMap[0].length;
+
+        /* Start simple. Fill map with grass */
+        for(int x = 0; x < tMapWid; x++) {
+            for(int y = 0; y < tMapHei; y++) {
+                tileMap[x][y] = new GrassTile();
+            }
+        }
+
+        for(int x = 0; x < tMapWid; x++) {
+            tileMap[x][tMapHei-1] = new WallTile();
+            tileMap[x][0] = new WallTile();
+        }
+            
+        for(int y = 0; y < tMapHei; y++) {
+            tileMap[0][y] = new WallTile();
+            tileMap[tMapWid-1][y] = new WallTile();
+        }
+
+    }
+
+
+    /* Returns a list of tuples that correspond to doors in the level */
+    /* Mindoors is unimplemented as of yet */
+    private ArrayList<Tuple> genDoors(Tile [][] tileMap, World world, Tuple level, int minDoors, float probDoor) {
+        Tuple leftDoor = null, topDoor = null, rightDoor = null, botDoor = null;
+        ArrayList<Tuple> doorList = new ArrayList<Tuple>();
+        int numDoors = 0;
+
+        while(numDoors < minDoors) { 
+            if(leftDoor == null) {
+                leftDoor = genDoorTuple(world, level, new Tuple(level.first() -1, level.last()), probDoor);
+                if(leftDoor != null) {
+                    tileMap[leftDoor.first()][leftDoor.last()] = new DoorTile();
+                    doorList.add(leftDoor);
+                    numDoors++;
+                }
+            }
+            if(rightDoor == null) {
+                rightDoor = genDoorTuple(world, level, new Tuple(level.first() +1, level.last()), probDoor);
+                if(rightDoor != null) {
+                    tileMap[rightDoor.first()][rightDoor.last()] = new DoorTile();
+                    doorList.add(rightDoor);
+                    numDoors++;
+                }
+            }
+            if(topDoor == null) {
+                topDoor = genDoorTuple(world, level, new Tuple(level.first(), level.last() + 1), probDoor);
+                if(topDoor != null) {
+                    tileMap[topDoor.first()][topDoor.last()] = new DoorTile();
+                    doorList.add(topDoor);
+                    numDoors++;
+                }
+            }
+            if(botDoor == null) {
+                botDoor = genDoorTuple(world, level, new Tuple(level.first(), level.last() - 1), probDoor);
+                if(botDoor != null) {
+                    tileMap[botDoor.first()][botDoor.last()] = new DoorTile();
+                    doorList.add(botDoor);
+                    numDoors++;
+                }
+            }
+        }
+
+        return doorList;
     }
 
 

@@ -65,7 +65,6 @@ public class Hero extends Actor {
             Tile t = world.getCurrentLevel().getTile(tpl);
 
             if(t instanceof DoorTile) {
-                System.out.println("door");
                 world.changeLevel(tpl);
             }
 
