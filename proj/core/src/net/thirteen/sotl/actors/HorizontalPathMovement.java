@@ -38,12 +38,18 @@ public class HorizontalPathMovement implements IEnemyMovementBehaviour {
 			tilePos.setFirst(tilePos.first()-1);
 		}
 		
+		//ensure tile exists within level
+		if (tilePos.first() < lev.getTilesX() && 
+			tilePos.last()  < lev.getTilesY() &&
+			tilePos.first() >= 0 &&
+			tilePos.last() >= 0) {
 
-		prospectiveTile = lev.getTile(tilePos.first(), tilePos.last());
+			prospectiveTile = lev.getTile(tilePos.first(), tilePos.last());
 
-		/*can go to tile, move in that direction*/
-		if(prospectiveTile.isTileTraversable()){
-			return direction;
+			/*can go to tile, move in that direction*/
+			if(prospectiveTile.isTileTraversable()){
+				return direction;
+			}
 		}
 
 		/*cannot go forward, turn around*/
