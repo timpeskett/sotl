@@ -17,6 +17,7 @@ public class World {
     private Tuple curLevelTup;
     private LevelMaker maker;
     private int dimX, dimY;
+    private boolean levelChanged;
     
 
     public World(int dimX, int dimY, Rectangle bounds) {
@@ -31,6 +32,8 @@ public class World {
         /* Set up initial level. (Eventually load) */
         Level curLevel = maker.generate(this, new Tuple(0, 0), 0);
         levelMap.put(curLevelTup, curLevel);
+
+        levelChanged = false;
     }
 
 
@@ -70,7 +73,17 @@ public class World {
             levelMap.put(curLevelTup, maker.generate(this, curLevelTup, 0));
         }
 
+        levelChanged = true;
+
         return getCurrentLevel();
+    }
+
+    public boolean hasLevelChanged() {
+        return levelChanged;
+    }
+
+    public void resetLevelChange() {
+        levelChanged = false;
     }
 
 

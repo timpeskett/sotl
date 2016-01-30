@@ -67,6 +67,10 @@ public class LevelScreen implements Screen {
 	public void update(float delta) {
 		handleInput(delta);
 		hud.update(delta);
+		if(game.world.hasLevelChanged()) {
+			level = game.world.getCurrentLevel();
+			game.world.resetLevelChange();
+		}
 	}
 
 	public void handleInput(float delta) {
