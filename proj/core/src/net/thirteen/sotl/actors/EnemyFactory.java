@@ -24,6 +24,63 @@ public class EnemyFactory {
 
 	}
 
+	public static Enemy createEnemy(Level lev, float difficulty, float xpos, float ypos){
+
+		difficulty *= 12;
+		int difficultyMask = 0;
+
+		if(difficulty <= 1){
+			difficultyMask &= Difficulty.STATIONARY.val();
+			difficultyMask &= Difficulty.SHORT_RANGE.val();
+		}
+		else if(difficulty <= 2){
+			difficultyMask &= Difficulty.STATIONARY.val();
+			difficultyMask &= Difficulty.MEDIUM_RANGE.val();
+		}
+		else if(difficulty <= 3){
+			difficultyMask &= Difficulty.STATIONARY.val();
+			difficultyMask &= Difficulty.LONG_RANGE.val();
+		}
+		else if(difficulty <= 4){
+			difficultyMask &= Difficulty.HOR_PATH.val();
+			difficultyMask &= Difficulty.SHORT_RANGE.val();
+		}
+		else if(difficulty <= 5){
+			difficultyMask &= Difficulty.VERT_PATH.val();
+			difficultyMask &= Difficulty.SHORT_RANGE.val();
+		}
+		else if(difficulty <= 6){
+			difficultyMask &= Difficulty.HOR_PATH.val();
+			difficultyMask &= Difficulty.MEDIUM_RANGE.val();
+		}
+		else if(difficulty <= 7){
+			difficultyMask &= Difficulty.VERT_PATH.val();
+			difficultyMask &= Difficulty.MEDIUM_RANGE.val();
+		}
+		else if(difficulty <= 8){
+			difficultyMask &= Difficulty.HOR_PATH.val();
+			difficultyMask &= Difficulty.LONG_RANGE.val();
+		}
+		else if(difficulty <= 9){
+			difficultyMask &= Difficulty.VERT_PATH.val();
+			difficultyMask &= Difficulty.LONG_RANGE.val();
+		}
+		else if(difficulty <= 10){
+			difficultyMask &= Difficulty.SEEKING.val();
+			difficultyMask &= Difficulty.SHORT_RANGE.val();
+		}
+		else if(difficulty <= 11){
+			difficultyMask &= Difficulty.SEEKING.val();
+			difficultyMask &= Difficulty.MEDIUM_RANGE.val();
+		}
+		else{
+			difficultyMask &= Difficulty.SEEKING.val();
+			difficultyMask &= Difficulty.LONG_RANGE.val();
+		}
+
+		return createEnemy(lev, difficultyMask, xpos, ypos);
+	}
+
 
 	public static Enemy createEnemy(Level lev, int difficulty, float xpos, float ypos){
 
@@ -57,7 +114,9 @@ public class EnemyFactory {
 			movementBehaviour = StationaryMovement.getInstance();
 		}
 
-		return new Enemy(lev, xpos, ypos, 200f,
+		return new Enemy(lev, xpos, ypos, 
+						 150f /*speed*/, 
+			             5 /*sightRange*/,
     	                 collisionBehaviour, 
     	                 movementBehaviour);
 	}

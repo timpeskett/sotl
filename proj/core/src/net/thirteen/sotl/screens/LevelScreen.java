@@ -57,7 +57,7 @@ public class LevelScreen implements Screen {
             e.draw(game.batch);
             e.update();
             if(e.checkHeroCollision()){
-            	game.setScreen(new DeathScreen(game));
+            	game.setScreen(new DeathScreen(game, hud.getTimeCount()));
             	dispose();
             }
 

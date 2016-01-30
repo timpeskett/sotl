@@ -43,7 +43,7 @@ public abstract class EnemyMovementBehaviour {
 		return Direction.UP;
 	}
 
-	public static boolean lineOfSight(Level lev, Rectangle rect, Direction direction) {
+	public static boolean lineOfSight(Level lev, Rectangle rect, Direction direction, int sightRange) {
 		Tuple tileTuple = lev.worldToTile(rect.x, rect.y);
 
 		Rectangle newRect = new Rectangle(rect);
@@ -51,7 +51,8 @@ public abstract class EnemyMovementBehaviour {
 		while(tileTuple.first() < lev.getTilesX() &&
 			  tileTuple.first() >= 0 &&
 		      tileTuple.last() < lev.getTilesY() &&
-		      tileTuple.last() >= 0) {
+		      tileTuple.last() >= 0 &&
+		      sightRange > 0) {
 
 			if(lev.isActorAtTile(lev.getHero(), tileTuple.first(), tileTuple.last())){
 				return true;
@@ -79,6 +80,8 @@ public abstract class EnemyMovementBehaviour {
 					newRect.x += newRect.width;
 					break;
 			}
+
+			sightRange--;
 			
 		}
 		return false;
