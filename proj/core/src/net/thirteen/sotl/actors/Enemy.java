@@ -52,6 +52,11 @@ public class Enemy extends Actor {
 	    }
 
     	if(seenHero){
+
+    		if(movementBehaviour instanceof StationaryMovement){
+    			movementBehaviour = SeekingMovement.getInstance();
+    		}
+
     		newDirection = movementBehaviour.seek(lev, rect, direction);
     	}
     	else{
@@ -60,8 +65,8 @@ public class Enemy extends Actor {
 
     	
 
-    	//do not move when turning around
-    	if(newDirection == direction){
+    	//do not move when turning around or if stationary
+    	if(newDirection == direction && !(movementBehaviour instanceof StationaryMovement)){
     		moveInDirection(direction);
     	}
     	else{
