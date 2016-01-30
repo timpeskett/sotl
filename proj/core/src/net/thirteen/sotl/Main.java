@@ -9,6 +9,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.audio.Music;
 
 import net.thirteen.sotl.screens.IntroScreen;
 import net.thirteen.sotl.screens.TitleScreen;
@@ -48,7 +49,12 @@ public class Main extends Game {
 		manager.load("deathScreenBG.png", Texture.class);
 		manager.load("oi.mp3", Sound.class);
 		manager.load("bleet.mp3", Sound.class);
+		manager.load("bgMusic.mp3", Music.class);
 		manager.finishLoading();
+
+		Music bgm = manager.get("bgMusic.mp3", Music.class);
+		bgm.setLooping(true);
+		bgm.play();
 
         world = new World(MAP_WIDTH, MAP_HEIGHT,
                           new Rectangle(0, 0, Main.WIDTH, Main.HEIGHT));
