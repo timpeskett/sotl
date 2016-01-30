@@ -8,6 +8,8 @@ import net.thirteen.sotl.tiles.Tile;
 
 public abstract class EnemyMovementBehaviour {
 
+
+
 	public abstract Direction move(Level lev, Rectangle rect, Direction direction);
 
 
@@ -15,17 +17,21 @@ public abstract class EnemyMovementBehaviour {
 	protected static Direction seek(Level lev, Rectangle rect, Direction direction) {
 		Hero hero = lev.getHero();
 		Rectangle heroRect = hero.getBoundBox();
-		double angle = Math.atan2(rect.y - heroRect.y, rect.x - heroRect.x) + Math.PI;
+
+		double x = (rect.x + (rect.width/2)) - (heroRect.x + (heroRect.width/2));
+		double y = (rect.y + (rect.height/2)) - (heroRect.y + (heroRect.height/2));;
+
+		double angle = Math.atan2(y, x) + Math.PI;
 
 		/*degrees are better, suck it tim*/
 		angle *= (180.0/Math.PI);
 
 
-		if(angle >= 45 && angle < 135){
+		if(angle >= 45.0f && angle < 135.0f){
 			direction = Direction.UP;
 
 			if(willHitWall(lev, rect, direction)){
-				if(angle < 90){
+				if(angle < 90.0f){
 					direction = Direction.RIGHT;
 				}
 				else{
@@ -33,11 +39,11 @@ public abstract class EnemyMovementBehaviour {
 				}
 			}
 		}
-		else if(angle >= 135 && angle < 225){
+		else if(angle >= 135.0f && angle < 225.0f){
 			direction = Direction.LEFT;
 		
 			if(willHitWall(lev, rect, direction)){
-				if(angle < 180){
+				if(angle < 180.0f){
 					direction = Direction.UP;
 				}
 				else{
@@ -45,11 +51,11 @@ public abstract class EnemyMovementBehaviour {
 				}
 			}
 		}
-		else if(angle >= 225 && angle < 315){
+		else if(angle >= 225.0f && angle < 315.0f){
 			direction = Direction.DOWN;
 			
 			if(willHitWall(lev, rect, direction)){
-				if(angle < 270){
+				if(angle < 270.0f){
 					direction = Direction.LEFT;
 				}
 				else{
@@ -61,7 +67,7 @@ public abstract class EnemyMovementBehaviour {
 			direction = Direction.RIGHT;
 			
 			if(willHitWall(lev, rect, direction)){
-				if(angle < 360){
+				if(angle < 360.0f){
 					direction = Direction.DOWN;
 				}
 				else{
@@ -98,7 +104,7 @@ public abstract class EnemyMovementBehaviour {
 		Tuple tileTuple = lev.worldToTile(posx, posy);
 		Tile proposedTile = lev.getTile(tileTuple.first(), tileTuple.last());
 
-		return proposedTile.isTileTraversable();	
+		return !proposedTile.isTileTraversable();	
 	}
 
 }

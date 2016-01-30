@@ -17,7 +17,7 @@ public abstract class Tile {
 
     /* Returns the speed multiplier for this tile. Will usually be 1. Will
      * be 0 if this tile cannot be traversed. */
-    abstract public double getSpeedMult();
+    abstract public float getSpeedMult();
 
     /* Returns true if this tile can be traversed. Equivalent to checking
      * whether getSpeedMult == 0, but without the worries of floating

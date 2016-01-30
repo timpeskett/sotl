@@ -27,14 +27,11 @@ public class LevelMaker {
 
 
     public Level generate(World world, Tuple to, int difficulty) {
-        Tuple leftDoor, topDoor, rightDoor, botDoor;
+        Tuple leftDoor = null, topDoor = null, rightDoor = null, botDoor = null;
+        int numDoors = 0;
         Tile [][] tileMap = new Tile[dimX][dimY];
         float prob = 0.5f;
 
-        leftDoor = genDoorTuple(world, to, new Tuple(to.first() -1, to.last()), prob);
-        rightDoor = genDoorTuple(world, to, new Tuple(to.first() +1, to.last()), prob);
-        topDoor = genDoorTuple(world, to, new Tuple(to.first(), to.last() + 1), prob);
-        botDoor = genDoorTuple(world, to, new Tuple(to.first(), to.last() - 1), prob);
 
         /* Start simple. Fill map with grass */
         for(int x = 0; x < dimX; x++) {
@@ -53,6 +50,21 @@ public class LevelMaker {
             tileMap[dimX-1][y] = new WallTile();
         }
 
+        //need at least two doors
+        while(numDoors < 2) {
+            numDoors = 0;
+
+            leftDoor = genDoorTuple(world, to, new Tuple(to.first() -1, to.last()), prob);
+            if(leftDoor != null) numDoors++;
+            rightDoor = genDoorTuple(world, to, new Tuple(to.first() +1, to.last()), prob);
+            if(rightDoor != null) numDoors++;
+            topDoor = genDoorTuple(world, to, new Tuple(to.first(), to.last() + 1), prob);
+            if(topDoor != null) numDoors++;
+            botDoor = genDoorTuple(world, to, new Tuple(to.first(), to.last() - 1), prob);
+            if(botDoor != null) numDoors++;
+        }
+
+
         if(leftDoor != null) {
             System.out.println("Left door: " + leftDoor);
             tileMap[leftDoor.first()][leftDoor.last()] = new DoorTile();
@@ -70,7 +82,17 @@ public class LevelMaker {
             tileMap[botDoor.first()][botDoor.last()] = new DoorTile();
         }
 
-        return new Level(dimX, dimY, bounds, tileMap, world);
+
+        Level level = new Level(dimX, dimY, bounds, tileMap, world);
+
+        /*Add an enemy*/
+        level.getEnemies().add(
+            EnemyFactory.createEnemy(level, 
+                EnemyFactory.Difficulty.SEEKING.val(),
+                64, 64)
+        );
+
+        return level;
     }
 
 
@@ -117,7 +139,6 @@ public class LevelMaker {
     
     public Level generate(HashMap<Tuple, DoorTile> entrances, int difficulty, World world) {
         Tile [][] tileMap = new Tile[dimX][dimY];
-        Level level;
 
         /* Start simple. Fill map with grass */
         for(int x = 0; x < dimX; x++) {
@@ -127,14 +148,7 @@ public class LevelMaker {
         }
 
         for(int x = 0; x < dimX; x++) {
-            //we'll add a door
-            if(x == 8){
-                tileMap[x][dimY-1] = new DoorTile();
-            }
-            else{
-                tileMap[x][dimY-1] = new WallTile();
-            }
-
+            tileMap[x][dimY-1] = new WallTile();
             tileMap[x][0] = new WallTile();
         }
             
@@ -144,7 +158,7 @@ public class LevelMaker {
         }
 
 
-        level = new Level(dimX, dimY, bounds, tileMap, world);
+        Level level = new Level(dimX, dimY, bounds, tileMap, world);
 
         /*Add an enemy*/
         level.getEnemies().add(

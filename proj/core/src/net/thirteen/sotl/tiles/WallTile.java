@@ -6,14 +6,14 @@ import com.badlogic.gdx.graphics.Texture;
 import net.thirteen.sotl.Main;
 
 public class WallTile extends Tile {
-    private static final double SPEED_MULT = 0.0;
+    private static final float SPEED_MULT = 0.0f;
 
     public WallTile() {
         setTexture(Main.manager.get("wall.png", Texture.class));
     }
 
     @Override
-    public double getSpeedMult() {
+    public float getSpeedMult() {
         return SPEED_MULT;
     }
 

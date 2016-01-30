@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import net.thirteen.sotl.Main;
 
 public class GrassTile extends Tile {
-    private static final double SPEED_MULT = 1.0;
+    private static final float SPEED_MULT = 1.0f;
     private Texture tex;
 
     public GrassTile() {
@@ -13,7 +13,7 @@ public class GrassTile extends Tile {
     }
 
     @Override
-    public double getSpeedMult() {
+    public float getSpeedMult() {
         return SPEED_MULT;
     }
 
