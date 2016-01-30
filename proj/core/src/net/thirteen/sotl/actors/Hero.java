@@ -62,7 +62,6 @@ public class Hero extends Actor {
         run = new Animation(0.1f, frames);
 
         sheepStand = new TextureRegion(getTexture(), 0, 0, 17, 26);
-        System.out.println(sheepStand.getRegionWidth() + "\t" + sheepStand.getRegionHeight());
         setRegion(sheepStand);
         setBounds(0, 0, 17, 26);
         Rectangle boundBox = getBoundBox();
