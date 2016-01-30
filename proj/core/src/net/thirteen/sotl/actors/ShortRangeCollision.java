@@ -1,9 +1,8 @@
 package net.thirteen.sotl.actors;
 
-import net.thirteen.sotl.levels.Level;
-import net.thirteen.sotl.actors.Hero;
 import com.badlogic.gdx.math.Rectangle;
 import net.thirteen.sotl.actors.Direction;
+import net.thirteen.sotl.levels.Level;
 
 public class ShortRangeCollision extends EnemyCollisionBehaviour {
 
@@ -21,6 +20,12 @@ public class ShortRangeCollision extends EnemyCollisionBehaviour {
 		}
 
 		return instance;
+	}
+
+	@Override
+	public void attackAnimation(Level lev, Rectangle rect, Direction direction){
+    	//enemy dead animation
+    	System.out.println("YOU DEAD");
 	}
 
 }

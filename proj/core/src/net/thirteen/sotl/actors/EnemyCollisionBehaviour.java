@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Rectangle;
 import net.thirteen.sotl.actors.Direction;
 import net.thirteen.sotl.utils.Tuple;
 
-public class EnemyCollisionBehaviour {
+public abstract class EnemyCollisionBehaviour {
 
 	protected int distance = 0;
 
@@ -25,7 +25,7 @@ public class EnemyCollisionBehaviour {
         }
 
 		//mediumRange can see 2 ahead
-		for(int i = 0; i < 2; i++){
+		for(int i = 0; i < distance; i++){
 
 			Tile checkTile;
 
@@ -60,4 +60,6 @@ public class EnemyCollisionBehaviour {
 
 		return false;
 	}
+
+	public abstract void attackAnimation(Level lev, Rectangle rect, Direction direction);
 }
