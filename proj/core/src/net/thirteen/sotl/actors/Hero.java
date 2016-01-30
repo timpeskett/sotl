@@ -3,8 +3,11 @@ package net.thirteen.sotl.actors;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 
 import net.thirteen.sotl.tiles.Tile;
 import net.thirteen.sotl.tiles.DoorTile;
@@ -15,10 +18,16 @@ import net.thirteen.sotl.utils.Tuple;
 
 public class Hero extends Actor {
 
+    public enum State { STANDING, RUNNING};
+
     /* speed in pixels per second */
 	private float speed;
 
     private World world;
+
+    private State currState;
+    private State prevState;
+    private float stateTimer;
 
     public Hero(World world, float xpos, float ypos, float width, float height, float speed) {
         super(Main.manager.get("hero.png", Texture.class),
@@ -35,6 +44,11 @@ public class Hero extends Actor {
 
         this.speed = speed;
         this.world = world;
+
+        currState = State.STANDING;
+        prevState = State.STANDING;
+        stateTimer = 0;
+
     }
 
     public float getSpeed() {
