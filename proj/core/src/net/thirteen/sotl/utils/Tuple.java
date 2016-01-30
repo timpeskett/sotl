@@ -22,6 +22,22 @@ public class Tuple {
         return y;
     }
 
+    public Tuple firstInc() {
+        return new Tuple(x + 1, y);
+    }
+
+    public Tuple firstDec() {
+        return new Tuple(x - 1, y);
+    }
+
+    public Tuple lastInc() {
+        return new Tuple(x, y + 1);
+    }
+
+    public Tuple lastDec() {
+        return new Tuple(x, y - 1);
+    }
+
     public void setFirst(int x) {
         this.x = x;
     }
@@ -32,6 +48,10 @@ public class Tuple {
 
     public int manhattan(Tuple t) {
         return Math.abs(t.first() - first()) + Math.abs(t.last() + last());
+    }
+
+    public float distance(Tuple t) {
+        return Math.sqrt(pow(t.first() - first(), 2) + pow(t.last() + last(), 2));
     }
 
     public int hashCode() {
