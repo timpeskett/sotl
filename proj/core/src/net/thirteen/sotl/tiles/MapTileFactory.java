@@ -62,11 +62,33 @@ public class MapTileFactory {
 
         for(ArrayList<String> a : tileSets) {
             for(String s : a) {
-                if(a.equals(name)) {
+                System.out.println("Tile: " + s);
+                if(s.equals(name)) {
                     present = true;
                 }
             }
         }
         return present;
+    }
+
+    public static ArrayList<String> getTileNames() {
+        ArrayList<String> tNames;
+
+        tNames = flattenTileSets(GrassTile.tileSets);
+        tNames.addAll(flattenTileSets(SlowTile.tileSets));
+        tNames.addAll(flattenTileSets(WallTile.tileSets));
+        tNames.addAll(flattenTileSets(DoorTile.tileSets));
+
+        return tNames;
+    }
+
+    private static ArrayList<String> flattenTileSets(ArrayList<ArrayList<String>> tileSets) {
+        ArrayList<String> al = new ArrayList<String>();
+
+        for(ArrayList<String> tSet : tileSets) {
+            al.addAll(tSet);
+        }
+        
+        return al;
     }
 }
