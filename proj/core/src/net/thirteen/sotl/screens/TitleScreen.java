@@ -43,7 +43,6 @@ public class TitleScreen implements Screen {
 
 		game.batch.begin();
 		game.batch.draw(Main.manager.get("titleScreenBG.png", Texture.class), 0, 0);
-		game.font.draw(game.batch, title, (Main.WIDTH - title.width) / 2, (Main.HEIGHT + title.height) * 0.75f);
 		if(screenTimer >= 4)
 			game.fontB.draw(game.batch, start, (Main.WIDTH - start.width) / 2, (Main.HEIGHT + start.height) * 0.1f);
 		game.batch.end();
@@ -59,7 +58,6 @@ public class TitleScreen implements Screen {
 
 		game.font.setColor(0, 0, 0, screenTimer / 4);
 		game.fontB.setColor(1, 1, 1, flashTimer);
-		title.setText(game.font, "Silence of the Lamb");
 		start.setText(game.fontB, "click / press enter to begin");
 
 	}
