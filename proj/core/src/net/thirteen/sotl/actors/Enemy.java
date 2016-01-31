@@ -166,6 +166,8 @@ public class Enemy extends Actor {
             currState = State.RUNNING;
     	}
     	else{
+            /*move to tile boundary first*/
+            snapToTile(direction);
     		setDirection(newDirection);
             currState = State.STANDING;
     	}
@@ -173,26 +175,39 @@ public class Enemy extends Actor {
 
     private void moveInDirection(Direction direction) {
 
- 		Tuple tilePos = lev.worldToTile(rect.x, rect.y);
- 		Tile tile = lev.getTile(tilePos.first(), tilePos.last());
+        Tuple tilePos = lev.worldToTile(rect.x, rect.y);
+        Tile tile = lev.getTile(tilePos.first(), tilePos.last());
+
  		float distance = Gdx.graphics.getDeltaTime() * speed * tile.getSpeedMult();
+        moveInDirection(direction, distance);
+    }
 
-    	switch (direction){
-    		case UP:
-    			rect.y += distance;
-    			break;
-    		case RIGHT:
-    			rect.x += distance;
-    			break;
-    		case DOWN:
-    			rect.y -= distance;
-    			break;
-    		case LEFT:
-    			rect.x -= distance;
-    			break;
-    	}
+    private void snapToTile(Direction direction) {
 
-    	setPosition(rect.x, rect.y);
+        rect.x = (int)(rect.x/lev.getTileWidth()) * lev.getTileWidth();
+        rect.y = (int)(rect.y/lev.getTileHeight()) * lev.getTileHeight();
+
+        setPosition(rect.x, rect.y);
+    }
+
+    private void moveInDirection(Direction direction, float distance) {
+     
+        switch (direction){
+            case UP:
+                rect.y += distance;
+                break;
+            case RIGHT:
+                rect.x += distance;
+                break;
+            case DOWN:
+                rect.y -= distance;
+                break;
+            case LEFT:
+                rect.x -= distance;
+                break;
+        }
+
+        setPosition(rect.x, rect.y);
     }
 
     public boolean checkHeroCollision() {
