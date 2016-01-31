@@ -14,7 +14,7 @@ public class DeathScreen implements Screen {
 
 	private Main game;
 	private OrthographicCamera titleCam;
-	private GlyphLayout layout;
+	private GlyphLayout layout, layout2;
 	private float screenTimer;
 	private int twoSecondInterval;
 	private float scoreTime;
@@ -22,6 +22,7 @@ public class DeathScreen implements Screen {
 	public DeathScreen(Main game, float scoreTime) {
 		this.game = game;
 		layout = new GlyphLayout();
+		layout2 = new GlyphLayout();
 		screenTimer = 0;
 		twoSecondInterval = 0;
 		this.scoreTime = scoreTime;
@@ -43,6 +44,7 @@ public class DeathScreen implements Screen {
 		game.batch.begin();
 		game.batch.draw(Main.manager.get("deathScreenBG.png", Texture.class), 0, 0);
 		game.font.draw(game.batch, layout, (Main.WIDTH - layout.width) / 2, (Main.HEIGHT + layout.height) / 2);
+		game.fontB.draw(game.batch, layout2, (Main.WIDTH - layout2.width) / 2, (Main.HEIGHT + layout2.height) / 4);
 		game.batch.end();
 	}
 
@@ -68,6 +70,7 @@ public class DeathScreen implements Screen {
 		}
 
 		layout.setText(game.font, "You escaped the ritual for " + (int)scoreTime + " seconds");
+		layout2.setText(game.font, "Score:  " + (int)Main.score);
 
 	}
 

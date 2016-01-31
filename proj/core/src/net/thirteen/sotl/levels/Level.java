@@ -7,6 +7,7 @@ import net.thirteen.sotl.actors.Hero;
 import net.thirteen.sotl.actors.Actor;
 import net.thirteen.sotl.utils.Tuple;
 import net.thirteen.sotl.World;
+import net.thirteen.sotl.Main;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
@@ -33,6 +34,8 @@ public class Level {
         this.tileMap = tileMap;
         
         enemies = new ArrayList<Enemy>();
+
+        Main.score += 13;
     }
 
 
