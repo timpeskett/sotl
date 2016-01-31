@@ -184,8 +184,22 @@ public class Enemy extends Actor {
 
     private void snapToTile(Direction direction) {
 
-        rect.x = (int)(rect.x/lev.getTileWidth()) * lev.getTileWidth();
-        rect.y = (int)(rect.y/lev.getTileHeight()) * lev.getTileHeight();
+        int tileWidth = lev.getTileWidth();
+        int tileHeight = lev.getTileHeight();
+
+        if((rect.x % tileWidth) < (tileWidth / 2)){
+            rect.x = (int)(rect.x/tileWidth) * tileWidth;
+        }
+        else{
+            rect.x = ((int)(rect.x/tileWidth) * tileWidth) + 1;
+        }
+
+        if((rect.x % tileHeight) < (tileHeight / 2)){
+            rect.y = (int)(rect.y/tileHeight) * tileHeight;
+        }
+        else{
+            rect.y = ((int)(rect.y/tileHeight) * tileHeight) + 1;
+        }
 
         setPosition(rect.x, rect.y);
     }

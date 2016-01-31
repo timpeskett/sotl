@@ -47,7 +47,7 @@ public class Main extends Game {
 		manager.load("sheeprun.png", Texture.class);
 		manager.load("titleScreenBG.png", Texture.class);
 		manager.load("deathScreenBG.png", Texture.class);
-		manager.load("pentagram.png", Texture.class);
+		//manager.load("pentagram.png", Texture.class);
 		manager.load("oi.mp3", Sound.class);
 		manager.load("bleet.mp3", Sound.class);
 		manager.load("bgMusic.mp3", Music.class);
