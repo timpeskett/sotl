@@ -16,6 +16,7 @@ import net.thirteen.sotl.screens.TitleScreen;
 import net.thirteen.sotl.World;
 import net.thirteen.sotl.levels.LevelMaker;
 import net.thirteen.sotl.screens.LevelScreen;
+import net.thirteen.sotl.tiles.MapTileFactory;
 
 public class Main extends Game {
 
@@ -38,16 +39,14 @@ public class Main extends Game {
 		font = new BitmapFont();
 		fontB = new BitmapFont();
 		manager = new AssetManager();
-		manager.load("grass.png", Texture.class);
-		manager.load("wall.png", Texture.class);
-		manager.load("hero.png", Texture.class);
-		manager.load("door.png", Texture.class);
+        for(String fName : MapTileFactory.getTileNames()) {
+            manager.load(fName, Texture.class);
+        }
 		manager.load("enemyrun.png", Texture.class);
 		manager.load("spear_enemyrun.png", Texture.class);
 		manager.load("sheeprun.png", Texture.class);
 		manager.load("titleScreenBG.png", Texture.class);
 		manager.load("deathScreenBG.png", Texture.class);
-		//manager.load("pentagram.png", Texture.class);
 		manager.load("oi.mp3", Sound.class);
 		manager.load("bleet.mp3", Sound.class);
 		manager.load("bgMusic.mp3", Music.class);

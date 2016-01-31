@@ -45,6 +45,20 @@ public class GrassTile extends Tile {
 
         tileSets.add(new ArrayList<String>());
         tileSets.get(0).add("grass.png");
+        tileSets.add(new ArrayList<String>());
+        tileSets.get(1).add("stone1.png");
+        tileSets.get(1).add("stone2.png");
+        tileSets.get(1).add("stone3.png");
+
+        tileSets.get(1).add("pentagramtopleft.png");
+        tileSets.get(1).add("pentagramtopmid.png");
+        tileSets.get(1).add("pentagramtopright.png");
+        tileSets.get(1).add("pentagrammidleft.png");
+        tileSets.get(1).add("pentagrammidmid.png");
+        tileSets.get(1).add("pentagrammidright.png");
+        tileSets.get(1).add("pentagrambotleft.png");
+        tileSets.get(1).add("pentagrambotmid.png");
+        tileSets.get(1).add("pentagrambotright.png");
     }
 
 }
