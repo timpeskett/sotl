@@ -2,6 +2,8 @@ package net.thirteen.sotl.actors;
 
 import net.thirteen.sotl.actors.Enemy;
 import net.thirteen.sotl.levels.Level;
+import net.thirteen.sotl.Main;
+import com.badlogic.gdx.graphics.Texture;
 
 public class EnemyFactory {
 
@@ -86,17 +88,24 @@ public class EnemyFactory {
 
 		EnemyCollisionBehaviour collisionBehaviour;
 		EnemyMovementBehaviour movementBehaviour;
+		Texture tex;
 
+		/*********
+		Range sucks, taken out of 48 hour mark build
+		*********/
 
 		//Attack range
-		if((difficulty & Difficulty.LONG_RANGE.val()) != 0){
+		/*if((difficulty & Difficulty.LONG_RANGE.val()) != 0){
 			collisionBehaviour = LongRangeCollision.getInstance();
+			tex = Main.manager.get("enemyrun.png", Texture.class);
 		}
 		else if((difficulty & Difficulty.MEDIUM_RANGE.val()) != 0){
 			collisionBehaviour = MediumRangeCollision.getInstance();
+			tex = Main.manager.get("spear_enemyrun.png", Texture.class);
 		}
-		else{
+		else*/{
 			collisionBehaviour = ShortRangeCollision.getInstance();
+			tex = Main.manager.get("enemyrun.png", Texture.class);
 		}
 
 
@@ -118,6 +127,7 @@ public class EnemyFactory {
 						 100f /*speed*/, 
 			             5 /*sightRange*/,
     	                 collisionBehaviour, 
-    	                 movementBehaviour);
+    	                 movementBehaviour,
+    	                 tex);
 	}
 }
