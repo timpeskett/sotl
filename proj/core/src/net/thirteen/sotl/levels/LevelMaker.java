@@ -12,6 +12,7 @@ import net.thirteen.sotl.actors.Enemy;
 import net.thirteen.sotl.levels.PathFinder;
 import net.thirteen.sotl.screens.DeathScreen;
 import net.thirteen.sotl.tiles.MapTileFactory;
+import net.thirteen.sotl.tiles.TileFactory;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.Gdx;
@@ -40,12 +41,16 @@ public class LevelMaker {
     /* Difficulty should be between 0 and 1 */
     public Level generate(World world, Tuple levelTup, float difficulty) {
         Tile [][] tileMap = new Tile[dimX][dimY];
+        TileFactory tf = new TileFactory(
+                                (int)(TileFactory.getNumTileSets() * difficulty * Math.pow(Math.random(), 2)),
+                                difficulty * 0.1,
+                                difficulty * 0.001);
         ArrayList<Tuple> doors;
 
         /* Create open map with walls all around */
-        genBasicMap(tileMap);
-        doors = genDoors(tileMap, world, levelTup, 2, (float)Math.random());
-        genMaze(tileMap, doors, difficulty);
+        genBasicMap(tileMap, tf, difficulty);
+        doors = genDoors(tileMap, tf, world, levelTup, 2, (float)Math.random());
+        genMaze(tileMap, tf, doors, difficulty);
 
         Level level = new Level(dimX, dimY, bounds, tileMap, world);
 
@@ -93,7 +98,7 @@ public class LevelMaker {
 
     /* Note: Assumes that tMap is a rectangular matrix, and not a jagged
      * arrays of arrays.*/
-    private void genBasicMap(Tile [][] tileMap) {
+    private void genBasicMap(Tile [][] tileMap, TileFactory tf, float difficulty) {
         /* These used instead of dimX and dimY for generality */
         int tMapWid = tileMap.length;
         int tMapHei = tileMap[0].length;
@@ -103,19 +108,24 @@ public class LevelMaker {
         /* Start simple. Fill map with grass */
         for(int x = 0; x < tMapWid; x++) {
             for(int y = 0; y < tMapHei; y++) {
-                tileMap[x][y] = mtf.makeGroundTile("grass.png");
-                /*tileMap[x][y] = new GrassTile();*/
+                /* CHANGE */
+                if(Math.random() < difficulty * 0.2) {
+                    tileMap[x][y] = tf.makeSlowTile();
+                }
+                else {
+                    tileMap[x][y] = tf.makeGrassTile();
+                }
             }
         }
 
         for(int x = 0; x < tMapWid; x++) {
-            tileMap[x][tMapHei-1] = new WallTile();
-            tileMap[x][0] = new WallTile();
+            tileMap[x][tMapHei-1] = tf.makeImpassableTile();
+            tileMap[x][0] = tf.makeImpassableTile();
         }
             
         for(int y = 0; y < tMapHei; y++) {
-            tileMap[0][y] = new WallTile();
-            tileMap[tMapWid-1][y] = new WallTile();
+            tileMap[0][y] = tf.makeImpassableTile();
+            tileMap[tMapWid-1][y] = tf.makeImpassableTile();
         }
 
     }
@@ -123,7 +133,7 @@ public class LevelMaker {
 
     /* Returns a list of tuples that correspond to doors in the level */
     /* Mindoors is unimplemented as of yet */
-    private ArrayList<Tuple> genDoors(Tile [][] tileMap, World world, Tuple level, int minDoors, float probDoor) {
+    private ArrayList<Tuple> genDoors(Tile [][] tileMap, TileFactory tf, World world, Tuple level, int minDoors, float probDoor) {
         Tuple leftDoor = null, topDoor = null, rightDoor = null, botDoor = null;
         ArrayList<Tuple> doorList = new ArrayList<Tuple>();
         int numDoors = 0;
@@ -135,7 +145,7 @@ public class LevelMaker {
             if(leftDoor == null) {
                 leftDoor = genDoorTuple(world, level, level.firstDec(), probDoor);
                 if(leftDoor != null) {
-                    tileMap[leftDoor.first()][leftDoor.last()] = new DoorTile();
+                    tileMap[leftDoor.first()][leftDoor.last()] = tf.makeDoorTile();
                     doorList.add(leftDoor);
                     numDoors++;
                 }
@@ -143,7 +153,7 @@ public class LevelMaker {
             if(rightDoor == null) {
                 rightDoor = genDoorTuple(world, level, level.firstInc(), probDoor);
                 if(rightDoor != null) {
-                    tileMap[rightDoor.first()][rightDoor.last()] = new DoorTile();
+                    tileMap[rightDoor.first()][rightDoor.last()] = tf.makeDoorTile();
                     doorList.add(rightDoor);
                     numDoors++;
                 }
@@ -151,7 +161,7 @@ public class LevelMaker {
             if(topDoor == null) {
                 topDoor = genDoorTuple(world, level, level.lastInc(), probDoor);
                 if(topDoor != null) {
-                    tileMap[topDoor.first()][topDoor.last()] = new DoorTile();
+                    tileMap[topDoor.first()][topDoor.last()] = tf.makeDoorTile();
                     doorList.add(topDoor);
                     numDoors++;
                 }
@@ -159,7 +169,7 @@ public class LevelMaker {
             if(botDoor == null) {
                 botDoor = genDoorTuple(world, level, level.lastDec(), probDoor);
                 if(botDoor != null) {
-                    tileMap[botDoor.first()][botDoor.last()] = new DoorTile();
+                    tileMap[botDoor.first()][botDoor.last()] = tf.makeDoorTile();
                     doorList.add(botDoor);
                     numDoors++;
                 }
@@ -170,7 +180,7 @@ public class LevelMaker {
     }
 
 
-    private void genMaze(Tile [][] tileMap, ArrayList<Tuple> doors, float difficulty) {
+    private void genMaze(Tile [][] tileMap, TileFactory tf, ArrayList<Tuple> doors, float difficulty) {
         int tMapWid = tileMap.length;
         int tMapHei = tileMap[0].length;
         int numKeySquares;
@@ -194,7 +204,7 @@ public class LevelMaker {
         for(int i = 0; i < tMapWid; i++) {
             for(int j = 0; j < tMapHei; j++) {
                 if(tileMap[i][j].isTileTraversable() && !reservedSquares.contains(new Tuple(i, j))) {
-                    tileMap[i][j] = new WallTile();
+                    tileMap[i][j] = tf.makeImpassableTile(1);
                 }
             }
         }

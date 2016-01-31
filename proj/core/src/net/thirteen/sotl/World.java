@@ -26,7 +26,7 @@ public class World implements Disposable {
         this.dimX = dimX;
         this.dimY = dimY;
 
-		hero = new Hero(this, 10 * Main.TILE_SIZE, 7 * Main.TILE_SIZE, Main.TILE_SIZE * 0.75f, Main.TILE_SIZE * 0.75f, 200);
+		hero = new Hero(this, 10 * Main.TILE_SIZE, 7 * Main.TILE_SIZE, Main.TILE_SIZE * 0.6f, Main.TILE_SIZE * 0.6f, 200);
 
         levelMap = new HashMap<Tuple, Level>();
         curLevelTup = new Tuple(0, 0);

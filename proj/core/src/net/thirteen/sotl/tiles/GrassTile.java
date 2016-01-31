@@ -45,6 +45,8 @@ public class GrassTile extends Tile {
 
         tileSets.add(new ArrayList<String>());
         tileSets.get(0).add("grass.png");
+        tileSets.get(0).add("grasssand.png");
+
         tileSets.add(new ArrayList<String>());
         tileSets.get(1).add("stone1.png");
         tileSets.get(1).add("stone2.png");
