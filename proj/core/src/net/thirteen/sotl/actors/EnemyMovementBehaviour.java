@@ -28,7 +28,7 @@ public abstract class EnemyMovementBehaviour {
         ArrayList<Tuple> path = PathFinder.getPath(lev, enemyTuple, heroTuple);
 
         /* Ensure not on the same tile as the hero */
-        if(path.size() > 1) {
+        if(path != null && path.size() > 1) {
             Tuple dest = path.get(1);
 
             if(dest.first() > enemyTuple.first()){
