@@ -124,8 +124,8 @@ public class EnemyFactory {
 		}
 
 		return new Enemy(lev, xpos, ypos, 
-                         lev.getTileWidth() * 0.6,
-                         lev.getTileHeight() * 0.6,
+                         lev.getTileWidth() * 0.6f,
+                         lev.getTileHeight() * 0.6f,
 						 100f /*speed*/, 
 			             lev.getTilesX()/2 /*sightRange*/,
     	                 collisionBehaviour, 
