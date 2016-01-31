@@ -42,14 +42,14 @@ public class LevelMaker {
     public Level generate(World world, Tuple levelTup, float difficulty) {
         Tile [][] tileMap = new Tile[dimX][dimY];
         TileFactory tf = new TileFactory(
-                                (int)(TileFactory.getNumTileSets() * difficulty * Math.pow(Math.random(), 2)),
+                                (int)(TileFactory.getNumTileSets() * difficulty * Math.pow(Math.random(), 1.8)),
                                 difficulty * 0.1,
                                 difficulty * 0.001);
         ArrayList<Tuple> doors;
 
         /* Create open map with walls all around */
         genBasicMap(tileMap, tf, difficulty);
-        doors = genDoors(tileMap, tf, world, levelTup, 2, (float)Math.random());
+        doors = genDoors(tileMap, tf, world, levelTup, 2, (float)Math.random() * 0.5f + 0.5f);
         genMaze(tileMap, tf, doors, difficulty);
 
         Level level = new Level(dimX, dimY, bounds, tileMap, world);
@@ -61,6 +61,7 @@ public class LevelMaker {
 
     private ArrayList<Enemy> genEnemies(Level level, ArrayList<Tuple> doors, float difficulty) {
         ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+        ArrayList<Tuple> enemyPositions = new ArrayList<Tuple>();
         Tile [][] tileMap = level.getTileMap();
         int numEnemies;
 
@@ -74,9 +75,11 @@ public class LevelMaker {
             do {
                 t = getRandomTraversableTilePos(tileMap);
                 validSpawn = true;
-                for(Tuple door : doors) {
-                    if(!(t.manhattan(door) > SAFE_DOOR_DISTANCE)) {
-                        validSpawn = false;
+                if(!enemyPositions.contains(t)) {
+                    for(Tuple door : doors) {
+                        if(!(t.manhattan(door) > SAFE_DOOR_DISTANCE)) {
+                            validSpawn = false;
+                        }
                     }
                 }
 
@@ -85,6 +88,7 @@ public class LevelMaker {
 
 
             if(validSpawn) {
+                enemyPositions.add(t);
                 enemies.add(
                     EnemyFactory.createEnemy(level,
                         (float)Math.random() * difficulty,
@@ -264,7 +268,7 @@ public class LevelMaker {
         Tuple outDoorTup = null;
 
         if(world.getLevel(level) == null && world.getLevel(adj) == null) {
-            if(Math.random() > probDoor) {
+            if(Math.random() < probDoor) {
                 int doorX = 0, doorY = 0;
 
                 /* These cases should all be mutually exclusive */
