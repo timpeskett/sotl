@@ -23,6 +23,10 @@ public class LevelMaker {
     private int dimX, dimY;
     private Rectangle bounds;
 
+    private static final int SAFE_DOOR_DISTANCE = 6;
+    private static final int KEY_SQUARES_MAX = 20;
+    private static final int KEY_SQUARES_MIN = 6;
+
     /* dimX and dimY are the number of horizontal and vertical tiles
      * respectively */
     public LevelMaker(int dimX, int dimY, Rectangle bounds) {
@@ -33,34 +37,55 @@ public class LevelMaker {
     }
 
 
-    public Level generate(World world, Tuple levelTup, int difficulty) {
+    /* Difficulty should be between 0 and 1 */
+    public Level generate(World world, Tuple levelTup, float difficulty) {
+        System.out.println(difficulty);
         Tile [][] tileMap = new Tile[dimX][dimY];
         ArrayList<Tuple> doors;
-        float prob = 0.5f;
 
         /* Create open map with walls all around */
         genBasicMap(tileMap);
-        doors = genDoors(tileMap, world, levelTup, 2, prob);
-        genMaze(tileMap, doors);
+        doors = genDoors(tileMap, world, levelTup, 2, (float)Math.random());
+        genMaze(tileMap, doors, difficulty);
 
         Level level = new Level(dimX, dimY, bounds, tileMap, world);
 
-        level.setEnemies(genEnemies(level, doors, prob));
+        level.setEnemies(genEnemies(level, doors, difficulty));
         
         return level;
     }
 
-    private ArrayList<Enemy> genEnemies(Level level, ArrayList<Tuple> doors, float enemiesPerTile) {
+    private ArrayList<Enemy> genEnemies(Level level, ArrayList<Tuple> doors, float difficulty) {
         ArrayList<Enemy> enemies = new ArrayList<Enemy>();
         Tile [][] tileMap = level.getTileMap();
+        int numEnemies;
 
-        /* Temporary */
-        for(int i = 0; i < 3; i++) {
-            Tuple t = getRandomTraversableTilePos(tileMap);
-            enemies.add(
+        numEnemies = (int)(difficulty * 3 + 2);
+
+        for(int i = 0; i < numEnemies; i++) {
+            int infGuard;
+            boolean validSpawn;
+            Tuple t;
+
+            do {
+                t = getRandomTraversableTilePos(tileMap);
+                validSpawn = true;
+                for(Tuple door : doors) {
+                    if(!(t.manhattan(door) > SAFE_DOOR_DISTANCE)) {
+                        validSpawn = false;
+                    }
+                }
+
+                infGuard = 0;
+            } while(!validSpawn && infGuard++ < 10);
+
+
+            if(validSpawn) {
+                enemies.add(
                     EnemyFactory.createEnemy(level,
-                        (float)Math.random(),
+                        (float)Math.random() * difficulty,
                         level.tileToWorldX(t), level.tileToWorldY(t)));
+            }
         }
 
         return enemies;
@@ -146,13 +171,18 @@ public class LevelMaker {
     }
 
 
-    private void genMaze(Tile [][] tileMap, ArrayList<Tuple> doors) {
+    private void genMaze(Tile [][] tileMap, ArrayList<Tuple> doors, float difficulty) {
         int tMapWid = tileMap.length;
         int tMapHei = tileMap[0].length;
+        int numKeySquares;
         ArrayList<Tuple> reservedSquares = new ArrayList<Tuple>();
         ArrayList<Tuple> keySquares = new ArrayList<Tuple>();
 
-        for(int i = 0; i < 15; i++) {
+        /* The higher the number of key squares, the more open the level
+         * is */
+        numKeySquares = (int)((1.0f - difficulty) * (KEY_SQUARES_MAX - KEY_SQUARES_MIN) + KEY_SQUARES_MIN);
+
+        for(int i = 0; i < numKeySquares; i++) {
             keySquares.add(getRandomTraversableTilePos(tileMap));
         }
 

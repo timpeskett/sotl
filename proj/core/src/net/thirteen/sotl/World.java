@@ -30,8 +30,7 @@ public class World implements Disposable {
 
         levelMap = new HashMap<Tuple, Level>();
         curLevelTup = new Tuple(0, 0);
-        /* Set up initial level. (Eventually load) */
-        /*Level curLevel = maker.generate(this, new Tuple(0, 0), 0);*/
+        /* Set up initial level.  */
         Level curLevel = maker.load(this, "start_map.dat");
         levelMap.put(curLevelTup, curLevel);
 
@@ -76,7 +75,11 @@ public class World implements Disposable {
 
         curLevelTup = new Tuple(newLevelX, newLevelY);
         if(!levelMap.containsKey(curLevelTup)) {
-            levelMap.put(curLevelTup, maker.generate(this, curLevelTup, 0));
+            float difficulty = (float)(curLevelTup.distance(new Tuple(0, 0)) / 10.0f);
+            if(difficulty > 1.0f) {
+                difficulty = 1.0f;
+            }
+            levelMap.put(curLevelTup, maker.generate(this, curLevelTup, difficulty));
         }
 
         levelChanged = true;
