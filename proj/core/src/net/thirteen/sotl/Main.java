@@ -26,6 +26,8 @@ public class Main extends Game {
 	public BitmapFont font;
 	public BitmapFont fontB;
 
+	public static float score;
+
 	public static final int TILE_SIZE = 32;
 	public static final int MAP_WIDTH = 20;
 	public static final int MAP_HEIGHT = 14;
@@ -35,6 +37,7 @@ public class Main extends Game {
 	
 	@Override
 	public void create () {
+		score = 0;
 		batch = new SpriteBatch();
 		font = new BitmapFont();
 		fontB = new BitmapFont();

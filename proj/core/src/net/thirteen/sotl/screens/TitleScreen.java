@@ -67,6 +67,7 @@ public class TitleScreen implements Screen {
 	public void handleInput(float delta) {
 		if(screenTimer > 0.2 && (Gdx.input.isTouched() || 
 		   Gdx.input.isKeyPressed(Input.Keys.ENTER))) {
+		   	Main.score = 0;
 			game.setScreen(new LevelScreen(game));
 			dispose();
 		}
