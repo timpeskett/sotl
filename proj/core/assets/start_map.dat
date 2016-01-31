@@ -1,306 +1,306 @@
 20 14
 
 #First row
-0 0 Impassable
-1 0 Impassable
-2 0 Impassable
-3 0 Impassable
-4 0 Impassable
-5 0 Door
-6 0 Impassable
-7 0 Impassable
-8 0 Impassable
-9 0 Impassable
-10 0 Impassable
-11 0 Impassable
-12 0 Impassable
-13 0 Impassable
-14 0 Impassable
-15 0 Impassable
-16 0 Impassable
-17 0 Impassable
-18 0 Impassable
-19 0 Impassable
+0 0 Impassable stonepillar.png
+1 0 Impassable stonepillar.png
+2 0 Impassable stonepillar.png
+3 0 Impassable stonepillar.png
+4 0 Impassable stonepillar.png
+5 0 Door door_stone.png
+6 0 Impassable stonepillar.png
+7 0 Impassable stonepillar.png
+8 0 Impassable stonepillar.png
+9 0 Impassable stonepillar.png
+10 0 Impassable stonepillar.png
+11 0 Impassable stonepillar.png
+12 0 Impassable stonepillar.png
+13 0 Impassable stonepillar.png
+14 0 Impassable stonepillar.png
+15 0 Impassable stonepillar.png
+16 0 Impassable stonepillar.png
+17 0 Impassable stonepillar.png
+18 0 Impassable stonepillar.png
+19 0 Impassable stonepillar.png
 
 
 #Last row
-0 13 Impassable
-1 13 Impassable
-2 13 Impassable
-3 13 Impassable
-4 13 Impassable
-5 13 Impassable
-6 13 Impassable
-7 13 Impassable
-8 13 Impassable
-9 13 Impassable
-10 13 Impassable
-11 13 Impassable
-12 13 Impassable
-13 13 Impassable
-14 13 Door
-15 13 Impassable
-16 13 Impassable
-17 13 Impassable
-18 13 Impassable
-19 13 Impassable
+0 13 Impassable stonepillar.png
+1 13 Impassable stonepillar.png
+2 13 Impassable stonepillar.png
+3 13 Impassable stonepillar.png
+4 13 Impassable stonepillar.png
+5 13 Impassable stonepillar.png
+6 13 Impassable stonepillar.png
+7 13 Impassable stonepillar.png
+8 13 Impassable stonepillar.png
+9 13 Impassable stonepillar.png
+10 13 Impassable stonepillar.png
+11 13 Impassable stonepillar.png
+12 13 Impassable stonepillar.png
+13 13 Impassable stonepillar.png
+14 13 Door door_stone.png
+15 13 Impassable stonepillar.png
+16 13 Impassable stonepillar.png
+17 13 Impassable stonepillar.png
+18 13 Impassable stonepillar.png
+19 13 Impassable stonepillar.png
 
 
 #First column
-0 1 Impassable
-0 2 Impassable
-0 3 Impassable
-0 4 Impassable
-0 5 Impassable
-0 6 Door
-0 7 Impassable
-0 8 Impassable
-0 9 Impassable
-0 10 Impassable
-0 11 Impassable
-0 12 Impassable
+0 1 Impassable stonepillar.png
+0 2 Impassable stonepillar.png
+0 3 Impassable stonepillar.png
+0 4 Impassable stonepillar.png
+0 5 Impassable stonepillar.png
+0 6 Door door_stone.png
+0 7 Impassable stonepillar.png
+0 8 Impassable stonepillar.png
+0 9 Impassable stonepillar.png
+0 10 Impassable stonepillar.png
+0 11 Impassable stonepillar.png
+0 12 Impassable stonepillar.png
 
 
 #Last column
-19 1 Impassable
-19 2 Impassable
-19 3 Impassable
-19 4 Impassable
-19 5 Impassable
-19 6 Impassable
-19 7 Door
-19 8 Impassable
-19 9 Impassable
-19 10 Impassable
-19 11 Impassable
-19 12 Impassable
+19 1 Impassable stonepillar.png
+19 2 Impassable stonepillar.png
+19 3 Impassable stonepillar.png
+19 4 Impassable stonepillar.png
+19 5 Impassable stonepillar.png
+19 6 Impassable stonepillar.png
+19 7 Door door_stone.png
+19 8 Impassable stonepillar.png
+19 9 Impassable stonepillar.png
+19 10 Impassable stonepillar.png
+19 11 Impassable stonepillar.png
+19 12 Impassable stonepillar.png
 
 
 #Body of the scene
-1 1 Ground
-2 1 Ground
-3 1 Ground
-4 1 Ground
-5 1 Ground
-6 1 Ground
-7 1 Ground
-8 1 Ground
-9 1 Ground
-10 1 Ground
-11 1 Ground
-12 1 Ground
-13 1 Ground
-14 1 Ground
-15 1 Ground
-16 1 Ground
-17 1 Ground
-18 1 Ground
+1 1 Ground stone1.png
+2 1 Ground stone1.png
+3 1 Ground stone1.png
+4 1 Ground stone1.png
+5 1 Ground stone1.png
+6 1 Ground stone1.png
+7 1 Ground stone1.png
+8 1 Ground stone1.png
+9 1 Ground stone1.png
+10 1 Ground stone1.png
+11 1 Ground stone1.png
+12 1 Ground stone1.png
+13 1 Ground stone1.png
+14 1 Ground stone1.png
+15 1 Ground stone1.png
+16 1 Ground stone1.png
+17 1 Ground stone1.png
+18 1 Ground stone1.png
 
-1 2 Ground
-2 2 Ground
-3 2 Ground
-4 2 Ground
-5 2 Ground
-6 2 Ground
-7 2 Ground
-8 2 Ground
-9 2 Ground
-10 2 Ground
-11 2 Ground
-12 2 Ground
-13 2 Ground
-14 2 Ground
-15 2 Ground
-16 2 Ground
-17 2 Ground
-18 2 Ground
+1 2 Ground stone1.png
+2 2 Ground stone1.png
+3 2 Ground stone1.png
+4 2 Ground stone1.png
+5 2 Ground stone1.png
+6 2 Ground stone1.png
+7 2 Ground stone1.png
+8 2 Ground stone1.png
+9 2 Ground stone1.png
+10 2 Ground stone1.png
+11 2 Ground stone1.png
+12 2 Ground stone1.png
+13 2 Ground stone1.png
+14 2 Ground stone1.png
+15 2 Ground stone1.png
+16 2 Ground stone1.png
+17 2 Ground stone1.png
+18 2 Ground stone1.png
 
-1 3 Ground
-2 3 Ground
-3 3 Ground
-4 3 Ground
-5 3 Ground
-6 3 Ground
-7 3 Ground
-8 3 Ground
-9 3 Ground
-10 3 Ground
-11 3 Ground
-12 3 Ground
-13 3 Ground
-14 3 Ground
-15 3 Ground
-16 3 Ground
-17 3 Ground
-18 3 Ground
+1 3 Ground stone1.png
+2 3 Ground stone1.png
+3 3 Ground stone1.png
+4 3 Ground stone1.png
+5 3 Ground stone1.png
+6 3 Ground stone1.png
+7 3 Ground stone1.png
+8 3 Ground stone1.png
+9 3 Ground stone1.png
+10 3 Ground stone1.png
+11 3 Ground stone1.png
+12 3 Ground stone1.png
+13 3 Ground stone1.png
+14 3 Ground stone1.png
+15 3 Ground stone1.png
+16 3 Ground stone1.png
+17 3 Ground stone1.png
+18 3 Ground stone1.png
 
-1 4 Ground
-2 4 Ground
-3 4 Ground
-4 4 Ground
-5 4 Ground
-6 4 Ground
-7 4 Ground
-8 4 Ground
-9 4 Ground
-10 4 Ground
-11 4 Ground
-12 4 Ground
-13 4 Ground
-14 4 Ground
-15 4 Ground
-16 4 Ground
-17 4 Ground
-18 4 Ground
+1 4 Ground stone1.png
+2 4 Ground stone1.png
+3 4 Ground stone1.png
+4 4 Ground stone1.png
+5 4 Ground stone1.png
+6 4 Ground stone1.png
+7 4 Ground stone1.png
+8 4 Ground stone1.png
+9 4 Ground stone1.png
+10 4 Ground stone1.png
+11 4 Ground stone1.png
+12 4 Ground stone1.png
+13 4 Ground stone1.png
+14 4 Ground stone1.png
+15 4 Ground stone1.png
+16 4 Ground stone1.png
+17 4 Ground stone1.png
+18 4 Ground stone1.png
 
-1 5 Ground
-2 5 Ground
-3 5 Ground
-4 5 Ground
-5 5 Ground
-6 5 Ground
-7 5 Ground
-8 5 Ground
-9 5 Ground
-10 5 Ground
-11 5 Ground
-12 5 Ground
-13 5 Ground
-14 5 Ground
-15 5 Ground
-16 5 Ground
-17 5 Ground
-18 5 Ground
+1 5 Ground stone1.png
+2 5 Ground stone1.png
+3 5 Ground stone1.png
+4 5 Ground stone1.png
+5 5 Ground stone1.png
+6 5 Ground stone1.png
+7 5 Ground stone1.png
+8 5 Ground stone1.png
+9 5 Ground stone1.png
+10 5 Ground stone1.png
+11 5 Ground stone1.png
+12 5 Ground stone1.png
+13 5 Ground stone1.png
+14 5 Ground stone1.png
+15 5 Ground stone1.png
+16 5 Ground stone1.png
+17 5 Ground stone1.png
+18 5 Ground stone1.png
 
-1 6 Ground
-2 6 Ground
-3 6 Ground
-4 6 Ground
-5 6 Ground
-6 6 Ground
-7 6 Ground
-8 6 Ground
-9 6 Ground
-10 6 Ground
-11 6 Ground
-12 6 Ground
-13 6 Ground
-14 6 Ground
-15 6 Ground
-16 6 Ground
-17 6 Ground
-18 6 Ground
+1 6 Ground stone1.png
+2 6 Ground stone1.png
+3 6 Ground stone1.png
+4 6 Ground stone1.png
+5 6 Ground stone1.png
+6 6 Ground stone1.png
+7 6 Ground stone1.png
+8 6 Ground pentagrambotleft.png
+9 6 Ground pentagrambotmid.png
+10 6 Ground pentagrambotright.png
+11 6 Ground stone1.png
+12 6 Ground stone1.png
+13 6 Ground stone1.png
+14 6 Ground stone1.png
+15 6 Ground stone1.png
+16 6 Ground stone1.png
+17 6 Ground stone1.png
+18 6 Ground stone1.png
 
-1 7 Ground
-2 7 Ground
-3 7 Ground
-4 7 Ground
-5 7 Ground
-6 7 Ground
-7 7 Ground
-8 7 Ground
-9 7 Ground
-10 7 Ground
-11 7 Ground
-12 7 Ground
-13 7 Ground
-14 7 Ground
-15 7 Ground
-16 7 Ground
-17 7 Ground
-18 7 Ground
+1 7 Ground stone1.png
+2 7 Ground stone1.png
+3 7 Ground stone1.png
+4 7 Ground stone1.png
+5 7 Ground stone1.png
+6 7 Ground stone1.png
+7 7 Ground stone1.png
+8 7 Ground pentagrammidleft.png
+9 7 Ground pentagrammidmid.png
+10 7 Ground pentagrammidright.png
+11 7 Ground stone1.png
+12 7 Ground stone1.png
+13 7 Ground stone1.png
+14 7 Ground stone1.png
+15 7 Ground stone1.png
+16 7 Ground stone1.png
+17 7 Ground stone1.png
+18 7 Ground stone1.png
 
-1 8 Ground
-2 8 Ground
-3 8 Ground
-4 8 Ground
-5 8 Ground
-6 8 Ground
-7 8 Ground
-8 8 Ground
-9 8 Ground
-10 8 Ground
-11 8 Ground
-12 8 Ground
-13 8 Ground
-14 8 Ground
-15 8 Ground
-16 8 Ground
-17 8 Ground
-18 8 Ground
+1 8 Ground stone1.png
+2 8 Ground stone1.png
+3 8 Ground stone1.png
+4 8 Ground stone1.png
+5 8 Ground stone1.png
+6 8 Ground stone1.png
+7 8 Ground stone1.png
+8 8 Ground pentagramtopleft.png
+9 8 Ground pentagramtopmid.png
+10 8 Ground pentagramtopright.png
+11 8 Ground stone1.png
+12 8 Ground stone1.png
+13 8 Ground stone1.png
+14 8 Ground stone1.png
+15 8 Ground stone1.png
+16 8 Ground stone1.png
+17 8 Ground stone1.png
+18 8 Ground stone1.png
 
-1 9 Ground
-2 9 Ground
-3 9 Ground
-4 9 Ground
-5 9 Ground
-6 9 Ground
-7 9 Ground
-8 9 Ground
-9 9 Ground
-10 9 Ground
-11 9 Ground
-12 9 Ground
-13 9 Ground
-14 9 Ground
-15 9 Ground
-16 9 Ground
-17 9 Ground
-18 9 Ground
+1 9 Ground stone1.png
+2 9 Ground stone1.png
+3 9 Ground stone1.png
+4 9 Ground stone1.png
+5 9 Ground stone1.png
+6 9 Ground stone1.png
+7 9 Ground stone1.png
+8 9 Ground stone1.png
+9 9 Ground stone1.png
+10 9 Ground stone1.png
+11 9 Ground stone1.png
+12 9 Ground stone1.png
+13 9 Ground stone1.png
+14 9 Ground stone1.png
+15 9 Ground stone1.png
+16 9 Ground stone1.png
+17 9 Ground stone1.png
+18 9 Ground stone1.png
 
-1 10 Ground
-2 10 Ground
-3 10 Ground
-4 10 Ground
-5 10 Ground
-6 10 Ground
-7 10 Ground
-8 10 Ground
-9 10 Ground
-10 10 Ground
-11 10 Ground
-12 10 Ground
-13 10 Ground
-14 10 Ground
-15 10 Ground
-16 10 Ground
-17 10 Ground
-18 10 Ground
+1 10 Ground stone1.png
+2 10 Ground stone1.png
+3 10 Ground stone1.png
+4 10 Ground stone1.png
+5 10 Ground stone1.png
+6 10 Ground stone1.png
+7 10 Ground stone1.png
+8 10 Ground stone1.png
+9 10 Ground stone1.png
+10 10 Ground stone1.png
+11 10 Ground stone1.png
+12 10 Ground stone1.png
+13 10 Ground stone1.png
+14 10 Ground stone1.png
+15 10 Ground stone1.png
+16 10 Ground stone1.png
+17 10 Ground stone1.png
+18 10 Ground stone1.png
 
-1 11 Ground
-2 11 Ground
-3 11 Ground
-4 11 Ground
-5 11 Ground
-6 11 Ground
-7 11 Ground
-8 11 Ground
-9 11 Ground
-10 11 Ground
-11 11 Ground
-12 11 Ground
-13 11 Ground
-14 11 Ground
-15 11 Ground
-16 11 Ground
-17 11 Ground
-18 11 Ground
+1 11 Ground stone1.png
+2 11 Ground stone1.png
+3 11 Ground stone1.png
+4 11 Ground stone1.png
+5 11 Ground stone1.png
+6 11 Ground stone1.png
+7 11 Ground stone1.png
+8 11 Ground stone1.png
+9 11 Ground stone1.png
+10 11 Ground stone1.png
+11 11 Ground stone1.png
+12 11 Ground stone1.png
+13 11 Ground stone1.png
+14 11 Ground stone1.png
+15 11 Ground stone1.png
+16 11 Ground stone1.png
+17 11 Ground stone1.png
+18 11 Ground stone1.png
 
-1 12 Ground
-2 12 Ground
-3 12 Ground
-4 12 Ground
-5 12 Ground
-6 12 Ground
-7 12 Ground
-8 12 Ground
-9 12 Ground
-10 12 Ground
-11 12 Ground
-12 12 Ground
-13 12 Ground
-14 12 Ground
-15 12 Ground
-16 12 Ground
-17 12 Ground
-18 12 Ground
+1 12 Ground stone1.png
+2 12 Ground stone1.png
+3 12 Ground stone1.png
+4 12 Ground stone1.png
+5 12 Ground stone1.png
+6 12 Ground stone1.png
+7 12 Ground stone1.png
+8 12 Ground stone1.png
+9 12 Ground stone1.png
+10 12 Ground stone1.png
+11 12 Ground stone1.png
+12 12 Ground stone1.png
+13 12 Ground stone1.png
+14 12 Ground stone1.png
+15 12 Ground stone1.png
+16 12 Ground stone1.png
+17 12 Ground stone1.png
+18 12 Ground stone1.png

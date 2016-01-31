@@ -43,6 +43,8 @@ public class SlowTile extends Tile {
         tileSets = new ArrayList<ArrayList<String>>();
 
         tileSets.add(new ArrayList<String>());
-        tileSets.get(0).add("sand.png");
+        tileSets.get(0).add("sand1.png");
+        tileSets.add(new ArrayList<String>());
+        tileSets.get(1).add("sand2.png");
     }
 }

@@ -45,5 +45,8 @@ public class WallTile extends Tile {
 
         tileSets.add(new ArrayList<String>());
         tileSets.get(0).add("wall.png");
+        tileSets.add(new ArrayList<String>());
+        tileSets.get(1).add("stonewall.png");
+        tileSets.get(1).add("stonepillar.png");
     }
 }

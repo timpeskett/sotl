@@ -62,7 +62,6 @@ public class MapTileFactory {
 
         for(ArrayList<String> a : tileSets) {
             for(String s : a) {
-                System.out.println("Tile: " + s);
                 if(s.equals(name)) {
                     present = true;
                 }

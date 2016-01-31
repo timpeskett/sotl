@@ -45,6 +45,8 @@ public class DoorTile extends Tile {
 
         tileSets.add(new ArrayList<String>());
         tileSets.get(0).add("door.png");
+        tileSets.add(new ArrayList<String>());
+        tileSets.get(1).add("door_stone.png");
     }
 }
 
