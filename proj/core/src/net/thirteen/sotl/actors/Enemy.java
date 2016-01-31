@@ -40,11 +40,12 @@ public class Enemy extends Actor {
     public Enemy(Level lev, float xpos, float ypos, 
                  float speed, int sightRange,
     	         EnemyCollisionBehaviour collisionBehaviour,
-    	         EnemyMovementBehaviour movementBehaviour) {
+    	         EnemyMovementBehaviour movementBehaviour,
+                 Texture tex) {
     	
-    	super(Main.manager.get("enemyrun.png", Texture.class),
-        	xpos, 
-        	ypos,
+    	super(tex,
+            xpos, 
+            ypos,
             lev.getTileWidth(),
             lev.getTileHeight()
         );
@@ -62,21 +63,47 @@ public class Enemy extends Actor {
 
         
         Array<TextureRegion> frames = new Array<TextureRegion>();
+
+        /*if(collisionBehaviour instanceof LongRangeCollision) {
+             //stuff
+         }
+        else*/ if(collisionBehaviour instanceof MediumRangeCollision){
         
-        frames.add(new TextureRegion(getTexture(), 1, 1, 23, 23));
-        frames.add(new TextureRegion(getTexture(), 1, 26, 23, 23));
-        frames.add(new TextureRegion(getTexture(), 1, 51, 23, 23));
-        frames.add(new TextureRegion(getTexture(), 1, 76, 23, 23));
-        frames.add(new TextureRegion(getTexture(), 1, 101, 23, 23));
-        frames.add(new TextureRegion(getTexture(), 1, 126, 23, 22));
-        frames.add(new TextureRegion(getTexture(), 1, 150, 23, 22));
-        frames.add(new TextureRegion(getTexture(), 1, 174, 23, 22));
+            frames.add(new TextureRegion(getTexture(), 1, 1, 23, 75));
+            frames.add(new TextureRegion(getTexture(), 1, 76, 23, 75));
+            frames.add(new TextureRegion(getTexture(), 1, 151, 23, 75));
+            frames.add(new TextureRegion(getTexture(), 1, 226, 23, 75));
+            frames.add(new TextureRegion(getTexture(), 1, 301, 23, 75));
+            frames.add(new TextureRegion(getTexture(), 1, 376, 23, 75));
+            frames.add(new TextureRegion(getTexture(), 1, 451, 23, 75));
+            frames.add(new TextureRegion(getTexture(), 1, 526, 23, 75));
+
+            enemyStand = new TextureRegion(getTexture(), 1, 376, 23, 75);
+
+            setBounds(1, 427, 23, 75);
+
+        }
+        else {
+
+            frames.add(new TextureRegion(getTexture(), 1, 1, 23, 23));
+            frames.add(new TextureRegion(getTexture(), 1, 26, 23, 23));
+            frames.add(new TextureRegion(getTexture(), 1, 51, 23, 23));
+            frames.add(new TextureRegion(getTexture(), 1, 76, 23, 23));
+            frames.add(new TextureRegion(getTexture(), 1, 101, 23, 23));
+            frames.add(new TextureRegion(getTexture(), 1, 126, 23, 22));
+            frames.add(new TextureRegion(getTexture(), 1, 150, 23, 22));
+            frames.add(new TextureRegion(getTexture(), 1, 174, 23, 22));
+
+            enemyStand = new TextureRegion(getTexture(), 1, 126, 23, 22);
+
+            setBounds(1, 126, 23, 22);
+
+        }
 
         run = new Animation(0.1f, frames);
 
-        enemyStand = new TextureRegion(getTexture(), 1, 126, 23, 22);
         setRegion(enemyStand);
-        setBounds(1, 126, 23, 22);
+        
         Rectangle boundBox = getBoundBox();
         setCenter(boundBox.getCenter(new Vector2()).x, 
             boundBox.getCenter(new Vector2()).y);
@@ -139,6 +166,8 @@ public class Enemy extends Actor {
             currState = State.RUNNING;
     	}
     	else{
+            /*move to tile boundary first*/
+            snapToTile(direction);
     		setDirection(newDirection);
             currState = State.STANDING;
     	}
@@ -146,26 +175,39 @@ public class Enemy extends Actor {
 
     private void moveInDirection(Direction direction) {
 
- 		Tuple tilePos = lev.worldToTile(rect.x, rect.y);
- 		Tile tile = lev.getTile(tilePos.first(), tilePos.last());
+        Tuple tilePos = lev.worldToTile(rect.x, rect.y);
+        Tile tile = lev.getTile(tilePos.first(), tilePos.last());
+
  		float distance = Gdx.graphics.getDeltaTime() * speed * tile.getSpeedMult();
+        moveInDirection(direction, distance);
+    }
 
-    	switch (direction){
-    		case UP:
-    			rect.y += distance;
-    			break;
-    		case RIGHT:
-    			rect.x += distance;
-    			break;
-    		case DOWN:
-    			rect.y -= distance;
-    			break;
-    		case LEFT:
-    			rect.x -= distance;
-    			break;
-    	}
+    private void snapToTile(Direction direction) {
 
-    	setPosition(rect.x, rect.y);
+        rect.x = (int)(rect.x/lev.getTileWidth()) * lev.getTileWidth();
+        rect.y = (int)(rect.y/lev.getTileHeight()) * lev.getTileHeight();
+
+        setPosition(rect.x, rect.y);
+    }
+
+    private void moveInDirection(Direction direction, float distance) {
+     
+        switch (direction){
+            case UP:
+                rect.y += distance;
+                break;
+            case RIGHT:
+                rect.x += distance;
+                break;
+            case DOWN:
+                rect.y -= distance;
+                break;
+            case LEFT:
+                rect.x -= distance;
+                break;
+        }
+
+        setPosition(rect.x, rect.y);
     }
 
     public boolean checkHeroCollision() {
@@ -179,12 +221,12 @@ public class Enemy extends Actor {
     private void checkCollisions() {
 
     	//Loop through other enemies for collisions
-    	for(Enemy e: lev.getEnemies()){
+    	// for(Enemy e: lev.getEnemies()){
 
-    		if(e != this && e.overlaps(this)){
-    			direction = direction.flip();
-    		}
-    	}
+    	// 	if(e != this && e.overlaps(this)){
+    	// 		direction = direction.flip();
+    	// 	}
+    	// }
     }
 
 

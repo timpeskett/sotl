@@ -43,6 +43,7 @@ public class Main extends Game {
             manager.load(fName, Texture.class);
         }
 		manager.load("enemyrun.png", Texture.class);
+		manager.load("spear_enemyrun.png", Texture.class);
 		manager.load("sheeprun.png", Texture.class);
 		manager.load("titleScreenBG.png", Texture.class);
 		manager.load("deathScreenBG.png", Texture.class);

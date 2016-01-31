@@ -63,7 +63,6 @@ public abstract class EnemyCollisionBehaviour {
 			}
 
 			if(lev.isActorAtTile(lev.getHero(), (int)tileX, (int)tileY)){
-				Main.manager.get("bleet.mp3", Sound.class).play();
 				return true;
 			}
 
