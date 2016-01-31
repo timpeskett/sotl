@@ -24,9 +24,11 @@ public class LevelMaker {
     private int dimX, dimY;
     private Rectangle bounds;
 
-    private static final int SAFE_DOOR_DISTANCE = 6;
+    private static final int SAFE_DOOR_DISTANCE = 5;
     private static final int KEY_SQUARES_MAX = 20;
     private static final int KEY_SQUARES_MIN = 6;
+    private static final int ENEMIES_MAX = 6;
+    private static final int ENEMIES_MIN = 2;
 
     /* dimX and dimY are the number of horizontal and vertical tiles
      * respectively */
@@ -65,7 +67,7 @@ public class LevelMaker {
         Tile [][] tileMap = level.getTileMap();
         int numEnemies;
 
-        numEnemies = (int)(difficulty * 3 + 2);
+        numEnemies = (int)((difficulty) * (ENEMIES_MAX - ENEMIES_MIN) + ENEMIES_MIN);
 
         for(int i = 0; i < numEnemies; i++) {
             int infGuard;
