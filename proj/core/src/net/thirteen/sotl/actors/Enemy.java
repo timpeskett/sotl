@@ -61,6 +61,10 @@ public class Enemy extends Actor {
         prevState = State.STANDING;
         stateTimer = 0;
 
+        if(movementBehaviour instanceof StationaryMovement){
+            direction = Direction.rand();
+        }
+
         
         Array<TextureRegion> frames = new Array<TextureRegion>();
 

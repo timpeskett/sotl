@@ -1,5 +1,6 @@
 package net.thirteen.sotl.actors;
 
+
 public enum Direction {
 	LEFT,
 	RIGHT,
@@ -18,6 +19,22 @@ public enum Direction {
 		}
 		else {
 			return UP;
+		}
+	}
+
+	public static Direction rand(){
+
+		int val = (int)(Math.random() * 3.9);
+		
+		switch (val){
+			case 0:
+				return UP;
+			case 1:
+				return DOWN;
+			case 2:
+				return LEFT;
+			default:
+				return RIGHT;
 		}
 	}
 }
