@@ -63,7 +63,25 @@ public class Enemy extends Actor {
         stateTimer = 0;
 
         if(movementBehaviour instanceof StationaryMovement){
-            direction = Direction.rand();
+            float x = xpos - (lev.getTilesX() * lev.getTileWidth())/2;
+            float y = ypos - (lev.getTilesY() * lev.getTileHeight())/2;
+            double angle = Math.atan2(y,x) + Math.PI;
+
+            angle *= (180/Math.PI);
+
+            if(angle > 45 && angle <= 135){
+                direction = Direction.UP;
+            }
+            else if(angle > 135 && angle <= 225){
+                direction = Direction.LEFT;
+            }
+            else if(angle > 225 && angle <= 315){
+                direction = Direction.DOWN;
+            }
+            else{
+                direction = Direction.RIGHT;
+            }
+
         }
 
         
