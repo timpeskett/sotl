@@ -20,10 +20,13 @@ public class GameHud implements Disposable {
 
 	private float timeCount;
 	private Label timerLabel;
+	private float scoreCount;
+	private Label scoreLabel;
 
 	public GameHud(SpriteBatch batch) {
 
 		timeCount = 0;
+		scoreCount = 0;
 
 		viewport = new FitViewport(Main.WIDTH, Main.HEIGHT, new OrthographicCamera());
 		stage = new Stage(viewport, batch);
@@ -32,9 +35,11 @@ public class GameHud implements Disposable {
 		table.top();
 		table.setFillParent(true);
 
-		timerLabel = new Label(String.format("%d", (int)(timeCount*100)), new Label.LabelStyle(new BitmapFont(), Color.BLACK));
+		timerLabel = new Label(String.format("%06d", (int)(timeCount*100)), new Label.LabelStyle(new BitmapFont(), Color.BLACK));
+		scoreLabel = new Label(String.format("%06d", (int)(scoreCount)), new Label.LabelStyle(new BitmapFont(), Color.BLACK));
 
 		table.add(timerLabel).expandX().padTop(10);
+		table.add(scoreLabel).expandX().padTop(10);
 
 		stage.addActor(table);
 
@@ -50,6 +55,14 @@ public class GameHud implements Disposable {
 
 	public float getTimeCount(){
 		return timeCount;
+	}
+
+	public float getScoreCount() {
+		return scoreCount;
+	}
+
+	public void incScore() {
+		scoreCount += 13;
 	}
 
 	@Override

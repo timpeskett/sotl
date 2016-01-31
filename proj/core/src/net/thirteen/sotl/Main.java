@@ -39,7 +39,6 @@ public class Main extends Game {
 		fontB = new BitmapFont();
 		manager = new AssetManager();
 		manager.load("grass.png", Texture.class);
-		manager.load("sand.png", Texture.class);
 		manager.load("wall.png", Texture.class);
 		manager.load("hero.png", Texture.class);
 		manager.load("door.png", Texture.class);
@@ -48,6 +47,7 @@ public class Main extends Game {
 		manager.load("sheeprun.png", Texture.class);
 		manager.load("titleScreenBG.png", Texture.class);
 		manager.load("deathScreenBG.png", Texture.class);
+		manager.load("pentagram.png", Texture.class);
 		manager.load("oi.mp3", Sound.class);
 		manager.load("bleet.mp3", Sound.class);
 		manager.load("bgMusic.mp3", Music.class);
