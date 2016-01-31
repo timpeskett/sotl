@@ -69,25 +69,25 @@ public class PathFinder {
 
         if(tile.first() > 0) {
             tempTile = tile.firstDec();
-            if(tileMap[tile.first()][tile.last()].isTileTraversable()) {
+            if(tileMap[tempTile.first()][tempTile.last()].isTileTraversable()) {
                 outTiles.add(tempTile);
             }
         }
         if(tile.last() > 0) {
             tempTile = tile.lastDec();
-            if(tileMap[tile.first()][tile.last()].isTileTraversable()) {
+            if(tileMap[tempTile.first()][tempTile.last()].isTileTraversable()) {
                 outTiles.add(tempTile);
             }
         }
         if(tile.first() < dimX - 1) {
             tempTile = tile.firstInc();
-            if(tileMap[tile.first()][tile.last()].isTileTraversable()) {
+            if(tileMap[tempTile.first()][tempTile.last()].isTileTraversable()) {
                 outTiles.add(tempTile);
             }
         }
         if(tile.last() < dimY - 1) {
             tempTile = tile.lastInc();
-            if(tileMap[tile.first()][tile.last()].isTileTraversable()) {
+            if(tileMap[tempTile.first()][tempTile.last()].isTileTraversable()) {
                 outTiles.add(tempTile);
             }
         }
