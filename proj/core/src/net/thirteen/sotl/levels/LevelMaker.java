@@ -39,7 +39,6 @@ public class LevelMaker {
 
     /* Difficulty should be between 0 and 1 */
     public Level generate(World world, Tuple levelTup, float difficulty) {
-        System.out.println(difficulty);
         Tile [][] tileMap = new Tile[dimX][dimY];
         ArrayList<Tuple> doors;
 
