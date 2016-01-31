@@ -39,7 +39,6 @@ public class Main extends Game {
 		fontB = new BitmapFont();
 		manager = new AssetManager();
 		manager.load("grass.png", Texture.class);
-		manager.load("sand.png", Texture.class);
 		manager.load("wall.png", Texture.class);
 		manager.load("hero.png", Texture.class);
 		manager.load("door.png", Texture.class);
