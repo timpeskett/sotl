@@ -38,6 +38,7 @@ public class Enemy extends Actor {
 
 
     public Enemy(Level lev, float xpos, float ypos, 
+                 float width, float height,
                  float speed, int sightRange,
     	         EnemyCollisionBehaviour collisionBehaviour,
     	         EnemyMovementBehaviour movementBehaviour,
@@ -46,8 +47,8 @@ public class Enemy extends Actor {
     	super(tex,
             xpos, 
             ypos,
-            lev.getTileWidth(),
-            lev.getTileHeight()
+            width,
+            height
         );
 
         this.lev = lev;
